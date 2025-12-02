@@ -6,7 +6,7 @@ before_action :set_user, only: :show
 
   def show
     @friends1 = Friend.where(user_main_id: @user.id).map {|friend| friend.user_friend}
-    @friends = Friend.where(user_friend_id: @user.id).map {|friend| friend.user_main} + @friends1 
+    @friends = Friend.where(user_friend_id: @user.id).map {|friend| friend.user_main} + @friends1
 
   end
 
