@@ -1,5 +1,10 @@
-<%= @user.last_name  %>
-
-  <%= @friends.each do |friend|  %>
-  <%=  friend.user_friend.first_name%>
-  <% end %>
+<% @friends.each do |friend|  %>
+<div><div class="card-product">
+  <<%= link_to , user_path %>
+  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+  <div class="card-product-infos">
+    <h2><%= friend.user_friend.first_name%> <%= friend.user_friend.last_name%></h2>
+  </div>
+</div>
+</div>
+ <% end %>

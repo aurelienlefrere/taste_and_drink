@@ -16,6 +16,6 @@ Rails.application.routes.draw do
     end
   end
   resources :meals
-  ressources :stocks
+
 
 end
