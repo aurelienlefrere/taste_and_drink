@@ -1,6 +1,7 @@
 require 'csv'
 
 Drink.destroy_all
+User.destroy_all
 
 csv_file = Rails.root.join('db', 'wines.csv')
 
