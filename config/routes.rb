@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'cellars/show'
-  get 'cellars/edit'
-  get 'cellars/update'
+  get 'stocks/show'
+  get 'stocks/edit'
+  get 'stocks/update'
   get 'users/show'
   devise_for :users
   root to: "pages#home"
@@ -13,8 +13,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :users, only: :show
-  resources :cellars, only: [:show, :edit, :update]
+  resources :users, only: :show do
+    collection do
+      get :stock
+    end
+  end
   resources :meals
 
 end

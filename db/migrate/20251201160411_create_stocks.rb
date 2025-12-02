@@ -1,7 +1,7 @@
-class CreateCellars < ActiveRecord::Migration[7.1]
+class CreateStocks < ActiveRecord::Migration[7.1]
   def change
-    create_table :cellars do |t|
-      t.integer :stock
+    create_table :stocks do |t|
+      t.integer :quantity
       t.references :user, null: false, foreign_key: true
       t.references :drink, null: false, foreign_key: true
 
