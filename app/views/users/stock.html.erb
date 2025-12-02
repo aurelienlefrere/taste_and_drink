@@ -3,3 +3,5 @@
 <h1><% @stocks.each do |stock| %>
 <li><ul><%= stock %></ul> </li>
 <% end %></h1>
+
+<%= link_to "Add a new stock", new_stock_path, class: "btn btn-info" %>
