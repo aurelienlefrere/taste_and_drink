@@ -1,5 +1,7 @@
 require 'csv'
 
+Drink.destroy_all
+
 csv_file = Rails.root.join('db', 'wines.csv')
 
 if File.exist?(csv_file)
@@ -21,3 +23,84 @@ if File.exist?(csv_file)
 else
   puts "❌ Erreur : wines.csv introuvable dans db/"
 end
+
+puts "\n👥 Création des utilisateurs..."
+
+users_data = [
+  {
+    email: 'Pierre@example.com',
+    password: 'password123',
+    first_name: 'Pierre',
+    last_name: 'Gozard',
+    diet: 'Vegan',
+    allergy: 'Nuts',
+    like: 'Red wines, Bordeaux',
+    dislike: 'Champagne'
+  },
+  {
+    email: 'Franck@example.com',
+    password: 'password123',
+    first_name: 'Franck',
+    last_name: 'Abeille',
+    diet: 'Omnivore',
+    allergy: 'Shellfish',
+    like: 'White wines, Burgundy',
+    dislike: 'Sweet wines'
+  },
+  {
+    email: 'Vitor@example.com',
+    password: 'password123',
+    first_name: 'Vitor',
+    last_name: 'de Castro',
+    diet: 'Vegetarian',
+    allergy: 'Gluten',
+    like: 'Rosé wines, Provence',
+    dislike: 'Dry wines'
+  },
+  {
+    email: 'Tom@example.com',
+    password: 'password123',
+    first_name: 'Tom',
+    last_name: 'Grenié',
+    diet: 'Omnivore',
+    allergy: 'Dairy',
+    like: 'Sparkling wines, Champagne',
+    dislike: 'Heavy wines'
+  },
+  {
+    email: 'Bassam@example.com',
+    password: 'password123',
+    first_name: 'Bassam',
+    last_name: 'Renaud',
+    diet: 'Pescatarian',
+    allergy: 'None',
+    like: 'Italian wines, Tuscan',
+    dislike: 'Bitter wines'
+  },
+  {
+    email: 'Aurelien@example.com',
+    password: 'password123',
+    first_name: 'Aurelien',
+    last_name: 'Lefrère',
+    diet: 'Omnivore',
+    allergy: 'Sulfites',
+    like: 'Spanish wines, Rioja',
+    dislike: 'Light wines'
+  }
+]
+
+users_data.each do |user_data|
+  user = User.find_or_create_by!(email: user_data[:email]) do |u|
+    u.password = user_data[:password]
+    u.password_confirmation = user_data[:password]
+    u.first_name = user_data[:first_name]
+    u.last_name = user_data[:last_name]
+    u.diet = user_data[:diet]
+    u.allergy = user_data[:allergy]
+    u.like = user_data[:like]
+    u.dislike = user_data[:dislike]
+  end
+  puts "✅ #{user.first_name} #{user.last_name} (#{user.email})"
+end
+
+puts "\n✨ Seed terminé ! #{Drink.count} vins + #{User.count} utilisateurs"
