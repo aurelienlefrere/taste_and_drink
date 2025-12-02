@@ -1,10 +1,10 @@
 class StocksController < ApplicationController
 
-  def index
-    @stocks = current_user.stocks
+  def new
+    @stock = Stock.new
   end
 
-
+  
   def show
     @stock = current_user.stock
   end
