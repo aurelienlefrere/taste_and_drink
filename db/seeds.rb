@@ -7,12 +7,15 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-User.create(email: "franckabeille33@gmail.com", password:"azerty", first_name: "Franck", last_name: "Abeille")
+
 
 require 'csv'
-
+Friend.destroy_all
+Cellar.destroy_all
 Drink.destroy_all
+User.destroy_all
 
+User.create(email: "franckabeille33@gmail.com", password:"azerty", first_name: "Franck", last_name: "Abeille")
 csv_file = Rails.root.join('db', 'wines.csv')
 
 if File.exist?(csv_file)

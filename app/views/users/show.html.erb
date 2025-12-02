@@ -1,4 +1,5 @@
+<%= @user.last_name  %>
 
-
-<h1><%= @user.email  %></h1>
-X
+  <%= @friends.each do |friend|  %>
+  <%=  friend.user_friend.first_name%>
+  <% end %>
