@@ -1,6 +1,6 @@
 require "test_helper"
 
-class CellarTest < ActiveSupport::TestCase
+class StockTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

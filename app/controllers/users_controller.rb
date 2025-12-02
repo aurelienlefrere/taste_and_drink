@@ -18,4 +18,7 @@ private
     @user = User.find(params[:id])
   end
 
+  def stock
+    @stocks = current_user.stocks
+  end
 end
