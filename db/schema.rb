@@ -14,16 +14,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_01_161542) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cellars", force: :cascade do |t|
-    t.integer "stock"
-    t.bigint "user_id", null: false
-    t.bigint "drink_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["drink_id"], name: "index_cellars_on_drink_id"
-    t.index ["user_id"], name: "index_cellars_on_user_id"
-  end
-
   create_table "drinks", force: :cascade do |t|
     t.string "title"
     t.string "category"
@@ -71,6 +61,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_01_161542) do
     t.index ["user_id"], name: "index_meals_on_user_id"
   end
 
+  create_table "stocks", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "user_id", null: false
+    t.bigint "drink_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["drink_id"], name: "index_stocks_on_drink_id"
+    t.index ["user_id"], name: "index_stocks_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -89,8 +89,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_01_161542) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "cellars", "drinks"
-  add_foreign_key "cellars", "users"
   add_foreign_key "friends", "users", column: "user_friend_id"
   add_foreign_key "friends", "users", column: "user_main_id"
   add_foreign_key "guests", "meals"
@@ -98,4 +96,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_01_161542) do
   add_foreign_key "meal_drinks", "drinks"
   add_foreign_key "meal_drinks", "meals"
   add_foreign_key "meals", "users"
+  add_foreign_key "stocks", "drinks"
+  add_foreign_key "stocks", "users"
 end
