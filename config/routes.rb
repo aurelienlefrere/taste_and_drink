@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'stocks/show'
-  get 'stocks/edit'
-  get 'stocks/update'
-  get 'users/show'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -13,11 +9,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :users, only: :show do
+  resources :users, only: [:index, :show] do
     collection do
       get :stock
+
     end
   end
   resources :meals
+  ressources :stocks
 
 end
