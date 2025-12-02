@@ -10,10 +10,7 @@
 
 
 require 'csv'
-Friend.destroy_all
-Cellar.destroy_all
-Drink.destroy_all
-User.destroy_all
+
 
 User.create(email: "franckabeille33@gmail.com", password:"azerty", first_name: "Franck", last_name: "Abeille")
 csv_file = Rails.root.join('db', 'wines.csv')
