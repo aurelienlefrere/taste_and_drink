@@ -6,8 +6,10 @@
 .td-navbar {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);  // Centre la navbar
+  width: 100%;
+  max-width: 430px;             // Même largeur que le body
   height: 60px;
   background: $dark-bg;
   border-bottom: 1px solid rgba($gold, 0.2);

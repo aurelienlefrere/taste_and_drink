@@ -11,32 +11,51 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  // Fond externe rose pâle (visible sur desktop)
+  background: linear-gradient(135deg, #F5E6E8 0%, #E8D4D8 50%, #F0E0E4 100%);
+  min-height: 100vh;
 }
 
+// === BODY = FRAME IPHONE ===
 body {
   background-color: $dark-bg;
   color: $text-primary;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  min-height: 100vh;
-  margin: 0;
+  margin: 0 auto; // Centré horizontalement
   padding: 0;
 
-  // Espacement pour navbar (60px) et footbar (70px)
+  // === DIMENSIONS IPHONE 15 Pro Max ===
+  max-width: 430px;
+  min-height: 100vh;
+
+  // === EFFET TÉLÉPHONE FLOTTANT ===
+  position: relative;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 25px 80px rgba(0, 0, 0, 0.25),
+    0 10px 30px rgba(0, 0, 0, 0.15);
+
+  // Espacement pour navbar et footbar
   padding-top: 60px;
   padding-bottom: 70px;
 }
 
-// === CONTAINER PRINCIPAL ===
-.td-main-content {
-  min-height: calc(100vh - 130px); // 60px navbar + 70px footbar
-  padding: 16px;
+// === SUR MOBILE RÉEL : PAS DE CADRE ===
+@media (max-width: 430px) {
+  html {
+    background: $dark-bg; // Même fond que l'app
+  }
+
+  body {
+    box-shadow: none;
+    max-width: 100%;
+  }
 }
 
-// Container centré avec max-width pour les écrans larges
-.td-container {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 0 16px;
+// === CONTAINER PRINCIPAL ===
+.td-main-content {
+  min-height: calc(100vh - 130px);
+  padding: 16px;
 }
 
 // === TITRES ===
