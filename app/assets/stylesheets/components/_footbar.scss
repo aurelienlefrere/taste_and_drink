@@ -7,14 +7,14 @@
 .td-footbar {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);  // Centre la footbar
+  width: 100%;
+  max-width: 430px;             // Même largeur que le body
   height: 70px;
   background: $dark-bg;
   border-top: 1px solid rgba($gold, 0.2);
   z-index: 1000;
-
-  // Safe area pour iPhone avec encoche
   padding-bottom: env(safe-area-inset-bottom);
 }
 
@@ -113,12 +113,12 @@
 // ============================================
 // === RESPONSIVE ADJUSTMENTS ===
 // ============================================
-@media (min-width: 768px) {
-  // Sur tablette/desktop, on peut masquer ou adapter
-  .td-footbar {
-    max-width: 500px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 20px 20px 0 0;
-  }
-}
+// @media (min-width: 768px) {
+//   // Sur tablette/desktop, on peut masquer ou adapter
+//   .td-footbar {
+//     max-width: 500px;
+//     left: 50%;
+//     transform: translateX(-50%);
+//     border-radius: 20px 20px 0 0;
+//   }
+// }
