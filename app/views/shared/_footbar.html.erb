@@ -1,0 +1,51 @@
+<%# ============================================ %>
+<%# 🍷 TASTE & DRINK - FOOTBAR (Bottom Navigation) %>
+<%# 5 onglets: Accueil | Event | Match | Ma Cave | Friends %>
+<%# ============================================ %>
+
+<nav class="td-footbar">
+  <div class="td-footbar-container">
+
+    <%# === 1. ACCUEIL (Home) === %>
+    <%= link_to root_path, class: "td-footbar-item #{'active' if current_page?(root_path)}" do %>
+      <div class="td-footbar-icon">
+        <i class="fas fa-home"></i>
+      </div>
+      <span class="td-footbar-label">Accueil</span>
+    <% end %>
+
+    <%# === 2. EVENT (Historique des repas) === %>
+    <%= link_to meals_path, class: "td-footbar-item #{'active' if controller_name == 'meals' && action_name == 'index'}" do %>
+      <div class="td-footbar-icon">
+        <i class="fas fa-calendar-alt"></i>
+      </div>
+      <span class="td-footbar-label">Event</span>
+    <% end %>
+
+    <%# === 3. MATCH (Centre - Bouton principal) === %>
+    <%= link_to new_meal_path, class: "td-footbar-item td-footbar-match #{'active' if controller_name == 'meals' && action_name == 'new'}" do %>
+      <div class="td-footbar-icon-match">
+        <i class="fas fa-utensils"></i>
+        <i class="fas fa-wine-glass-alt"></i>
+      </div>
+      <span class="td-footbar-label">Match</span>
+    <% end %>
+
+    <%# === 4. MA CAVE (Stock de vins) === %>
+    <%= link_to stocks_path, class: "td-footbar-item #{'active' if controller_name == 'stocks'}" do %>
+      <div class="td-footbar-icon">
+        <i class="fas fa-wine-bottle"></i>
+      </div>
+      <span class="td-footbar-label">Ma Cave</span>
+    <% end %>
+
+    <%# === 5. FRIENDS (Liste d'amis) === %>
+    <%= link_to users_path, class: "td-footbar-item #{'active' if controller_name == 'users' && action_name == 'index'}" do %>
+      <div class="td-footbar-icon">
+        <i class="fas fa-user-friends"></i>
+      </div>
+      <span class="td-footbar-label">Friends</span>
+    <% end %>
+
+  </div>
+</nav>

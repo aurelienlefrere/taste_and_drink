@@ -1,3 +1,101 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%# ============================================ %>
+<%# 🏠 HOME - Page d'accueil Taste & Drink %>
+<%# ============================================ %>
 
+<div class="td-home fade-in">
+  <% if user_signed_in? %>
+    <%# === UTILISATEUR CONNECTÉ === %>
+
+    <%# Header de bienvenue %>
+    <div class="td-home-header">
+      <p class="td-home-greeting">Bonjour,</p>
+      <h1 class="td-home-name"><%= current_user.first_name || "Chef" %> 👋</h1>
+    </div>
+
+    <%# Carte principale - Action rapide %>
+    <div class="td-home-hero">
+      <div class="td-hero-content">
+        <h2>Prêt pour un accord parfait ?</h2>
+        <p>Trouvez la boisson idéale pour votre prochain repas.</p>
+        <%= link_to new_meal_path, class: "btn btn-gold" do %>
+          <i class="fas fa-magic me-2"></i>Lancer un Match
+        <% end %>
+      </div>
+      <div class="td-hero-decoration">
+        <i class="fas fa-wine-glass-alt"></i>
+        <span>&</span>
+        <i class="fas fa-utensils"></i>
+      </div>
+    </div>
+
+    <%# Stats rapides %>
+    <div class="td-home-stats">
+      <div class="td-stat-card">
+        <span class="td-stat-value"><%= current_user.meals.count %></span>
+        <span class="td-stat-label">Events</span>
+      </div>
+      <div class="td-stat-card">
+        <span class="td-stat-value"><%= current_user.stocks.sum(:quantity) %></span>
+        <span class="td-stat-label">Bouteilles</span>
+      </div>
+      <div class="td-stat-card">
+        <span class="td-stat-value"><%= Friend.where(user_main: current_user).count %></span>
+        <span class="td-stat-label">Amis</span>
+      </div>
+    </div>
+
+    <%# Derniers events %>
+    <% recent_meals = current_user.meals.order(date: :desc).limit(3) %>
+    <% if recent_meals.any? %>
+      <div class="td-home-section">
+        <div class="td-section-header-row">
+          <h3>Derniers accords</h3>
+          <%= link_to "Voir tout", meals_path, class: "td-link-gold" %>
+        </div>
+        <div class="td-recent-meals">
+          <% recent_meals.each do |meal| %>
+            <%= link_to meal_path(meal), class: "td-mini-card" do %>
+              <span class="td-mini-date"><%= meal.date&.strftime("%d/%m") %></span>
+              <span class="td-mini-title"><%= truncate(meal.dish_name, length: 20) %></span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+  <% else %>
+    <%# === UTILISATEUR NON CONNECTÉ === %>
+
+    <div class="td-welcome">
+      <%# Logo animé %>
+      <div class="td-welcome-logo">
+        <%= image_tag "logo_taste_drink.png", alt: "Taste & Drink" %>
+      </div>
+
+      <h1 class="td-welcome-title">Taste & Drink</h1>
+      <p class="td-welcome-tagline">L'accord parfait entre votre plat et votre boisson</p>
+
+      <%# Features %>
+      <div class="td-welcome-features">
+        <div class="td-feature">
+          <i class="fas fa-camera"></i>
+          <span>Scannez vos bouteilles</span>
+        </div>
+        <div class="td-feature">
+          <i class="fas fa-brain"></i>
+          <span>IA Sommelier</span>
+        </div>
+        <div class="td-feature">
+          <i class="fas fa-users"></i>
+          <span>Partagez avec vos amis</span>
+        </div>
+      </div>
+
+      <%# CTA %>
+      <div class="td-welcome-actions">
+        <%= link_to "Créer un compte", new_user_registration_path, class: "btn btn-gold btn-lg" %>
+        <%= link_to "Se connecter", new_user_session_path, class: "btn btn-gold-outline btn-lg" %>
+      </div>
+    </div>
+  <% end %>
+</div>
