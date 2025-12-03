@@ -117,8 +117,9 @@ users_data.each do |user_data|
 end
 
 friends = User.where.not(id: User.last.id)
+@mail_aureo = User.find_by(email: "aurelien@example.com")
 friends.each do |friend|
-  Friend.create!(user_main_id: User.last.id,  user_friend_id: friend.id)
+  Friend.create!(user_main_id: @mail_aureo.id,  user_friend_id: friend.id)
 end
 
 puts "\n✨ Seed terminé ! #{Drink.count} vins + #{User.count} utilisateurs"
