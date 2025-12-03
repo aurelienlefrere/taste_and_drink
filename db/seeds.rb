@@ -14,7 +14,7 @@ Drink.destroy_all
 Friend.destroy_all
 User.destroy_all
 
-User.create(email: "franckabeille33@gmail.com", password:"azerty", first_name: "Franck", last_name: "Abeille")
+
 csv_file = Rails.root.join('db', 'wines.csv')
 
 if File.exist?(csv_file)
@@ -114,6 +114,11 @@ users_data.each do |user_data|
     u.dislike = user_data[:dislike]
   end
   puts "✅ #{user.first_name} #{user.last_name} (#{user.email})"
+end
+
+friends = User.where.not(id: User.last.id)
+friends.each do |friend|
+  Friend.create!(user_main_id: User.last.id,  user_friend_id: friend.id)
 end
 
 puts "\n✨ Seed terminé ! #{Drink.count} vins + #{User.count} utilisateurs"
