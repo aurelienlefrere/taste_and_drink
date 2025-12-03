@@ -6,11 +6,8 @@
       <div class="bg-white rounded p-3 shadow">
         <h3>Create a new stock</h3>
           <%= simple_form_for(@stock) do |f| %>
-            <%= f.input :title %>
-            <%= f.input :category %>
-            <%= f.input :region %>
-            <%= f.input :year %>
-            <%= f.input :photo, as: :file %>
+            <%= f.association :drink %>
+            <%= f.input :quantity %>
             <%= f.submit class: "btn btn-warning" %>
           <% end %>
       </div>

@@ -6,7 +6,7 @@ class StocksController < ApplicationController
 
 def create
     @stock = Stock.new(stock_params)
-
+    @stock.user = current_user
     if @stock.save
       redirect_to stock_users_path
     else
@@ -27,6 +27,6 @@ def create
   private
 
   def stock_params
-    params.require(:stock).permit(:title, :category, :region, :year, :photo)
+    params.require(:stock).permit(:drink_id, :quantity)
   end
 end
