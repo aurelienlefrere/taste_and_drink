@@ -14,9 +14,9 @@ before_action :set_user, only: :show
   @friends = Friend.all
   end
 
-  def stock
-    @stocks = current_user.stocks
-  end
+  # def stock
+  #   @stocks = current_user.stocks
+  # end
 
 private
   def set_user

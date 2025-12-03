@@ -1,7 +1,7 @@
 class StocksController < ApplicationController
-  #def index
-  # @stocks = current_user.stocks.includes(:drink)
-  #end
+  def index
+    @stocks = current_user.stocks.includes(:drink)
+  end
 
   def new
     @stock = Stock.new
