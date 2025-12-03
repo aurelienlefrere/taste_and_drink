@@ -1,7 +1,21 @@
 <h1>Ma Cave</h1>
 
-<h1><% @stocks.each do |stock| %>
-<li><ul><%= stock %></ul> </li>
-<% end %></h1>
+<% @stocks.each do |stock| %>
+  <div class="stock-item">
+    <span><%= stock.drink.title %></span>
+
+    <div class="counter">
+      <%= button_to "-", stock_path(stock, stock: { quantity: stock.quantity - 1 }),
+          method: :patch,
+          class: "btn btn-secondary" %>
+
+      <span class="quantity"><%= stock.quantity %></span>
+
+      <%= button_to "+", stock_path(stock, stock: { quantity: stock.quantity + 1 }),
+          method: :patch,
+          class: "btn btn-secondary" %>
+    </div>
+  </div>
+<% end %>
 
 <%= link_to "Add a new stock", new_stock_path, class: "btn btn-info" %>

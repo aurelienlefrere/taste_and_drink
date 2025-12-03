@@ -6,7 +6,7 @@
       <div class="bg-white rounded p-3 shadow">
         <h3>Create a new stock</h3>
           <%= simple_form_for(@stock) do |f| %>
-            <%= f.association :drink %>
+            <%= f.association :drink, input_html: {data: {controller: "tom-select"}} %>
             <%= f.input :quantity %>
             <%= f.submit class: "btn btn-warning" %>
           <% end %>
