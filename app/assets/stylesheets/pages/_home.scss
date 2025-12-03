@@ -1,1 +1,239 @@
-// Specific CSS for your home-page
+// ============================================
+// 🏠 TASTE & DRINK - HOME PAGE
+// ============================================
+
+.td-home {
+  padding: 0 16px;
+}
+
+// === HEADER CONNECTÉ ===
+.td-home-header {
+  margin-bottom: 24px;
+}
+
+.td-home-greeting {
+  font-size: 14px;
+  color: $text-muted;
+  margin: 0;
+}
+
+.td-home-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: $text-primary;
+  margin: 4px 0 0 0;
+}
+
+// === HERO CARD ===
+.td-home-hero {
+  background: linear-gradient(135deg, $dark-bg-card, $dark-bg-light);
+  border: 1px solid rgba($gold, 0.2);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.td-hero-content {
+  position: relative;
+  z-index: 1;
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: $gold;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    color: $text-secondary;
+    margin: 0 0 16px 0;
+    font-size: 14px;
+  }
+}
+
+.td-hero-decoration {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.15;
+  font-size: 48px;
+  color: $gold;
+
+  span {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+// === STATS ===
+.td-home-stats {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.td-stat-card {
+  flex: 1;
+  background: $dark-bg-card;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid rgba($gold, 0.1);
+}
+
+.td-stat-value {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  color: $gold;
+}
+
+.td-stat-label {
+  font-size: 11px;
+  color: $text-muted;
+  text-transform: uppercase;
+}
+
+// === SECTIONS ===
+.td-home-section {
+  margin-bottom: 24px;
+}
+
+.td-section-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+
+  h3 {
+    font-size: 16px;
+    color: $text-primary;
+    margin: 0;
+  }
+}
+
+.td-link-gold {
+  font-size: 13px;
+  color: $gold;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.td-recent-meals {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.td-mini-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: $dark-bg-card;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $dark-bg-light;
+  }
+}
+
+.td-mini-date {
+  font-size: 12px;
+  color: $text-muted;
+  min-width: 40px;
+}
+
+.td-mini-title {
+  font-size: 14px;
+  color: $text-primary;
+}
+
+// ============================================
+// === PAGE WELCOME (NON CONNECTÉ) ===
+// ============================================
+.td-welcome {
+  text-align: center;
+  padding: 40px 20px;
+  min-height: calc(100vh - 130px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.td-welcome-logo {
+  margin-bottom: 24px;
+
+  img {
+    width: 120px;
+    height: auto;
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.td-welcome-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: $gold;
+  margin: 0 0 8px 0;
+}
+
+.td-welcome-tagline {
+  font-size: 16px;
+  color: $text-secondary;
+  margin: 0 0 32px 0;
+}
+
+.td-welcome-features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.td-feature {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: $text-secondary;
+
+  i {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($gold, 0.1);
+    border-radius: 10px;
+    color: $gold;
+  }
+}
+
+.td-welcome-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,124 @@
+// ============================================
+// 🍷 TASTE & DRINK - FOOTBAR STYLES
+// Position: Fixe en bas de l'écran
+// 5 onglets avec le bouton "Match" au centre
+// ============================================
+
+.td-footbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: $dark-bg;
+  border-top: 1px solid rgba($gold, 0.2);
+  z-index: 1000;
+
+  // Safe area pour iPhone avec encoche
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.td-footbar-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  max-width: 100%;
+  padding: 0 8px;
+}
+
+// === ITEM DE LA FOOTBAR ===
+.td-footbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+  padding: 8px 4px;
+  text-decoration: none;
+  color: $text-muted;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: $text-secondary;
+  }
+
+  // État actif (page courante)
+  &.active {
+    color: $gold;
+
+    .td-footbar-icon {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// === ICÔNE STANDARD ===
+.td-footbar-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+  transition: transform 0.3s ease;
+}
+
+// === LABEL (Texte sous l'icône) ===
+.td-footbar-label {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// ============================================
+// === BOUTON "MATCH" (Central - Plus grand) ===
+// ============================================
+.td-footbar-match {
+  position: relative;
+
+  .td-footbar-icon-match {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, $gold-dark, $gold, $gold-light);
+    border-radius: 50%;
+    margin-bottom: 4px;
+    margin-top: -20px; // Dépasse légèrement
+    box-shadow: 0 4px 15px rgba($gold, 0.4);
+    transition: all 0.3s ease;
+
+    i {
+      font-size: 14px;
+      color: $dark-bg;
+    }
+  }
+
+  &:hover .td-footbar-icon-match {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba($gold, 0.6);
+  }
+
+  &.active .td-footbar-icon-match {
+    background: linear-gradient(135deg, $gold, $gold-light);
+  }
+
+  .td-footbar-label {
+    color: $gold;
+    font-weight: 600;
+  }
+}
+
+// ============================================
+// === RESPONSIVE ADJUSTMENTS ===
+// ============================================
+@media (min-width: 768px) {
+  // Sur tablette/desktop, on peut masquer ou adapter
+  .td-footbar {
+    max-width: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px 20px 0 0;
+  }
+}
