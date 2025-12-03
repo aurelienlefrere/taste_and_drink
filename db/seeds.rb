@@ -14,7 +14,6 @@ Drink.destroy_all
 Friend.destroy_all
 User.destroy_all
 
-Friend.create!()
 User.create(email: "franckabeille33@gmail.com", password:"azerty", first_name: "Franck", last_name: "Abeille")
 csv_file = Rails.root.join('db', 'wines.csv')
 
