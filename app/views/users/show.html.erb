@@ -1,14 +1,49 @@
-<div></div>
-
-
-
-
-<% @friends.each do |friend|  %>
-  <div><div class="card-product">
-  <%= link_to(image_tag('https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', alt: 'Image Description'), user_path(friend)) %>
-  <div class="card-product-infos">
-    <h2><%= friend.first_name%> <%= friend.last_name%></h2>
+<div class="container">
+  <h1 class="mb-4">Mon profil</h1>
+  <!-- Profil principal avec row Bootstrap -->
+  <div class="row align-items-start mb-5">
+    <div class="col-auto">
+      <%= image_tag('https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg',
+          alt: 'Skateboard',
+          class: "rounded-circle",
+          style: "width: 120px; height: 120px; object-fit: cover;") %>
+    </div>
+    <div class="col ">
+      <div class="mb-3">
+        <small class="text-muted">Nom</small>
+        <div><%= @user.last_name %></div>
+      </div>
+      <div class="mb-3">
+        <small class="text-muted">Prénom</small>
+        <div><%= @user.first_name %></div>
+      </div>
+      <div class="mb-3">
+        <small class="text-muted">Allergy</small>
+        <div><%= @user.allergy %></div>
+      </div>
+      <div class="mb-3">
+        <small class="text-muted">Diet</small>
+        <div><%= @user.diet %></div>
+      </div>
+    </div>
   </div>
+
+  <!-- Section Friends avec scroll horizontal -->
+  <h1 class="mb-4">Friends:</h1>
+<div class="d-flex overflow-auto pb-3" style="gap: 1rem;">
+  <% @friends.each do |friend| %>
+    <div class="card-product flex-shrink-0" style="min-width: 100px;">
+      <div class="d-flex flex-column p-2">
+        <div class="mb-2">
+          <%= link_to(image_tag('https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg',
+              alt: 'Image Description',
+              style: "width: 80px; height: 80px; object-fit: cover; border-radius: 8px;"),
+              user_path(friend)) %>
+        </div>
+        <div class="card-product-infos">
+          <h2 class="mb-0"><%= friend.first_name %> </h2>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
-</div>
- <% end %>
