@@ -1,6 +1,35 @@
-// Define variables for your color scheme
+// ============================================
+// 🍷 TASTE & DRINK - PALETTE DE COULEURS
+// Theme: Dark Luxueux avec accents dorés
+// ============================================
 
-// For example:
+// === COULEURS PRINCIPALES ===
+// Fond principal (noir profond)
+$dark-bg: #121212;
+$dark-bg-light: #1E1E1E;
+$dark-bg-card: #252525;
+
+// Or/Doré (inspiré du logo)
+$gold: #C9A962;
+$gold-light: #D4BC7B;
+$gold-dark: #A8893F;
+
+// === COULEURS SECONDAIRES ===
+$wine-red: #722F37;
+$wine-burgundy: #4A1C24;
+
+// === TEXTES ===
+$text-primary: #FFFFFF;
+$text-secondary: #B3B3B3;
+$text-muted: #707070;
+
+// === UTILITAIRES ===
+$success: #2ECC71;
+$warning: #F39C12;
+$danger: #E74C3C;
+$info: #3498DB;
+
+// === ANCIENNES COULEURS (compatibilité) ===
 $red: #FD1015;
 $blue: #0D6EFD;
 $yellow: #FFC65A;
