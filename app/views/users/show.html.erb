@@ -1,14 +1,26 @@
-<div></div>
 
-
-
-
-<% @friends.each do |friend|  %>
-  <div><div class="card-product">
-  <%= link_to(image_tag('https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', alt: 'Image Description'), user_path(friend)) %>
-  <div class="card-product-infos">
-    <h2><%= friend.first_name%> <%= friend.last_name%></h2>
-  </div>
+<div class="container ">
+  <h1>Mon profil</h1>
+  <%= image_tag('https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg',
+      alt: 'Skateboard',
+      class: "rounded-circle w-25") %>
+      <div>Nom</div>
+        <div>Prénom</div>
+          <div>Allergy</div>
+            <div>Diet</div>
+          <div>Nombre de MATCH </div></div>
 </div>
+
+
+<div class="bg-black">
+<h1 >Friends:</h1>
+<% @friends.each do |friend|  %>
+  <div>
+    <div class="card-product d-flex p-2"> <%= link_to(image_tag('https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', alt: 'Image Description'), user_path(friend)) %>
+      <div class="card-product-infos ">
+        <h2><%= friend.first_name%> <%= friend.last_name%></h2>
+      </div>
+    </div>
+  </div>
 </div>
  <% end %>
