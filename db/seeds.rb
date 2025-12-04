@@ -11,6 +11,7 @@
 
 require 'csv'
 Drink.destroy_all
+# Stock.destroy_all
 Friend.destroy_all
 User.destroy_all
 
@@ -38,7 +39,7 @@ else
 end
 
 puts "\n👥 Création des utilisateurs..."
-
+#USER
 users_data = [
   {
     email: 'Pierre@example.com',
@@ -116,10 +117,22 @@ users_data.each do |user_data|
   puts "✅ #{user.first_name} #{user.last_name} (#{user.email})"
 end
 
+
+puts "\n👥 Création des friends..."
 friends = User.where.not(id: User.last.id)
 @mail_aureo = User.find_by(email: "aurelien@example.com")
+
 friends.each do |friend|
   Friend.create!(user_main_id: @mail_aureo.id,  user_friend_id: friend.id)
 end
 
-puts "\n✨ Seed terminé ! #{Drink.count} vins + #{User.count} utilisateurs"
+puts "\n👥 Création des Stock..."
+drinks = Drink.all
+@mail_aureo = User.find_by(email: "aurelien@example.com")
+
+# drinks.each do |drink|
+#   Stock.create!(drink_id: drink.id, user_id: @mail_aureo.id, quantity: 1 )
+# end
+
+puts "\n✨ Seed terminé ! #{Drink.count} vins + #{User.count} utilisateurs + #{Friend.count} friends +
+#{Stock.count} stock "
