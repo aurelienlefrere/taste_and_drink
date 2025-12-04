@@ -40,7 +40,7 @@
     <% end %>
 
     <%# === 5. FRIENDS (Liste d'amis) === %>
-    <%= link_to users_path, class: "td-footbar-item #{'active' if controller_name == 'users' && action_name == 'index'}" do %>
+    <%= link_to friends_path, class: "td-footbar-item #{'active' if controller_name == 'users' && action_name == 'index'}" do %>
       <div class="td-footbar-icon">
         <i class="fas fa-user-friends"></i>
       </div>
