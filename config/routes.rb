@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
   resources :meals
   resources :stocks
+  resources :drinks
   resources :friends, only: [:index]
 end

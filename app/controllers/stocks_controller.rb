@@ -24,7 +24,8 @@ class StocksController < ApplicationController
   end
 
   def show
-    @stock = current_user.stock
+    @stock = current_user.stocks.find(params[:id])
+    @drink = @stock.drink
   end
 
   def edit
