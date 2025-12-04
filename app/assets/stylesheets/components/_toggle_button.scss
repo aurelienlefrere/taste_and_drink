@@ -1,0 +1,40 @@
+.toggle-checkbox {
+  display: none;
+}
+
+.toggle-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid #4a90e2;
+  border-radius: 6px;
+  background-color: #e8f4ff;
+  color: #4a90e2;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.toggle-btn:hover {
+  background-color: #d0e8ff;
+}
+
+.toggle-checkbox:checked + .toggle-btn {
+  background-color: #4a90e2;
+  color: white;
+  border-color: #4a90e2;
+}
+
+.toggle-checkbox:checked + .toggle-btn:hover {
+  background-color: #3a7bc8;
+}
+
+.toggle-btn:active {
+  transform: scale(0.98);
+}
+
+.toggle-checkbox:focus + .toggle-btn {
+  outline: 2px solid #4a90e2;
+  outline-offset: 2px;
+}
