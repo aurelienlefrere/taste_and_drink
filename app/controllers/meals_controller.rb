@@ -10,6 +10,7 @@ class MealsController < ApplicationController
 
   def new
     @meal = Meal.new
+    @friends = current_user.all_friends
     # @stock = current_user.stock
   end
 
@@ -23,8 +24,12 @@ class MealsController < ApplicationController
     end
   end
 
+  # def
+  #   params[:meal][:guest_ids]
+  # end
+
 private
   def meal_params
-    params.require(:meal).permit(:dish_name)
+    params.require(:meal).permit(:dish_name, :friends)
   end
 end

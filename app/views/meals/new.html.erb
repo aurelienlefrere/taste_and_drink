@@ -1,13 +1,13 @@
 <%= simple_form_for @meal do |f| %>
   <%= f.input :dish_name, label: "Nom du plat" %>
-    <div >
-    <div >
-    </div>
-    <button type="button"
-            class="btn btn-info mb-3">
-          Ma cave
-    </button>
-  </div>
 
-  <%= f.submit "MATCH", class: "btn btn-warning" %>
+  <input type="checkbox" class="toggle-checkbox" id="mon_bouton" name="with_stock" value="true">
+  <label class="toggle-btn" for="mon_bouton">Ma cave</label>
+
+  <%= f.association :guests, collection: @friends, as: :check_boxes, class:"toggle-toggle", label_method: :first_name, include_blank: false %>
+
+
+  <div>
+  <%= f.submit "VALIDER", class: "btn btn-warning" %>
+  </div>
 <% end %>
