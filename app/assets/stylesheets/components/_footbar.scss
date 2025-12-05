@@ -1,19 +1,18 @@
 // ============================================
 // 🍷 TASTE & DRINK - FOOTBAR STYLES
-// Position: Fixe en bas de l'écran
-// 5 onglets avec le bouton "Match" au centre
+// Style: Rose glossy inspiré du logo Taste & Drink
 // ============================================
 
 .td-footbar {
   position: fixed;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);  // Centre la footbar
+  transform: translateX(-50%);
   width: 100%;
-  max-width: 430px;             // Même largeur que le body
+  max-width: 430px;
   height: 70px;
   background: $dark-bg;
-  border-top: 1px solid rgba($gold, 0.2);
+  border-top: 1px solid rgba($pink-glossy, 0.3);  // Changé de $gold
   z-index: 1000;
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -27,7 +26,7 @@
   padding: 0 8px;
 }
 
-// === ITEM DE LA FOOTBAR ===
+// === ITEM DE LA FOOTBAR (style glossy rose) ===
 .td-footbar-item {
   display: flex;
   flex-direction: column;
@@ -37,31 +36,36 @@
   height: 100%;
   padding: 8px 4px;
   text-decoration: none;
-  color: $text-muted;
+  color: rgba($pink-glossy, 0.6);  // Rose avec transparence
   transition: all 0.3s ease;
 
   &:hover {
-    color: $text-secondary;
+    color: $pink-glossy;
   }
 
-  // État actif (page courante)
+  // État actif - effet glossy plus prononcé
   &.active {
-    color: $gold;
+    color: $pink-glossy-light;
 
     .td-footbar-icon {
       transform: translateY(-2px);
+      text-shadow: 0 0 10px rgba($pink-glossy, 0.5);  // Lueur rose
+    }
+
+    .td-footbar-label {
+      text-shadow: 0 0 8px rgba($pink-glossy, 0.4);
     }
   }
 }
 
-// === ICÔNE STANDARD ===
+// === ICÔNE STANDARD (rose glossy) ===
 .td-footbar-icon {
   font-size: 20px;
   margin-bottom: 4px;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);  // Effet glossy
 }
 
-// === LABEL (Texte sous l'icône) ===
 .td-footbar-label {
   font-size: 10px;
   font-weight: 500;
@@ -70,7 +74,7 @@
 }
 
 // ============================================
-// === BOUTON "MATCH" (Central - Plus grand) ===
+// === BOUTON "MATCH" (Central - Rose Glossy Premium) ===
 // ============================================
 .td-footbar-match {
   position: relative;
@@ -82,43 +86,58 @@
     gap: 4px;
     width: 56px;
     height: 56px;
-    background: linear-gradient(135deg, $gold-dark, $gold, $gold-light);
+    // Gradient rose glossy premium
+    background: linear-gradient(135deg, $pink-glossy-dark, $pink-glossy, $pink-glossy-light);
     border-radius: 50%;
     margin-bottom: 4px;
-    margin-top: -20px; // Dépasse légèrement
-    box-shadow: 0 4px 15px rgba($gold, 0.4);
+    margin-top: -20px;
+    // Ombre et effet glossy multicouche
+    box-shadow:
+      0 4px 15px rgba($pink-glossy, 0.4),           // Ombre colorée
+      inset 0 2px 4px rgba(255, 255, 255, 0.25),    // Reflet interne haut
+      inset 0 -2px 4px rgba(0, 0, 0, 0.1);          // Ombre interne bas
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    // Reflet glossy en haut (effet "bulle")
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 40%;
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0)
+      );
+      border-radius: 50%;
+    }
 
     i {
       font-size: 14px;
       color: $dark-bg;
+      position: relative;
+      z-index: 1;
     }
   }
 
   &:hover .td-footbar-icon-match {
     transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba($gold, 0.6);
+    box-shadow:
+      0 6px 20px rgba($pink-glossy, 0.6),
+      inset 0 2px 4px rgba(255, 255, 255, 0.3),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
   }
 
   &.active .td-footbar-icon-match {
-    background: linear-gradient(135deg, $gold, $gold-light);
+    background: linear-gradient(135deg, $pink-glossy, $pink-glossy-light);
   }
 
   .td-footbar-label {
-    color: $gold;
+    color: $pink-glossy;
     font-weight: 600;
   }
 }
-
-// ============================================
-// === RESPONSIVE ADJUSTMENTS ===
-// ============================================
-// @media (min-width: 768px) {
-//   // Sur tablette/desktop, on peut masquer ou adapter
-//   .td-footbar {
-//     max-width: 500px;
-//     left: 50%;
-//     transform: translateX(-50%);
-//     border-radius: 20px 20px 0 0;
-//   }
-// }
