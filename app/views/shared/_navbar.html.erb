@@ -1,13 +1,19 @@
 <%# ============================================ %>
 <%# 🍷 TASTE & DRINK - NAVBAR %>
-<%# Structure: Logo (gauche) | Avatar Profil (droite) %>
+<%# Structure: Logo icône (gauche) | Logo texte (centre) | Avatar Profil (droite) %>
 <%# ============================================ %>
 
 <nav class="td-navbar">
   <div class="td-navbar-container">
-    <%# === LOGO (gauche) - Cliquable vers Home === %>
+    <%# === LOGO ICÔNE (gauche) - Cliquable vers Home === %>
     <%= link_to root_path, class: "td-navbar-logo" do %>
       <%= image_tag "logo_taste_drink.png", alt: "Taste & Drink" %>
+    <% end %>
+
+    <%# === LOGO TEXTE (centre) === %>
+   
+    <%= link_to root_path, class: "td-navbar-logo-text" do %>
+      <span>Taste <em>&</em> Drink</span>
     <% end %>
 
     <%# === AVATAR PROFIL (droite) - Cliquable vers Profil === %>
@@ -16,7 +22,6 @@
         <% if current_user.respond_to?(:photo) && current_user.photo.present? %>
           <%= image_tag("https://www.webstickersmuraux.com/fr/img/pokgo05-jpg/folder/products-listado-merchant/stickers-muraux-enfants-bebes-pikachu.jpg", alt: current_user.first_name)|| "Profil" %>
         <% else %>
-          <%# Avatar par défaut avec les initiales %>
           <div class="td-avatar-placeholder">
             <%= current_user.first_name&.first&.upcase || current_user.email.first.upcase %>
           </div>
