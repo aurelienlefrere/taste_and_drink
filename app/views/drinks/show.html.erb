@@ -1,17 +1,19 @@
 
 <div class="container">
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center mt-5">
         <div class="td-home-hero">
           <div class="td-hero-content">
             <div class="stock-item">
-              <div class="d-flex justify-content-center">
+              <div class="d-flex justify-content-center mb-3">
                 <%= image_tag(@drink.photo, class: "w-100", alt: "#{@drink.title}") %>
               </div>
-              <h2><%= @drink.title %></h2>
-              <div class="$text-secondary" >
-                <p><%= @drink.category %></p>
-                <p><%= @drink.region %></p>
-                <p><%= @drink.year %></p>
+              <div class="my-3">
+                <h2><%= @drink.title %></h2>
+                <div class="$text-secondary pt-2" >
+                  <p><%= @drink.category %></p>
+                  <p><%= @drink.region %></p>
+                  <p><%= @drink.year %></p>
+                </div>
               </div>
 
 
@@ -21,6 +23,6 @@
       </div>
 
   <div class="d-flex align-items-center">
-    <%= link_to "Retourner à votre cave", stocks_path, class: "btn btn-gold" %>
+    <%= link_to "Retourner à votre cave", stocks_path, class: "btn btn-gold w-100" %>
   </div>
 </div>

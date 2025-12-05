@@ -13,8 +13,10 @@ gem "pg", "~> 1.1"
 gem "ruby_llm", "~> 1.2.0"
 gem 'dotenv', groups: [:development, :test]
 
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
+
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
@@ -52,6 +54,7 @@ gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
+gem "neighbor"
 
 group :development, :test do
   gem "dotenv-rails"

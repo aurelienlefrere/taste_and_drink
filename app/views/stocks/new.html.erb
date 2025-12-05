@@ -1,16 +1,14 @@
 
 
-<div class="container py-5">
-  <div class="row">
-    <%# <div class="col-12 col-md-6 offset-lg-3"> %>
-      <div class="bg-white rounded p-3 shadow">
-        <h3>Create a new stock</h3>
-          <%= simple_form_for(@stock) do |f| %>
-            <%= f.association :drink, input_html: {data: {controller: "tom-select"}} %>
-            <%= f.input :quantity %>
-            <%= f.submit class: "btn btn-gold" %>
-          <% end %>
-      </div>
-    </div>
+<div class="container">
+  <div class="td-home-header">
+    <h3 class="td-home-name mt-5">Create a new stock</h3>
   </div>
+  <%= simple_form_for(@stock) do |f| %>
+    <div class="td-hero-content">
+      <%= f.association :drink, input_html: {data: {controller: "tom-select"}, class: ""} %>
+    </div>
+    <%= f.input :quantity, input_html: {min: 1} %>
+    <%= f.submit class: "btn btn-gold w-100 mt-3" %>
+  <% end %>
 </div>

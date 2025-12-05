@@ -13,6 +13,7 @@
 ActiveRecord::Schema[7.1].define(version: 2025_12_05_141615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "vector"
 
   create_table "drinks", force: :cascade do |t|
     t.string "title"
@@ -22,6 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_05_141615) do
     t.text "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.vector "embedding", limit: 1536
   end
 
   create_table "friends", force: :cascade do |t|
@@ -98,6 +100,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_05_141615) do
     t.string "allergy"
     t.text "like"
     t.text "dislike"
+    t.string "photo"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -10,10 +10,13 @@
 
 
 require 'csv'
-Drink.destroy_all
-# Stock.destroy_all
+Guest.destroy_all
+Meal.destroy_all
+Stock.destroy_all
 Friend.destroy_all
+
 User.destroy_all
+Drink.destroy_all
 
 
 csv_file = Rails.root.join('db', 'wines.csv')
@@ -49,7 +52,8 @@ users_data = [
     diet: 'Vegan',
     allergy: 'Nuts',
     like: 'Red wines, Bordeaux',
-    dislike: 'Champagne'
+    dislike: 'Champagne',
+    photo: 'Pierre.jpeg'
   },
   {
     email: 'Franck@example.com',
@@ -59,7 +63,8 @@ users_data = [
     diet: 'Omnivore',
     allergy: 'Shellfish',
     like: 'White wines, Burgundy',
-    dislike: 'Sweet wines'
+    dislike: 'Sweet wines',
+    photo: 'Franck.jpeg'
   },
   {
     email: 'Vitor@example.com',
@@ -69,7 +74,8 @@ users_data = [
     diet: 'Vegetarian',
     allergy: 'Gluten',
     like: 'Rosé wines, Provence',
-    dislike: 'Dry wines'
+    dislike: 'Dry wines',
+    photo: 'Vitor.jpeg'
   },
   {
     email: 'Tom@example.com',
@@ -79,7 +85,8 @@ users_data = [
     diet: 'Omnivore',
     allergy: 'Dairy',
     like: 'Sparkling wines, Champagne',
-    dislike: 'Heavy wines'
+    dislike: 'Heavy wines',
+    photo: 'Tom.jpeg'
   },
   {
     email: 'Bassam@example.com',
@@ -89,7 +96,8 @@ users_data = [
     diet: 'Pescatarian',
     allergy: 'None',
     like: 'Italian wines, Tuscan',
-    dislike: 'Bitter wines'
+    dislike: 'Bitter wines',
+    photo: 'Bassam.jpeg'
   },
   {
     email: 'Aurelien@example.com',
@@ -99,7 +107,8 @@ users_data = [
     diet: 'Omnivore',
     allergy: 'Sulfites',
     like: 'Spanish wines, Rioja',
-    dislike: 'Light wines'
+    dislike: 'Light wines',
+    photo: 'Aurélien.jpeg'
   }
 ]
 
@@ -113,6 +122,7 @@ users_data.each do |user_data|
     u.allergy = user_data[:allergy]
     u.like = user_data[:like]
     u.dislike = user_data[:dislike]
+    u.photo = user_data[:photo]
   end
   puts "✅ #{user.first_name} #{user.last_name} (#{user.email})"
 end
