@@ -13,8 +13,8 @@
     <%# === AVATAR PROFIL (droite) - Cliquable vers Profil === %>
     <% if user_signed_in? %>
       <%= link_to user_path(current_user), class: "td-navbar-avatar" do %>
-        <% if current_user.respond_to?(:photo) && current_user.photo.attached? %>
-          <%= image_tag current_user.photo, alt: current_user.first_name || "Profil" %>
+        <% if current_user.respond_to?(:photo) && current_user.photo.present? %>
+          <%= image_tag("https://www.webstickersmuraux.com/fr/img/pokgo05-jpg/folder/products-listado-merchant/stickers-muraux-enfants-bebes-pikachu.jpg", alt: current_user.first_name)|| "Profil" %>
         <% else %>
           <%# Avatar par défaut avec les initiales %>
           <div class="td-avatar-placeholder">
