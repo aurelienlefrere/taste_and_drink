@@ -35,7 +35,8 @@
     <div class="card-product flex-shrink-0" style="min-width: 100px;">
       <div class="d-flex flex-column p-2">
         <div class="mb-2">
-          <%= link_to(image_tag(@user.photo,
+      
+          <%= link_to(image_tag(friend.photo,
               alt: 'Image Description',
               style: "width: 80px; height: 80px; object-fit: cover; border-radius: 8px;"),
               user_path(friend)) %>
