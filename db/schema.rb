@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_01_161542) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_04_202255) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_01_161542) do
     t.datetime "updated_at", null: false
     t.index ["drink_id"], name: "index_meal_drinks_on_drink_id"
     t.index ["meal_id"], name: "index_meal_drinks_on_meal_id"
+  end
+
+  create_table "meal_recommendations", force: :cascade do |t|
+    t.bigint "meal_id", null: false
+    t.text "analysis"
+    t.text "wine_suggestions"
+    t.text "alcoholic_suggestions"
+    t.text "non_alcoholic_suggestions"
+    t.text "unusual_suggestions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meal_id"], name: "index_meal_recommendations_on_meal_id"
   end
 
   create_table "meals", force: :cascade do |t|
@@ -95,6 +107,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_01_161542) do
   add_foreign_key "guests", "users"
   add_foreign_key "meal_drinks", "drinks"
   add_foreign_key "meal_drinks", "meals"
+  add_foreign_key "meal_recommendations", "meals"
   add_foreign_key "meals", "users"
   add_foreign_key "stocks", "drinks"
   add_foreign_key "stocks", "users"
