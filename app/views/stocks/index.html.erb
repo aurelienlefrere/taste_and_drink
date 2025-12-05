@@ -1,30 +1,53 @@
 <div class="container">
     <div class="td-home-header">
       <p class="td-home-name">Ma Cave</p>
+      <%= link_to "Add a new stock", new_stock_path, class: "btn btn-gold w-100 mt-3" %>
     </div>
     <% @stocks.each do |stock| %>
-      <div class="d-flex align-items-center">
-        <div class="td-home-hero">
+        <%# <div class="td-home-hero"> %>
           <div class="td-hero-content">
-            <div class="stock-item">
-              <span><%= link_to "#{stock.drink.title}", drink_path(stock.drink) %></span>
-              <div class="counter">
-                <%= button_to "-", stock_path(stock, stock: { quantity: stock.quantity - 1 }),
-                    method: :patch,
-                    class: "btn btn-secondary rounded-circle mt-3" %>
-              </div>
+            <%# <div class="stock-item"> %>
 
-                <span class="quantity"><%= stock.quantity %></span>
+              <div class="stock-card">
+                <div class="stock-content">
 
-              <div class="counter">
-                <%= button_to "+", stock_path(stock, stock: { quantity: stock.quantity + 1 }),
-                    method: :patch,
-                    class: "btn btn-secondary rounded-circle" %>
+                  <div class="d-flex jusftify-content-between align-items-center">
+                    <div class="stock-image-wrapper">
+                      <%= image_tag(stock.drink.photo, class: "stock-image-container", alt: "#{stock.drink.title}") %>
+                    </div>
+                    <div class="stock-title">
+                      <span><%= link_to "#{stock.drink.title}", drink_path(stock.drink) %></span>
+                      <% if stock.drink.year.present? %>
+                        <p class="stock-year"><%= stock.drink.year %></p>
+                      <% end %>
+                    </div>
+                  </div>
+
+                  <div class="stock-counter" onclick="event.preventDefault(); event.stopPropagation();">
+                    <div class="d-flex jusftify-content-between align-items-center position-absolute bottom-0 end-0">
+                      <%= button_to stock_path(stock),
+                          method: :patch,
+                          params: { stock: { quantity: stock.quantity - 1 } },
+                          class: "counter-btn rounded-circle",
+                          onclick: "event.stopPropagation();" do %>
+                        <span class="counter-symbol">−</span>
+                      <% end %>
+                      <div>
+                        <span class="quantity mx-2"><%= stock.quantity %></span>
+                      </div>
+                      <%= button_to stock_path(stock),
+                          method: :patch,
+                          params: { stock: { quantity: stock.quantity + 1 } },
+                          class: "counter-btn rounded-circle",
+                          onclick: "event.stopPropagation();" do %>
+                        <span class="counter-symbol">+</span>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     <% end %>
-  <%= link_to "Add a new stock", new_stock_path, class: "btn btn-gold " %>
 </div>

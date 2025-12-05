@@ -16,7 +16,7 @@ class StocksController < ApplicationController
     else
       @stock = current_user.stocks.new(stock_params)
       if @stock.save
-        redirect_to stocks_path, notice: 'Stock ajouté avec succès'
+        redirect_to stocks_path
       else
         render :new, status: :unprocessable_entity
       end
@@ -37,11 +37,11 @@ class StocksController < ApplicationController
 
     if new_quantity <= 0
       @stock.destroy
-      redirect_to stocks_path, notice: 'Stock supprimé'
+      redirect_to stocks_path
     elsif @stock.update(quantity: new_quantity)
-      redirect_to stocks_path, notice: 'Quantité mise à jour'
+      redirect_to stocks_path
     else
-      redirect_to stocks_path, alert: 'Erreur'
+      redirect_to stocks_path
     end
   end
 
