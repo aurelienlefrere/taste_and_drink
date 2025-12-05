@@ -10,10 +10,12 @@
 
 
 require 'csv'
-Drink.destroy_all
-# Stock.destroy_all
+Meal.destroy_all
+Stock.destroy_all
 Friend.destroy_all
+Guest.destroy_all
 User.destroy_all
+Drink.destroy_all
 
 
 csv_file = Rails.root.join('db', 'wines.csv')
