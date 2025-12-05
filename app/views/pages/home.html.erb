@@ -1,5 +1,6 @@
 <%# ============================================ %>
 <%# 🏠 HOME - Page d'accueil Taste & Drink %>
+<%# Redesign avec carousels swipables %>
 <%# ============================================ %>
 
 <div class="td-home fade-in">
@@ -9,17 +10,14 @@
     <%# Header de bienvenue %>
     <div class="td-home-header">
       <p class="td-home-greeting">Bonjour,</p>
-      <h1 class="td-home-name"><%= current_user.first_name || "Chef" %> </h1>
+      <h1 class="td-home-name"><%= current_user.first_name || "Chef" %></h1>
     </div>
 
-    <%# Carte principale - Action rapide %>
+    <%# Carte principale - Zone de texte (sans bouton) %>
     <div class="td-home-hero">
       <div class="td-hero-content">
         <h2>Prêt pour un accord parfait ?</h2>
-        <p>Trouvez la boisson idéale pour votre prochain repas.</p>
-        <%= link_to new_meal_path, class: "btn btn-gold" do %>
-          <i class="fas fa-magic me-2"></i>Lancer un Match
-        <% end %>
+        <p>Découvrez les meilleures associations entre vos plats et vos vins grâce à notre IA sommelier.</p>
       </div>
       <div class="td-hero-decoration">
         <i class="fas fa-wine-glass-alt"></i>
@@ -28,14 +26,14 @@
       </div>
     </div>
 
-    <%# Stats rapides %>
+    <%# Stats rapides (Events, Bouteilles, Amis) %>
     <div class="td-home-stats">
       <div class="td-stat-card">
         <span class="td-stat-value"><%= current_user.meals.count %></span>
         <span class="td-stat-label">Events</span>
       </div>
       <div class="td-stat-card">
-        <%# <span class="td-stat-value"><%= current_user.stocks.sum(:quantity) %>
+        <span class="td-stat-value"><%= current_user.stocks.sum(:quantity) rescue 0 %></span>
         <span class="td-stat-label">Bouteilles</span>
       </div>
       <div class="td-stat-card">
@@ -44,30 +42,128 @@
       </div>
     </div>
 
-    <%# Derniers events %>
-    <% recent_meals = current_user.meals.order(date: :desc).limit(3) %>
-    <% if recent_meals.any? %>
-      <div class="td-home-section">
-        <div class="td-section-header-row">
-          <h3>Derniers accords</h3>
-          <%= link_to "Voir tout", meals_path, class: "td-link-gold" %>
-        </div>
-        <div class="td-recent-meals">
-          <% recent_meals.each do |meal| %>
-            <%= link_to meal_path(meal), class: "td-mini-card" do %>
-              <span class="td-mini-date"><%= meal.date&.strftime("%d/%m") %></span>
-              <span class="td-mini-title"><%= truncate(meal.dish_name, length: 20) %></span>
+    <%# ============================================ %>
+    <%# SECTION 1: Mes Vins Notés (Swipable) %>
+    <%# ============================================ %>
+    <div class="td-home-section">
+      <div class="td-section-header-row">
+        <h3><i class="fas fa-star me-2"></i>Mes Vins Notés</h3>
+        <%= link_to "Voir tout", stocks_path, class: "td-link-gold" %>
+      </div>
+
+      <%# Le data-controller connecte au Stimulus controller %>
+      <div class="td-swiper" data-controller="swiper">
+        <div class="td-swiper-track" data-swiper-target="track">
+          <% rated_wines = current_user.stocks.includes(:drink).where.not(rating: nil).order(rating: :desc).limit(10) %>
+          <% if rated_wines.any? %>
+            <% rated_wines.each do |stock| %>
+              <%= link_to drink_path(stock.drink), class: "td-wine-card" do %>
+                <div class="td-wine-card-image">
+                  <% if stock.drink.photo.attached? %>
+                    <%= image_tag stock.drink.photo, alt: stock.drink.name %>
+                  <% else %>
+                    <div class="td-wine-placeholder">
+                      <i class="fas fa-wine-bottle"></i>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="td-wine-card-content">
+                  <span class="td-wine-name"><%= truncate(stock.drink.name, length: 18) %></span>
+                  <span class="td-wine-type"><%= stock.drink.color %></span>
+                  <div class="td-wine-rating">
+                    <%# Affiche les étoiles pleines %>
+                    <% stock.rating.to_i.times do %>
+                      <i class="fas fa-star"></i>
+                    <% end %>
+                    <%# Affiche les étoiles vides %>
+                    <% (5 - stock.rating.to_i).times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%# Placeholder si pas de vins notés %>
+            <% 3.times do %>
+              <div class="td-wine-card td-card-empty">
+                <div class="td-wine-card-image">
+                  <div class="td-wine-placeholder">
+                    <i class="fas fa-wine-bottle"></i>
+                  </div>
+                </div>
+                <div class="td-wine-card-content">
+                  <span class="td-wine-name">Notez vos vins</span>
+                  <span class="td-wine-type">Ajoutez des notes</span>
+                </div>
+              </div>
             <% end %>
           <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
+
+    <%# ============================================ %>
+    <%# SECTION 2: Recommandations IA (Swipable) %>
+    <%# ============================================ %>
+    <div class="td-home-section">
+      <div class="td-section-header-row">
+        <h3><i class="fas fa-magic me-2"></i>Recommandations</h3>
+        <%= link_to "Explorer", new_meal_path, class: "td-link-gold" %>
+      </div>
+
+      <div class="td-swiper" data-controller="swiper">
+        <div class="td-swiper-track" data-swiper-target="track">
+          <% recommendations = current_user.meal_recommendations.order(created_at: :desc).limit(10) rescue [] %>
+          <% if recommendations.any? %>
+            <% recommendations.each do |reco| %>
+              <div class="td-reco-card">
+                <div class="td-reco-icon">
+                  <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="td-reco-content">
+                  <span class="td-reco-title"><%= truncate(reco.recommendation_text, length: 50) rescue "Recommandation" %></span>
+                  <span class="td-reco-date"><%= reco.created_at&.strftime("%d/%m") %></span>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <%# Exemples de recommandations %>
+            <div class="td-reco-card td-card-highlight">
+              <div class="td-reco-icon">
+                <i class="fas fa-utensils"></i>
+              </div>
+              <div class="td-reco-content">
+                <span class="td-reco-title">Boeuf Bourguignon</span>
+                <span class="td-reco-subtitle">Pinot Noir, Bourgogne</span>
+              </div>
+            </div>
+            <div class="td-reco-card">
+              <div class="td-reco-icon">
+                <i class="fas fa-fish"></i>
+              </div>
+              <div class="td-reco-content">
+                <span class="td-reco-title">Saumon Grillé</span>
+                <span class="td-reco-subtitle">Chardonnay, Loire</span>
+              </div>
+            </div>
+            <div class="td-reco-card">
+              <div class="td-reco-icon">
+                <i class="fas fa-cheese"></i>
+              </div>
+              <div class="td-reco-content">
+                <span class="td-reco-title">Plateau Fromages</span>
+                <span class="td-reco-subtitle">Sauternes, Bordeaux</span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
   <% else %>
     <%# === UTILISATEUR NON CONNECTÉ === %>
-
     <div class="td-welcome">
-      <%# Logo animé %>
       <div class="td-welcome-logo">
         <%= image_tag "logo_taste_drink.png", alt: "Taste & Drink" %>
       </div>
@@ -75,7 +171,6 @@
       <h1 class="td-welcome-title">Taste & Drink</h1>
       <p class="td-welcome-tagline">L'accord parfait entre votre plat et votre boisson</p>
 
-      <%# Features %>
       <div class="td-welcome-features">
         <div class="td-feature">
           <i class="fas fa-camera"></i>
@@ -91,9 +186,8 @@
         </div>
       </div>
 
-      <%# CTA %>
       <div class="td-welcome-actions">
-        <%= link_to "Créer un compte", new_user_registration_path, class: "btn btn-gold btn-lg" %>
+        <%= link_to "Créer un compte", new_user_registration_path, class: "btn btn-pink-glossy btn-lg" %>
         <%= link_to "Se connecter", new_user_session_path, class: "btn btn-gold-outline btn-lg" %>
       </div>
     </div>

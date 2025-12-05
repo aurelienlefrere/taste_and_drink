@@ -7,9 +7,9 @@
   position: fixed;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);  // Centre la navbar
+  transform: translateX(-50%);
   width: 100%;
-  max-width: 430px;             // Même largeur que le body
+  max-width: 430px;
   height: 60px;
   background: $dark-bg;
   border-bottom: 1px solid rgba($gold, 0.2);
@@ -25,13 +25,39 @@
   max-width: 100%;
 }
 
-// === LOGO ===
+// === LOGO ICÔNE (gauche) ===
 .td-navbar-logo {
   display: flex;
   align-items: center;
 
   img {
     height: 40px;
+    width: auto;
+    object-fit: contain;
+  }
+}
+
+// === LOGO TEXTE (centre) ===
+.td-navbar-logo-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin: 0 12px;
+
+  span {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: $text-primary;
+
+    em {
+      color: $pink-glossy;
+      font-style: normal;
+    }
+  }
+
+  img {
+    height: 32px;
     width: auto;
     object-fit: contain;
   }
