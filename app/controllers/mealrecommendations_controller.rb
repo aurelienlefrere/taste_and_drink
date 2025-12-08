@@ -5,7 +5,8 @@ class MealrecommendationsController < ApplicationController
   end
 
 
-end
+
+
 
 
 
@@ -17,6 +18,5 @@ end
   else
     @message = @chat.messages.last
     render "chats/show", status: :unprocessable_entity
-  end
   end
 end

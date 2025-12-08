@@ -3,6 +3,6 @@ class Meal < ApplicationRecord
   has_many :guests
   has_many :meal_drinks
 
-  
+
 
 end
