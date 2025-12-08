@@ -7,6 +7,7 @@ class User < ApplicationRecord
          has_many :guests
          has_many :meals
          has_many :friends
+         has_many :drinks, through: :stocks
 
 
   def all_friends

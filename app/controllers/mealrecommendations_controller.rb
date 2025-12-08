@@ -9,6 +9,7 @@ class MealrecommendationsController < ApplicationController
 
 
 
+
   drinks = Drink.nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(2)
   instructions = system_prompt
   instructions += drinks.map { |drink| drink_prompt(drink) }.join("\n\n")
