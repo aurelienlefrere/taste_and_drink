@@ -20,7 +20,7 @@
           </div>
           <div class="d-fles mb-3 mx-3">
             <div class="stock-counter" onclick="event.preventDefault(); event.stopPropagation();">
-              <div class="d-flex jusftify-content-between align-items-center position-absolute bottom-0 end-0">
+              <div class="d-flex jusftify-content-between align-items-center position-absolute bottom-0 end-0 p-2">
                 <%= button_to stock_path(stock),
                     method: :patch,
                     params: { stock: { quantity: stock.quantity - 1 } },
