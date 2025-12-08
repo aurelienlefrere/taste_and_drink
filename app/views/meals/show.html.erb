@@ -1,2 +1,27 @@
-coucou
+<div class="container">
+    <div class="td-home-header">
+      <h2 class="td-home-name">Nos Recommandations</h2>
+    </div>
 
+    <%# ============================================ %>
+    <%# SECTION 1: Mes Vins qui match(Swipable) %>
+    <%# ============================================ %>
+    <div class="td-home-section">
+        <h3><i class="td-home-name"></i>Mes Vins qui match</h3>
+      <div class="cards">
+            <% @drinks.each do |drink| %>
+              <div class="td-wine-card w-100">
+                <div class="td-wine-card-image">
+                  <div class="td-wine-placeholder">
+                  <%= image_tag(drink.photo, class: "stock-image-container", alt: "#{drink.title}") %>
+                  </div>
+                </div>
+                <div class="td-wine-card-content">
+                  <span class="stock-title"><%= drink.title %></span>
+                  <%# <span class="td-wine-type">Ajoutez des notes</span> %>
+                </div>
+              </div>
+            <% end %>
+        </div>
+      </div>
+</div>

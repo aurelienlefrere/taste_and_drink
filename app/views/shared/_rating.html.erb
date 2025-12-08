@@ -1,0 +1,31 @@
+<%# ============================================ %>
+<%# ⭐ RATING - Système de notation par étoiles %>
+<%# ============================================ %>
+<%#
+  Usage:
+  <%= render "shared/rating", meal_drink: @meal_drink %>
+%>
+
+<div class="td-rating-widget"
+     data-controller="rating"
+     data-rating-meal-drink-id-value="<%= @drink %>"
+     data-rating-rating-value="<%= @drink.rating || 0 %>">
+
+  <div class="td-rating-stars">
+    <% (1..5).each do |i| %>
+      <button type="button"
+              class="td-star <%= 'active' if @drink.rating && i <= @drink.rating %>"
+              data-rating-target="star"
+              data-value="<%= i %>"
+              data-action="click->rating#rate mouseenter->rating#hover mouseleave->rating#leave">
+        <i class="fas fa-star"></i>
+      </button>
+    <% end %>
+  </div>
+
+  <% if meal_drink.rating.present? %>
+    <span class="td-rating-text"><%= @drink.rating %>/5</span>
+  <% else %>
+    <span class="td-rating-text td-rating-placeholder">Noter</span>
+  <% end %>
+</div>

@@ -1,0 +1,853 @@
+// ============================================
+// 🍷 TASTE & DRINK - STYLES PAGE MATCH
+// ============================================
+
+// === PAGE MATCH ===
+.td-match-page {
+  padding: 0 16px 120px;
+}
+
+.td-match-header {
+  text-align: center;
+  margin-bottom: 24px;
+  padding-top: 8px;
+
+  .td-page-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 32px;
+  }
+
+  .td-match-icon {
+    color: $gold;
+  }
+
+  .td-match-ampersand {
+    font-family: 'Playfair Display', serif;
+    color: $pink-glossy;
+  }
+}
+
+// === CARDS GÉNÉRALES ===
+.td-card {
+  background: $dark-bg-card;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border: 1px solid rgba($gold, 0.1);
+}
+
+// === ONGLETS BOISSON ===
+.td-tab.active {
+  border-color: $gold;
+  color: $gold;
+  background: rgba($gold, 0.1);
+}
+
+// === INFO BOX (pour IA seule) ===
+.td-info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: rgba($gold, 0.1);
+  border-radius: 12px;
+  border-left: 3px solid $gold;
+
+  i {
+    font-size: 24px;
+    color: $gold;
+    margin-top: 2px;
+  }
+
+  p {
+    margin: 0;
+    color: $text-secondary;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+// === LISTE CAVE AMÉLIORÉE ===
+.td-cave-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.td-cave-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: $dark-bg-light;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+
+  &:has(input:checked) {
+    background: rgba($gold, 0.15);
+    border-color: $gold;
+
+    .td-cave-item-check {
+      opacity: 1;
+      color: $gold;
+    }
+  }
+
+  input[type="radio"] {
+    display: none;
+  }
+}
+
+.td-cave-item-image {
+  width: 40px;
+  height: 50px;
+  background: rgba($gold, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $gold;
+}
+
+.td-cave-item-content {
+  flex: 1;
+}
+
+.td-cave-item-name {
+  display: block;
+  font-weight: 600;
+  color: $text-primary;
+  font-size: 14px;
+}
+
+.td-cave-item-details {
+  font-size: 12px;
+  color: $text-muted;
+}
+
+.td-cave-item-check {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-size: 20px;
+}
+
+// === ZONE CAMÉRA ===
+.td-camera-zone {
+  border: 2px dashed rgba($text-muted, 0.3);
+  border-radius: 12px;
+  padding: 24px;
+  min-height: 150px;
+  position: relative;
+}
+
+.td-camera-placeholder {
+  text-align: center;
+  color: $text-muted;
+
+  i {
+    font-size: 40px;
+    margin-bottom: 12px;
+    display: block;
+    color: $gold;
+    opacity: 0.5;
+  }
+
+  p {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+  }
+}
+
+.td-scan-preview {
+  position: relative;
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+  }
+}
+
+.td-btn-remove-scan {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    background: $danger;
+  }
+}
+
+.td-scan-result {
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba($success, 0.1);
+  border-radius: 8px;
+}
+
+.td-scan-result-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $success;
+  font-size: 14px;
+
+  i {
+    font-size: 18px;
+  }
+}
+
+// === INPUT HINT ===
+.td-input-hint {
+  font-size: 12px;
+  color: $text-muted;
+  margin-top: 8px;
+}
+
+// === BOUTON OUTLINE GOLD ===
+.btn-outline-gold {
+  border: 1px solid $gold;
+  color: $gold;
+  background: transparent;
+
+  &:hover {
+    background: rgba($gold, 0.1);
+    color: $gold;
+  }
+}
+
+// === BOUTON GOLD ===
+.btn-gold {
+  background: linear-gradient(135deg, $gold-dark, $gold);
+  border: none;
+  color: $dark-bg;
+  font-weight: 600;
+
+  &:hover {
+    background: linear-gradient(135deg, $gold, $gold-light);
+    color: $dark-bg;
+  }
+}
+
+// === BOUTON MATCH (Submit) ===
+.td-match-submit {
+  position: sticky;
+  bottom: 80px;
+  padding: 16px 0;
+  background: linear-gradient(to top, $dark-bg 80%, transparent);
+  margin: 0 -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.td-btn-match {
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba($gold, 0.4);
+}
+
+// ============================================
+// === PAGE RÉSULTAT ===
+// ============================================
+.td-result-page {
+  padding: 0 16px 150px;
+}
+
+.td-result-header {
+  text-align: center;
+  padding: 24px 0;
+}
+
+.td-result-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 36px;
+
+  &.td-result-success {
+    background: linear-gradient(135deg, $wine-red, #E74C3C);
+    color: white;
+    animation: pulse 2s infinite;
+  }
+
+  &.td-result-fail {
+    background: rgba($text-muted, 0.2);
+    color: $text-muted;
+  }
+
+  &.td-result-neutral {
+    background: linear-gradient(135deg, $gold-dark, $gold);
+    color: $dark-bg;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.td-result-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin: 0;
+  color: $text-primary;
+
+  &.td-text-success { color: $success; }
+  &.td-text-fail { color: $danger; }
+}
+
+// === CARTE ACCORD ===
+.td-pairing-card {
+  background: linear-gradient(135deg, $dark-bg-card, $dark-bg-light);
+  border: 1px solid rgba($gold, 0.2);
+}
+
+.td-pairing-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.td-pairing-dish,
+.td-pairing-drink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: $dark-bg;
+  border-radius: 12px;
+
+  i {
+    font-size: 20px;
+    color: $gold;
+  }
+}
+
+.td-pairing-drink.td-match-good {
+  background: rgba($success, 0.15);
+  border: 1px solid rgba($success, 0.3);
+
+  i { color: $success; }
+}
+
+.td-pairing-label {
+  display: block;
+  font-size: 10px;
+  color: $text-muted;
+  text-transform: uppercase;
+}
+
+.td-pairing-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.td-pairing-separator {
+  span {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: $pink-glossy;
+  }
+}
+
+// === BOX ANALYSE ===
+.td-analysis-box {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 16px;
+  background: rgba($gold, 0.05);
+  border-radius: 12px;
+  border-left: 3px solid $gold;
+
+  i {
+    font-size: 20px;
+    color: $gold;
+  }
+
+  p {
+    margin: 0;
+    color: $text-secondary;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+// === BOISSONS SÉLECTIONNÉES ===
+.td-selected-drinks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.td-selected-drink-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background: $dark-bg-light;
+  border-radius: 10px;
+}
+
+.td-drink-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: $text-primary;
+
+  i { color: $gold; }
+}
+
+.td-btn-remove-drink {
+  background: none;
+  border: none;
+  color: $text-muted;
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover { color: $danger; }
+}
+
+// === SECTIONS SUGGESTIONS ===
+.td-suggestions-section {
+  background: $dark-bg-card;
+}
+
+.td-suggestions-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: $gold;
+  margin-bottom: 16px;
+
+  i { font-size: 18px; }
+}
+
+.td-suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+// === CARTE SUGGESTION SÉLECTIONNABLE ===
+.td-suggestion-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  background: $dark-bg-light;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+
+  &:hover {
+    background: rgba($gold, 0.05);
+  }
+
+  &.selected {
+    background: rgba($gold, 0.15);
+    border-color: $gold;
+
+    .td-suggestion-check {
+      .far { display: none; }
+      .fas { display: block; color: $gold; }
+    }
+  }
+}
+
+.td-suggestion-check {
+  margin-top: 2px;
+
+  i { font-size: 18px; color: $text-muted; }
+  .fas { display: none; }
+}
+
+.td-suggestion-content {
+  flex: 1;
+}
+
+.td-suggestion-name {
+  display: block;
+  font-weight: 600;
+  color: $text-primary;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.td-suggestion-reason {
+  font-size: 12px;
+  color: $text-muted;
+  line-height: 1.4;
+}
+
+// === STICKY BOTTOM ===
+.td-sticky-bottom {
+  position: fixed;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  padding: 16px;
+  background: linear-gradient(to top, $dark-bg 90%, transparent);
+}
+
+.td-selected-count {
+  text-align: center;
+  font-size: 13px;
+  color: $gold;
+  margin-bottom: 8px;
+}
+
+.td-btn-add-event {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+}
+
+// ============================================
+// === PAGE EVENTS (INDEX) ===
+// ============================================
+.td-events-page {
+  padding: 0 16px 100px;
+}
+
+.td-event-card {
+  display: block;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.td-event-header {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.td-event-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 50px;
+  padding: 10px;
+  background: rgba($gold, 0.1);
+  border-radius: 10px;
+}
+
+.td-date-day {
+  font-size: 22px;
+  font-weight: 700;
+  color: $gold;
+  line-height: 1;
+}
+
+.td-date-month {
+  font-size: 11px;
+  color: $text-muted;
+  text-transform: uppercase;
+}
+
+.td-event-main {
+  flex: 1;
+}
+
+.td-event-dish {
+  font-size: 16px;
+  font-weight: 600;
+  color: $text-primary;
+  margin: 0 0 4px 0;
+}
+
+.td-event-details {
+  font-size: 13px;
+  color: $text-muted;
+  margin: 0;
+
+  i {
+    font-size: 11px;
+  }
+}
+
+.td-event-match-indicator {
+  margin-left: auto;
+}
+
+.td-match-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.td-match-good {
+    background: rgba($success, 0.15);
+    color: $success;
+  }
+
+  &.td-match-bad {
+    background: rgba($danger, 0.15);
+    color: $danger;
+  }
+
+  &.td-match-neutral {
+    background: rgba($gold, 0.15);
+    color: $gold;
+  }
+}
+
+.td-event-guests {
+  display: flex;
+  gap: 4px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba($text-muted, 0.1);
+}
+
+.td-event-drinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.td-drink-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: rgba($pink-glossy, 0.1);
+  border-radius: 20px;
+  font-size: 12px;
+  color: $pink-glossy;
+
+  i { font-size: 10px; }
+
+  &.td-drink-more {
+    background: rgba($text-muted, 0.2);
+    color: $text-muted;
+  }
+}
+
+.td-drink-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 4px;
+  color: $gold;
+  font-weight: 600;
+
+  i { font-size: 9px; }
+}
+
+// === EMPTY STATE ===
+.td-empty-state {
+  text-align: center;
+  padding: 60px 24px;
+
+  .td-empty-icon {
+    font-size: 60px;
+    color: $gold;
+    opacity: 0.3;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 20px;
+    color: $text-primary;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: $text-muted;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
+
+.td-empty-mini {
+  text-align: center;
+  padding: 24px;
+  color: $text-muted;
+
+  i {
+    font-size: 32px;
+    margin-bottom: 8px;
+    display: block;
+    opacity: 0.5;
+  }
+
+  p {
+    margin: 0 0 12px 0;
+  }
+}
+
+// === ANIMATION FADE IN ===
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// === SECTION CARD ===
+.td-section-card {
+  .td-section-title-small {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+}
+
+.td-guests-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.td-guest-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.td-guest-avatar-large {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $gold-dark, $gold);
+  color: $dark-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.td-guest-name {
+  font-size: 12px;
+  color: $text-secondary;
+}
+
+// ============================================
+// === WIDGET DE NOTATION ===
+// ============================================
+.td-rating-widget {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &.rated {
+    animation: ratedPulse 0.5s ease;
+  }
+}
+
+@keyframes ratedPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.td-rating-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.td-star {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  i {
+    font-size: 16px;
+    color: $text-muted;
+    transition: color 0.2s ease;
+  }
+
+  &.active i {
+    color: $gold;
+  }
+
+  &:hover {
+    transform: scale(1.2);
+
+    i { color: $gold; }
+  }
+}
+
+.td-rating-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: $gold;
+}
+
+.td-rating-placeholder {
+  color: $text-muted;
+}
+
+// Mise à jour de l'item boisson sélectionnée
+.td-selected-drink-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background: $dark-bg-light;
+  border-radius: 10px;
+}
+
+.td-drink-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

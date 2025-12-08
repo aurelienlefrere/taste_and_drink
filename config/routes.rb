@@ -14,5 +14,5 @@ Rails.application.routes.draw do
   resources :stocks
   resources :drinks
   resources :friends, only: [:index]
-  resources :meal_recommendations, only: [:new, :create]
+  resources :meal_drinks, only: [:new, :show, :create]
 end
