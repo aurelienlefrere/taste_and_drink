@@ -6,6 +6,7 @@ class MealsController < ApplicationController
 
   def show
     @meal = Meal.find(params[:id])
+    @drinks = @meal.drinks
   end
 
   def new
@@ -28,7 +29,7 @@ class MealsController < ApplicationController
       embedding = RubyLLM.embed(prompt)
       @drinks = Drink.nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
       @drinks.each do |drink|
-        MealRecommendation.new()
+        MealDrink.create(meal: @meal, drink: drink, status: "recommendation")
       end
       redirect_to meal_path(@meal)
     else
