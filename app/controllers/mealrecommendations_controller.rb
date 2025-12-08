@@ -4,7 +4,7 @@ class MealrecommendationsController < ApplicationController
   @meal_recommendations = MealRecommendation.new
   end
 
-  
+
 end
 
 
