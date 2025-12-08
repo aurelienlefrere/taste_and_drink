@@ -1,0 +1,47 @@
+// Styliser Tom Select
+.ts-wrapper {
+  .ts-control {
+  background-color: #2a2a2a !important;
+  border: 1px solid $gold !important;
+  border-radius: 8px !important;
+  padding: 0.75rem 1rem !important;
+  color: #fff !important; // ✅ Couleur par défaut du texte
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  min-height: 48px !important;
+  transition: all 0.15s ease-in-out !important;
+
+    input {
+      color: #fff !important; // ✅ AJOUTÉ : Texte quand on tape
+    }
+
+    // Texte sélectionné
+    .item {
+      color: #fff !important; // ✅ Texte de l'option sélectionnée
+      background-color: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+    }
+
+    // Placeholder
+    .placeholder {
+      color: #999 !important;
+    }
+  }
+
+  .ts-dropdown {
+    background-color: #2a2a2a !important;
+    border: 1px solid $gold-light !important;
+    border-radius: 8px !important;
+
+    .option {
+      color: #fff !important;
+
+      &:hover,
+      &.active {
+        background-color: $gold-dark !important;
+        color: #1a1a1a !important;
+      }
+    }
+  }
+}

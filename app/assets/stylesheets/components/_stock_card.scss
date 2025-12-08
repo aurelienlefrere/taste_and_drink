@@ -3,7 +3,7 @@
 .container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
 }
 
 .stock-card-link {
@@ -25,12 +25,13 @@
   background: #2c2a2a;
   transition: all 0.3s ease;
   border-radius: 8px;
-  border-color: rgba($gold, 1.0);
+  border: 1px solid $gold-dark;
   margin-bottom: 5px;
+  margin-top: 5px;
 
   &:hover {
-    border-color: rgba($gold, 0.4);
-    transform: translateY(-2px);
+    border: 1px solid $gold-light;
+    // transform: translateY(-1px);
   }
 }
 
@@ -71,7 +72,7 @@
 // }
 
 .stock-title {
-  color: #d4af37;
+  color: rgba($gold, 1.0);
   font-size: 0.9rem;
   font-weight: 500;
   margin-left: 1;
@@ -90,7 +91,7 @@
   align-items: center;
   gap: 15px;
   justify-content: flex-end;
-  margin-bottom: 4px; // ✅ MODIFIÉ : Changé de 15px à auto pour pousser vers le bas
+  padding-bottom: 4px; // ✅ MODIFIÉ : Changé de 15px à auto pour pousser vers le bas
 }
 
 .counter-btn {
