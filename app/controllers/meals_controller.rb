@@ -1,7 +1,9 @@
 class MealsController < ApplicationController
 
   def index
-    @meals = Meal.all
+    @meals = current_user.meals
+                         .includes(:guests, :meal_drinks, :drinks)
+                         .order(created_at: :desc)
   end
 
   def show
