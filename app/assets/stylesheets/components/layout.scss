@@ -18,27 +18,7 @@ html {
 
 // === BODY = FRAME IPHONE ===
 body {
-  // === NOUVELLE IMAGE DE FOND ===
-  background-image: url('background_wine.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-
-  // Overlay sombre pour garder la lisibilité
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(18, 18, 18, 0.75); // Filtre noir à 75% d'opacité
-    z-index: -1;
-  }
-
+  background-color: $dark-bg;
   color: $text-primary;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   margin: 0 auto; // Centré horizontalement
@@ -49,6 +29,7 @@ body {
   min-height: 100vh;
 
   // === EFFET TÉLÉPHONE FLOTTANT ===
+  position: relative;
   box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.1),
     0 25px 80px rgba(0, 0, 0, 0.25),
@@ -71,11 +52,41 @@ body {
   }
 }
 
+// === WATERMARK BACKGROUND (Logo Lie de Vin) ===
 // === CONTAINER PRINCIPAL ===
 .td-main-content {
   min-height: calc(100vh - 130px);
   padding: 16px;
 }
+
+.td-watermark-bg {
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  height: calc(100vh - 130px);
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;              // Réduit de 80% à 60%
+    height: 60%;             // Réduit de 80% à 60%
+    background-image: url('logo_icône_3_lie_de_vin.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.03;           // Encore plus subtil
+  }
+}
+
 
 // === TITRES ===
 h1, h2, h3, h4, h5, h6 {
@@ -250,100 +261,5 @@ a {
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   body {
     padding-bottom: calc(70px + env(safe-area-inset-bottom));
-  }
-}
-
-// ============================================
-// 🍷 LISERÉ DORÉ GLOBAL POUR TOUTES LES CARDS
-// ============================================
-
-// Card de base
-.td-card {
-  border: 2px solid $gold !important;
-  box-shadow: 0 0 15px rgba($gold, 0.2);
-}
-
-// Homepage - Carte hero
-.td-home-hero {
-  border: 2px solid $gold !important;
-  box-shadow: 0 0 15px rgba($gold, 0.2);
-}
-
-// Homepage - Stats cards (Events, Bouteilles, Amis)
-.td-stat-card {
-  border: 2px solid $gold !important;
-  box-shadow: 0 0 15px rgba($gold, 0.2);
-
-  &:hover {
-    border-color: $gold-light !important;
-    box-shadow: 0 0 20px rgba($gold, 0.3);
-  }
-}
-
-// Homepage - Cards vins notés
-.td-wine-card {
-  border: 2px solid $gold !important;
-  box-shadow: 0 0 15px rgba($gold, 0.2);
-
-  &:hover {
-    border-color: $gold-light !important;
-    box-shadow: 0 0 20px rgba($gold, 0.3);
-  }
-}
-
-// Homepage - Cards derniers events
-.td-event-mini-card {
-  border: 2px solid $gold !important;
-  box-shadow: 0 0 15px rgba($gold, 0.2);
-
-  &:hover {
-    border-color: $gold-light !important;
-    box-shadow: 0 0 20px rgba($gold, 0.3);
-  }
-}
-
-// Page amis - Cards amis
-.td-friend-card,
-.td-friend-card-new {
-  border: 2px solid $gold !important;
-  box-shadow: 0 0 15px rgba($gold, 0.2);
-
-  &:hover {
-    border-color: $gold-light !important;
-    box-shadow: 0 0 20px rgba($gold, 0.3);
-    transform: translateY(-2px);
-  }
-}
-
-// Page events - Cards events
-.td-event-card {
-  border: 2px solid $gold !important;
-  box-shadow: 0 0 15px rgba($gold, 0.2);
-
-  &:hover {
-    border-color: $gold-light !important;
-    box-shadow: 0 0 20px rgba($gold, 0.3);
-  }
-}
-
-// Page match - Sections formulaire
-.td-form-section {
-  border: 2px solid $gold !important;
-  box-shadow: 0 0 15px rgba($gold, 0.2);
-
-  &:hover {
-    border-color: $gold-light !important;
-    box-shadow: 0 0 20px rgba($gold, 0.3);
-  }
-}
-
-// Cards recommandations
-.td-reco-card {
-  border: 2px solid $gold !important;
-  box-shadow: 0 0 15px rgba($gold, 0.2);
-
-  &:hover {
-    border-color: $gold-light !important;
-    box-shadow: 0 0 20px rgba($gold, 0.3);
   }
 }
