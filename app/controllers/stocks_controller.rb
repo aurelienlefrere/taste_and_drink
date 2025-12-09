@@ -12,11 +12,21 @@ class StocksController < ApplicationController
     @stock = current_user.stocks.find_by(drink: @drink)
 
     if @stock
-      redirect_to stocks_path, alert: "Vous l'avez déjà dans votre cave !"
-    else
-      @stock = current_user.stocks.new(stock_params)
+      # La bouteille existe déjà → ON ADDITIONNE LES QUANTITÉS
+      nouvelle_quantite = stock_params[:quantity].to_i
+      @stock.quantity += nouvelle_quantite
+
       if @stock.save
-        redirect_to stocks_path
+        redirect_to stocks_path, notice: "✅ #{nouvelle_quantite} bouteille(s) ajoutée(s) ! Total : #{@stock.quantity}"
+      else
+        redirect_to stocks_path, alert: "❌ Erreur lors de l'ajout"
+      end
+    else
+      # Nouvelle bouteille → ON LA CRÉE
+      @stock = current_user.stocks.new(stock_params)
+
+      if @stock.save
+        redirect_to stocks_path, notice: "✅ Bouteille ajoutée à votre cave !"
       else
         render :new, status: :unprocessable_entity
       end

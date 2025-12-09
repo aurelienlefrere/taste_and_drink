@@ -50,7 +50,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_08_110832) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "rating"
     t.index ["drink_id"], name: "index_meal_drinks_on_drink_id"
     t.index ["meal_id"], name: "index_meal_drinks_on_meal_id"
   end
@@ -64,9 +63,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_08_110832) do
     t.text "unusual_suggestions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "guest_suggestions"
-    t.boolean "match_result"
-    t.string "tested_drink"
     t.index ["meal_id"], name: "index_meal_recommendations_on_meal_id"
   end
 

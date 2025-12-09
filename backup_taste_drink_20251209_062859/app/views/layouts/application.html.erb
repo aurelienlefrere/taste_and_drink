@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Taste & Drink</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+    <meta name="theme-color" content="#121212">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%# Google Fonts - Inter (moderne et lisible) %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <%# === NAVBAR (fixe en haut) === %>
+    <%= render "shared/navbar" %>
+
+    <%# === WATERMARK BACKGROUND (Logo Lie de Vin en transparence) === %>
+    <div class="td-watermark-bg"></div>
+
+    <%# === FLASH MESSAGES === %>
+    <%= render "shared/flashes" %>
+
+    <%# === CONTENU PRINCIPAL === %>
+    <main class="td-main-content">
+      <%= yield %>
+    </main>
+
+    <%# === FOOTBAR (fixe en bas) - Seulement si connecté === %>
+    <% if user_signed_in? %>
+      <%= render "shared/footbar" %>
+    <% end %>
+  </body>
+</html>
