@@ -7,19 +7,22 @@
   <% if user_signed_in? %>
     <%# === UTILISATEUR CONNECTÉ === %>
 
-    <%# === LOGO DORÉ FLOTTANT === %>
-    <div class="td-floating-logo">
-      <%= image_tag "logo_taste_drink.png", alt: "Taste & Drink", class: "td-logo-float" %>
+    <%# Header de bienvenue %>
+    <div class="td-home-header">
+      <p class="td-home-greeting">Bonjour,</p>
+      <h1 class="td-home-name"><%= current_user.first_name || "Chef" %></h1>
     </div>
 
-    <%# Carte principale - Message de bienvenue personnalisé %>
+    <%# Carte principale - Zone de texte (sans bouton) %>
     <div class="td-home-hero">
       <div class="td-hero-content">
-        <h2 class="td-hero-greeting">Bonjour <%= current_user.first_name || "Chef" %>,</h2>
-        <p class="td-hero-description">
-          Prêts à créer l'accord parfait entre votre plat et votre boisson
-          et en faire un moment inoubliable avec vos amis ?!
-        </p>
+        <h2>Prêt pour un accord parfait ?</h2>
+        <p>Découvrez les meilleures associations entre vos plats et vos vins grâce à notre IA sommelier.</p>
+      </div>
+      <div class="td-hero-decoration">
+        <i class="fas fa-wine-glass-alt"></i>
+        <span>&</span>
+        <i class="fas fa-utensils"></i>
       </div>
     </div>
 
@@ -101,66 +104,57 @@
     </div>
 
     <%# ============================================ %>
-    <%# SECTION 2: Vos Derniers Events (Swipable) %>
+    <%# SECTION 2: Recommandations IA (Swipable) %>
     <%# ============================================ %>
     <div class="td-home-section">
       <div class="td-section-header-row">
-        <h3><i class="fas fa-calendar-alt me-2"></i>Vos Derniers Events</h3>
-        <%= link_to "Voir tout", meals_path, class: "td-link-gold" %>
+        <h3><i class="fas fa-magic me-2"></i>Recommandations</h3>
+        <%= link_to "Explorer", new_meal_path, class: "td-link-gold" %>
       </div>
 
       <div class="td-swiper" data-controller="swiper">
         <div class="td-swiper-track" data-swiper-target="track">
-          <% recent_events = current_user.meals.order(created_at: :desc).limit(10) %>
-          <% if recent_events.any? %>
-            <% recent_events.each do |event| %>
-              <%= link_to meal_path(event), class: "td-event-mini-card" do %>
-                <%# Date de l'event %>
-                <div class="td-event-date-badge">
-                  <span class="td-event-day"><%= event.date&.strftime("%d") || event.created_at.strftime("%d") %></span>
-                  <span class="td-event-month"><%= event.date&.strftime("%b") || event.created_at.strftime("%b") %></span>
+          <% recommendations = current_user.meal_recommendations.order(created_at: :desc).limit(10) rescue [] %>
+          <% if recommendations.any? %>
+            <% recommendations.each do |reco| %>
+              <div class="td-reco-card">
+                <div class="td-reco-icon">
+                  <i class="fas fa-lightbulb"></i>
                 </div>
-
-                <%# Nom du plat %>
-                <div class="td-event-dish-name">
-                  <%= truncate(event.dish_name, length: 30) %>
+                <div class="td-reco-content">
+                  <span class="td-reco-title"><%= truncate(reco.recommendation_text, length: 50) rescue "Recommandation" %></span>
+                  <span class="td-reco-date"><%= reco.created_at&.strftime("%d/%m") %></span>
                 </div>
-
-                <%# Boisson associée %>
-                <% if event.meal_drinks.first %>
-                  <div class="td-event-drink-info">
-                    <%= truncate(event.meal_drinks.first.drink.title, length: 25) %>
-                  </div>
-                <% end %>
-
-                <%# Avatars des amis %>
-                <% if event.guests.any? %>
-                  <div class="td-event-guests-mini">
-                    <% event.guests.first(3).each do |guest| %>
-                      <div class="td-guest-avatar-mini">
-                        <% if guest.user.photo.present? %>
-                          <%= image_tag guest.user.photo, alt: guest.user.first_name %>
-                        <% else %>
-                          <span><%= guest.user.first_name&.first&.upcase || "?" %></span>
-                        <% end %>
-                      </div>
-                    <% end %>
-                    <% if event.guests.count > 3 %>
-                      <div class="td-guest-avatar-mini td-avatar-more">
-                        <span>+<%= event.guests.count - 3 %></span>
-                      </div>
-                    <% end %>
-                  </div>
-                <% end %>
-              <% end %>
+              </div>
             <% end %>
           <% else %>
-            <%# Message si pas d'events %>
-            <div class="td-event-mini-card td-card-empty">
-              <div class="td-empty-icon-mini">
-                <i class="fas fa-calendar-plus"></i>
+            <%# Exemples de recommandations %>
+            <div class="td-reco-card td-card-highlight">
+              <div class="td-reco-icon">
+                <i class="fas fa-utensils"></i>
               </div>
-              <span>Créez votre premier event</span>
+              <div class="td-reco-content">
+                <span class="td-reco-title">Boeuf Bourguignon</span>
+                <span class="td-reco-subtitle">Pinot Noir, Bourgogne</span>
+              </div>
+            </div>
+            <div class="td-reco-card">
+              <div class="td-reco-icon">
+                <i class="fas fa-fish"></i>
+              </div>
+              <div class="td-reco-content">
+                <span class="td-reco-title">Saumon Grillé</span>
+                <span class="td-reco-subtitle">Chardonnay, Loire</span>
+              </div>
+            </div>
+            <div class="td-reco-card">
+              <div class="td-reco-icon">
+                <i class="fas fa-cheese"></i>
+              </div>
+              <div class="td-reco-content">
+                <span class="td-reco-title">Plateau Fromages</span>
+                <span class="td-reco-subtitle">Sauternes, Bordeaux</span>
+              </div>
             </div>
           <% end %>
         </div>
