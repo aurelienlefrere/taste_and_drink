@@ -31,7 +31,7 @@ class MealsController < ApplicationController
       embedding = RubyLLM.embed(prompt)
 
       # Vin
-      @drinks = Drink.where(category: "Vin")nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
+      @drinks = Drink.where(category: "Vin").nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
       @drinks.each do |drink|
         MealDrink.create(meal: @meal, drink: drink, status: "recommendation")
       end
