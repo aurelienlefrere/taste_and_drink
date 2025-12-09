@@ -1,27 +1,98 @@
-<div class="container">
-    <div class="td-home-header">
-      <h2 class="td-home-name">Nos Recommandations</h2>
-    </div>
+<div class="td-home-section">
+  <h3><i class="td-home-name"></i>Mes recommandations</h3>
 
-    <%# ============================================ %>
-    <%# SECTION 1: Mes Vins qui match(Swipable) %>
-    <%# ============================================ %>
-    <div class="td-home-section">
-        <h3><i class="td-home-name"></i>Mes Vins qui match</h3>
-      <div class="cards">
-            <% @drinks.each do |drink| %>
-              <div class="td-wine-card w-100">
-                <div class="td-wine-card-image">
-                  <div class="td-wine-placeholder">
-                  <%= image_tag(drink.photo, class: "stock-image-container", alt: "#{drink.title}") %>
-                  </div>
-                </div>
-                <div class="td-wine-card-content">
-                  <span class="stock-title"><%= link_to "#{drink.title}", drink_path(drink) %>/span>
-                  <%# <span class="td-wine-type">Ajoutez des notes</span> %>
-                </div>
-              </div>
-            <% end %>
+  <% wines = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Vin" }) %>
+  <% if wines.any? %>
+    <h4>🍷 Vins</h4>
+    <div class="cards">
+      <% wines.each do |meal_drink| %>
+        <div class="td-wine-card w-100">
+          <div class="td-wine-card-image">
+            <div class="td-wine-placeholder">
+              <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+            </div>
+          </div>
+          <div class="td-wine-card-content">
+            <span class="stock-title"><%= meal_drink.drink.title %></span>
+          </div>
         </div>
-      </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% my_cellar = @meal.meal_drinks.joins(drink: :stocks).where(status: "recommendation", stocks: { user_id: current_user.id }) %>
+  <% if my_cellar.any? %>
+    <h4>🏠 Dans ma cave</h4>
+    <div class="cards">
+      <% my_cellar.each do |meal_drink| %>
+        <div class="td-wine-card w-100">
+          <div class="td-wine-card-image">
+            <div class="td-wine-placeholder">
+              <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+            </div>
+          </div>
+          <div class="td-wine-card-content">
+            <span class="stock-title"><%= meal_drink.drink.title %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% alcohol = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Alcoolisée" }) %>
+  <% if alcohol.any? %>
+    <h4>🍸 Boissons alcoolisées</h4>
+    <div class="cards">
+      <% alcohol.each do |meal_drink| %>
+        <div class="td-wine-card w-100">
+          <div class="td-wine-card-image">
+            <div class="td-wine-placeholder">
+              <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+            </div>
+          </div>
+          <div class="td-wine-card-content">
+            <span class="stock-title"><%= meal_drink.drink.title %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% no_alcohol = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Non alcoolisée" }) %>
+  <% if no_alcohol.any? %>
+    <h4>🥤 Boissons sans alcool</h4>
+    <div class="cards">
+      <% no_alcohol.each do |meal_drink| %>
+        <div class="td-wine-card w-100">
+          <div class="td-wine-card-image">
+            <div class="td-wine-placeholder">
+              <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+            </div>
+          </div>
+          <div class="td-wine-card-content">
+            <span class="stock-title"><%= meal_drink.drink.title %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% improbable = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Improbable" }) %>
+  <% if improbable.any? %>
+    <h4>🎲 Suggestions improbables</h4>
+    <div class="cards">
+      <% improbable.each do |meal_drink| %>
+        <div class="td-wine-card w-100">
+          <div class="td-wine-card-image">
+            <div class="td-wine-placeholder">
+              <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+            </div>
+          </div>
+          <div class="td-wine-card-content">
+            <span class="stock-title"><%= meal_drink.drink.title %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
