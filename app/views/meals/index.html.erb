@@ -37,12 +37,12 @@
                 <%= meal.date&.strftime("%b") || meal.created_at.strftime("%b") %>
               </span>
             </div>
-            
+
             <%# Nom du plat (au centre, plus gros) %>
             <div class="td-event-dish-main">
               <h3><%= meal.dish_name %></h3>
             </div>
-            
+
             <%# Avatars des amis (à droite) %>
             <% if meal.guests.any? %>
               <div class="td-event-avatars-inline">
@@ -84,7 +84,7 @@
                   <%# Infos de la boisson %>
                   <div class="td-drink-info">
                     <span class="td-drink-name">
-                      <%= truncate(meal_drink.drink.title, length: 25) %>
+                      <%= link_to truncate(meal_drink.drink.title, length: 25), drink_path(meal_drink.drink) %>
                     </span>
                     <span class="td-drink-details">
                       <%= meal_drink.drink.category %>
