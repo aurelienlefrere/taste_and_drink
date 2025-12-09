@@ -30,24 +30,24 @@ class MealsController < ApplicationController
       prompt = chat_prompt(@meal)
       embedding = RubyLLM.embed(prompt)
 
-      # Drink
-      @drinks = Drink.nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
+      # Vin
+      @drinks = Drink.where(category: "Vin")nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
       @drinks.each do |drink|
         MealDrink.create(meal: @meal, drink: drink, status: "recommendation")
       end
 
-       # Ma cave
-           @drinks_stocks = current_user.drinks.nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
+    # Ma cave
+      @drinks_stocks = current_user.drinks.nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
       @drinks_stocks.each do |drink|
         MealDrink.create(meal: @meal, drink: drink, status: "recommendation")
       end
       # Drink alcohol
-           @drinks_alcohol = Drink.where(category: "Alcoolisée").nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
+      @drinks_alcohol = Drink.where(category: "Alcoolisée").nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
       @drinks_alcohol.each do |drink|
-        MealDrink.create(meal: @meal, drink: drink, status: "recommendation")
+      MealDrink.create(meal: @meal, drink: drink, status: "recommendation")
       end
 
-       # Drink no-alcohol
+    # Drink no-alcohol
            @drinks_no_alcohol = Drink.where(category: "Non alcoolisée").nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
       @drinks_no_alcohol.each do |drink|
         MealDrink.create(meal: @meal, drink: drink, status: "recommendation")
