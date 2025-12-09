@@ -17,7 +17,7 @@
                   </div>
                 </div>
                 <div class="td-wine-card-content">
-                  <span class="stock-title"><%= drink.title %></span>
+                  <span class="stock-title"><%= link_to "#{drink.title}", drink_path(drink) %>/span>
                   <%# <span class="td-wine-type">Ajoutez des notes</span> %>
                 </div>
               </div>
