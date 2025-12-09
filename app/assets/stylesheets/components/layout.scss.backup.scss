@@ -44,23 +44,9 @@ body {
   margin: 0 auto; // Centré horizontalement
   padding: 0;
 
-  // === DIMENSIONS ADAPTATIVES ===
-  // Par défaut : format iPhone 15 Pro Max
+  // === DIMENSIONS IPHONE 15 Pro Max ===
   max-width: 430px;
   min-height: 100vh;
-
-  // === ÉCRANS LARGES (Projecteurs, monitors 1600px+) ===
-  // Sur les grands écrans, on élargit pour ne pas avoir un tube étroit
-  @media (min-width: 1600px) {
-    max-width: 50vw;      // 50% de la largeur de l'écran
-    min-width: 600px;      // Mais jamais moins de 600px
-  }
-
-  // === TRÈS GRANDS ÉCRANS (4K, 2400px+) ===
-  // On fixe une largeur confortable pour ne pas être trop étiré
-  @media (min-width: 2400px) {
-    max-width: 900px;      // Largeur fixe optimale
-  }
 
   // === EFFET TÉLÉPHONE FLOTTANT ===
   box-shadow:
