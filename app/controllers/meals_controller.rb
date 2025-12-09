@@ -22,7 +22,7 @@ class MealsController < ApplicationController
     @meal.user = current_user
     @meal.date = Date.today
     if @meal.save
-      @guest_ids = guest_params[:guest_ids].compact_blank
+      @guest_ids = Array(guest_params[:guest_ids]).compact_blank
       @guest_ids.each do |guest|
         Guest.create(user_id: guest.to_i, meal: @meal)
       end
@@ -110,4 +110,3 @@ private
 
 
 end
-
