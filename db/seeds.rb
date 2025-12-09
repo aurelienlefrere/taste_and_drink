@@ -15,7 +15,6 @@ MealDrink.destroy_all
 Meal.destroy_all
 Stock.destroy_all
 Friend.destroy_all
-
 User.destroy_all
 Drink.destroy_all
 
@@ -164,70 +163,70 @@ drinks = [
   { title: "Pinot Grigio", category: "Vin", region: "Italie", year: 2021, photo: "https://source.unsplash.com/1200x1200/?pinot+grigio+wine" },
 
   # 20 Boissons alcoolisées hors vin
-  { title: "Whisky", category: "Alcoolisée", region: "Écosse", year: 2018, photo: "whisky.jpg" },
-  { title: "Rhum", category: "Alcoolisée", region: "Caraïbes", year: 2020, photo: "rum.jpg" },
-  { title: "Vodka", category: "Alcoolisée", region: "Russie", year: 2019, photo: "vodka.jpg" },
-  { title: "Gin", category: "Alcoolisée", region: "Angleterre", year: 2021, photo: "gin.jpg" },
-  { title: "Tequila", category: "Alcoolisée", region: "Mexique", year: 2020, photo: "tequila.jpg" },
-  { title: "Cognac", category: "Alcoolisée", region: "France", year: 2017, photo: "cognac.jpg" },
-  { title: "Bière Blonde", category: "Alcoolisée", region: "Belgique", year: 2023, photo: "biere_blonde.jpg" },
-  { title: "Bière Brune", category: "Alcoolisée", region: "Allemagne", year: 2022, photo: "biere_brune.jpg" },
-  { title: "Bière IPA", category: "Alcoolisée", region: "USA", year: 2023, photo: "biere_ipa.jpg" },
-  { title: "Saké", category: "Alcoolisée", region: "Japon", year: 2021, photo: "sake.jpg" },
-  { title: "Amaretto", category: "Alcoolisée", region: "Italie", year: 2020, photo: "amaretto.jpg" },
-  { title: "Baileys", category: "Alcoolisée", region: "Irlande", year: 2022, photo: "baileys.jpg" },
-  { title: "Cachaça", category: "Alcoolisée", region: "Brésil", year: 2021, photo: "cachaca.jpg" },
-  { title: "Mezcal", category: "Alcoolisée", region: "Mexique", year: 2022, photo: "mezcal.jpg" },
-  { title: "Pisco", category: "Alcoolisée", region: "Pérou", year: 2020, photo: "pisco.jpg" },
-  { title: "Pastis", category: "Alcoolisée", region: "France", year: 2019, photo: "pastis.jpg" },
-  { title: "Grappa", category: "Alcoolisée", region: "Italie", year: 2018, photo: "grappa.jpg" },
-  { title: "Whisky Japonais", category: "Alcoolisée", region: "Japon", year: 2021, photo: "japanese_whisky.jpg" },
-  { title: "Porto", category: "Alcoolisée", region: "Portugal", year: 2020, photo: "porto.jpg" },
-  { title: "Sherry", category: "Alcoolisée", region: "Espagne", year: 2019, photo: "sherry.jpg" },
+  { title: "Whisky", category: "Alcoolisée", region: "Écosse", year: 2018, photo: "Aurélien.jpeg" },
+  { title: "Rhum", category: "Alcoolisée", region: "Caraïbes", year: 2020, photo: "Aurélien.jpeg" },
+  { title: "Vodka", category: "Alcoolisée", region: "Russie", year: 2019, photo: "Aurélien.jpeg" },
+  { title: "Gin", category: "Alcoolisée", region: "Angleterre", year: 2021, photo: "Aurélien.jpeg" },
+  { title: "Tequila", category: "Alcoolisée", region: "Mexique", year: 2020, photo: "Aurélien.jpeg" },
+  { title: "Cognac", category: "Alcoolisée", region: "France", year: 2017, photo: "Aurélien.jpeg" },
+  { title: "Bière Blonde", category: "Alcoolisée", region: "Belgique", year: 2023, photo: "Aurélien.jpeg" },
+  { title: "Bière Brune", category: "Alcoolisée", region: "Allemagne", year: 2022, photo: "Aurélien.jpeg" },
+  { title: "Bière IPA", category: "Alcoolisée", region: "USA", year: 2023, photo: "Aurélien.jpeg" },
+  { title: "Saké", category: "Alcoolisée", region: "Japon", year: 2021, photo: "Aurélien.jpeg" },
+  { title: "Amaretto", category: "Alcoolisée", region: "Italie", year: 2020, photo: "Aurélien.jpeg" },
+  { title: "Baileys", category: "Alcoolisée", region: "Irlande", year: 2022, photo: "Aurélien.jpeg" },
+  { title: "Cachaça", category: "Alcoolisée", region: "Brésil", year: 2021, photo: "Aurélien.jpeg" },
+  { title: "Mezcal", category: "Alcoolisée", region: "Mexique", year: 2022, photo: "Aurélien.jpeg" },
+  { title: "Pisco", category: "Alcoolisée", region: "Pérou", year: 2020, photo: "Aurélien.jpeg" },
+  { title: "Pastis", category: "Alcoolisée", region: "France", year: 2019, photo: "Aurélien.jpeg" },
+  { title: "Grappa", category: "Alcoolisée", region: "Italie", year: 2018, photo: "Aurélien.jpeg" },
+  { title: "Whisky Japonais", category: "Alcoolisée", region: "Japon", year: 2021, photo: "Aurélien.jpeg" },
+  { title: "Porto", category: "Alcoolisée", region: "Portugal", year: 2020, photo: "Aurélien.jpeg" },
+  { title: "Sherry", category: "Alcoolisée", region: "Espagne", year: 2019, photo: "Aurélien.jpeg" },
 
   # 20 Boissons non alcoolisées
-  { title: "Eau plate", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "eau_plate.jpg" },
-  { title: "Eau gazeuse", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "eau_gazeuse.jpg" },
-  { title: "Jus d'orange", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "jus_orange.jpg" },
-  { title: "Jus de pomme", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "jus_pomme.jpg" },
-  { title: "Coca-Cola", category: "Non alcoolisée", region: "USA", year: nil, photo: "coca_cola.jpg" },
-  { title: "Pepsi", category: "Non alcoolisée", region: "USA", year: nil, photo: "pepsi.jpg" },
-  { title: "Thé glacé", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "the_glace.jpg" },
-  { title: "Limonade", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "limonade.jpg" },
-  { title: "Smoothie fraise", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "smoothie_fraise.jpg" },
-  { title: "Smoothie mangue", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "smoothie_mangue.jpg" },
-  { title: "Café", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "cafe.jpg" },
-  { title: "Thé vert", category: "Non alcoolisée", region: "Chine", year: nil, photo: "the_vert.jpg" },
-  { title: "Thé noir", category: "Non alcoolisée", region: "Inde", year: nil, photo: "the_noir.jpg" },
-  { title: "Eau de coco", category: "Non alcoolisée", region: "Tropicale", year: nil, photo: "eau_coco.jpg" },
-  { title: "Ginger ale", category: "Non alcoolisée", region: "USA", year: nil, photo: "ginger_ale.jpg" },
-  { title: "Kombucha", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "kombucha.jpg" },
-  { title: "Orangina", category: "Non alcoolisée", region: "France", year: nil, photo: "orangina.jpg" },
-  { title: "Tonic", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "tonic.jpg" },
-  { title: "Sirop de grenadine", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "grenadine.jpg" },
-  { title: "Chocolat chaud", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "chocolat_chaud.jpg" },
+  { title: "Eau plate", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Eau gazeuse", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Jus d'orange", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Jus de pomme", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Coca-Cola", category: "Non alcoolisée", region: "USA", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Pepsi", category: "Non alcoolisée", region: "USA", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Thé glacé", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Limonade", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Smoothie fraise", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Smoothie mangue", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Café", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Thé vert", category: "Non alcoolisée", region: "Chine", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Thé noir", category: "Non alcoolisée", region: "Inde", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Eau de coco", category: "Non alcoolisée", region: "Tropicale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Ginger ale", category: "Non alcoolisée", region: "USA", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Kombucha", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Orangina", category: "Non alcoolisée", region: "France", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Tonic", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Sirop de grenadine", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Chocolat chaud", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
 
   # 20 Boissons improbables
-  { title: "Kefir", category: "Improbable", region: "Caucase", year: nil, photo: "kefir.jpg" },
-  { title: "Vin chaud sans alcool", category: "Improbable", region: "France", year: nil, photo: "vin_chaud.jpg" },
-  { title: "Cidre brut", category: "Improbable", region: "France", year: 2021, photo: "cidre.jpg" },
-  { title: "Cider japonais", category: "Improbable", region: "Japon", year: 2022, photo: "japanese_cider.jpg" },
-  { title: "Ginger beer", category: "Improbable", region: "Angleterre", year: nil, photo: "ginger_beer.jpg" },
-  { title: "Lassi salé", category: "Improbable", region: "Inde", year: nil, photo: "lassi_sale.jpg" },
-  { title: "Thé fumé", category: "Improbable", region: "Chine", year: nil, photo: "the_fume.jpg" },
-  { title: "Matcha latte", category: "Improbable", region: "Japon", year: nil, photo: "matcha_latte.jpg" },
-  { title: "Shrub (vinaigre de fruit)", category: "Improbable", region: "USA", year: nil, photo: "shrub.jpg" },
-  { title: "Tepache", category: "Improbable", region: "Mexique", year: 2023, photo: "tepache.jpg" },
-  { title: "Pulque", category: "Improbable", region: "Mexique", year: 2022, photo: "pulque.jpg" },
-  { title: "Bière de gingembre fermentée", category: "Improbable", region: "Mondiale", year: nil, photo: "biere_gingembre.jpg" },
-  { title: "Kombucha épicé", category: "Improbable", region: "Mondiale", year: nil, photo: "kombucha_epice.jpg" },
-  { title: "Shrub aux fruits rouges", category: "Improbable", region: "USA", year: nil, photo: "shrub_fruits.jpg" },
-  { title: "Café infusé au citron", category: "Improbable", region: "Mondiale", year: nil, photo: "cafe_citron.jpg" },
-  { title: "Soda artisanal au basilic", category: "Improbable", region: "Mondiale", year: nil, photo: "soda_basilic.jpg" },
-  { title: "Jus de betterave", category: "Improbable", region: "Mondiale", year: nil, photo: "jus_betterave.jpg" },
-  { title: "Infusion de romarin", category: "Improbable", region: "Mondiale", year: nil, photo: "infusion_romarin.jpg" },
-  { title: "Cider au gingembre", category: "Improbable", region: "Angleterre", year: 2022, photo: "cider_gingembre.jpg" },
-  { title: "Soda au concombre", category: "Improbable", region: "Mondiale", year: nil, photo: "soda_concombre.jpg" }
+  { title: "Kefir", category: "Improbable", region: "Caucase", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Vin chaud sans alcool", category: "Improbable", region: "France", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Cidre brut", category: "Improbable", region: "France", year: 2021, photo: "Aurélien.jpeg" },
+  { title: "Cider japonais", category: "Improbable", region: "Japon", year: 2022, photo: "Aurélien.jpeg" },
+  { title: "Ginger beer", category: "Improbable", region: "Angleterre", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Lassi salé", category: "Improbable", region: "Inde", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Thé fumé", category: "Improbable", region: "Chine", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Matcha latte", category: "Improbable", region: "Japon", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Shrub (vinaigre de fruit)", category: "Improbable", region: "USA", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Tepache", category: "Improbable", region: "Mexique", year: 2023, photo: "Aurélien.jpeg" },
+  { title: "Pulque", category: "Improbable", region: "Mexique", year: 2022, photo: "Aurélien.jpeg" },
+  { title: "Bière de gingembre fermentée", category: "Improbable", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Kombucha épicé", category: "Improbable", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Shrub aux fruits rouges", category: "Improbable", region: "USA", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Café infusé au citron", category: "Improbable", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Soda artisanal au basilic", category: "Improbable", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Jus de betterave", category: "Improbable", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Infusion de romarin", category: "Improbable", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" },
+  { title: "Cider au gingembre", category: "Improbable", region: "Angleterre", year: 2022, photo: "Aurélien.jpeg" },
+  { title: "Soda au concombre", category: "Improbable", region: "Mondiale", year: nil, photo: "Aurélien.jpeg" }
 ]
 
 drinks.each do |drink|
@@ -266,43 +265,3 @@ if File.exist?(csv_file)
 else
   puts "❌ Erreur : wines.csv introuvable dans db/"
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
