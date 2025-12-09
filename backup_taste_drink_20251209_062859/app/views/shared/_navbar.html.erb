@@ -1,0 +1,36 @@
+<%# ============================================ %>
+<%# 🍷 TASTE & DRINK - NAVBAR %>
+<%# Structure: Logo icône (gauche) | Logo texte (centre) | Avatar Profil (droite) %>
+<%# ============================================ %>
+
+<nav class="td-navbar">
+  <div class="td-navbar-container">
+    <%# === LOGO ICÔNE (gauche) - Cliquable vers Home === %>
+    <%= link_to root_path, class: "td-navbar-logo" do %>
+      <%= image_tag "logo_taste_drink.png", alt: "Taste & Drink" %>
+    <% end %>
+
+    <%# === LOGO TEXTE (centre) === %>
+   
+    <%= link_to root_path, class: "td-navbar-logo-text" do %>
+      <span>Taste <em>&</em> Drink</span>
+    <% end %>
+
+    <%# === AVATAR PROFIL (droite) - Cliquable vers Profil === %>
+    <% if user_signed_in? %>
+      <%= link_to user_path(current_user), class: "td-navbar-avatar" do %>
+        <% if current_user.respond_to?(:photo) && current_user.photo.present? %>
+          <%= image_tag(current_user.photo, alt: current_user.first_name)|| "Profil" %>
+        <% else %>
+          <div class="td-avatar-placeholder">
+            <%= current_user.first_name&.first&.upcase || current_user.email.first.upcase %>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= link_to new_user_session_path, class: "td-navbar-login" do %>
+        <i class="fas fa-user"></i>
+      <% end %>
+    <% end %>
+  </div>
+</nav>

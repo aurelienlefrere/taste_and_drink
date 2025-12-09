@@ -1,0 +1,58 @@
+// ============================================
+// 🍷 NOUVEAUX STYLES À AJOUTER À _events.scss
+// À ajouter à la FIN du fichier existant
+// ============================================
+
+// === NOUVEAU HEADER (une seule ligne) ===
+.td-event-header-new {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.td-event-dish-main {
+  flex: 1; // Prend tout l'espace disponible
+  
+  h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: $text-primary;
+  }
+}
+
+.td-event-avatars-inline {
+  display: flex;
+  gap: -6px; // Chevauche légèrement
+}
+
+.td-guest-avatar-inline {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid $dark-bg;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $lie-de-vin;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  span {
+    font-size: 13px;
+    font-weight: 600;
+    color: $text-primary;
+  }
+  
+  &.td-avatar-more {
+    background: rgba($gold, 0.2);
+    font-size: 11px;
+    color: $gold;
+  }
+}

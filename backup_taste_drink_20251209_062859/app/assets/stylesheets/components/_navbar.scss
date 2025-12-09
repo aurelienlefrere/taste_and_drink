@@ -1,0 +1,119 @@
+// ============================================
+// 🍷 TASTE & DRINK - NAVBAR STYLES
+// Position: Fixe en haut
+// ============================================
+
+.td-navbar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  height: 60px;
+  background: $dark-bg;
+  border-bottom: 1px solid rgba($gold, 0.2);
+  z-index: 1000;
+}
+
+.td-navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 16px;
+  max-width: 100%;
+}
+
+// === LOGO ICÔNE (gauche) ===
+.td-navbar-logo {
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+  }
+}
+
+// === LOGO TEXTE (centre) ===
+.td-navbar-logo-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin: 0 12px;
+
+  span {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: $text-primary;
+
+    em {
+      color: $pink-glossy;
+      font-style: normal;
+    }
+  }
+
+  img {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+  }
+}
+
+// === AVATAR PROFIL ===
+.td-navbar-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid $gold;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $gold-light;
+    transform: scale(1.05);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// Placeholder avatar (quand pas de photo)
+.td-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, $gold-dark, $gold);
+  color: $dark-bg;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+// === BOUTON LOGIN (si pas connecté) ===
+.td-navbar-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: $dark-bg-card;
+  color: $gold;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $gold;
+    color: $dark-bg;
+  }
+}
