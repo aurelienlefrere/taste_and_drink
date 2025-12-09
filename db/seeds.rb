@@ -11,12 +11,12 @@
 
 require 'csv'
 Guest.destroy_all
+MealDrink.destroy_all
 Meal.destroy_all
 Stock.destroy_all
 Friend.destroy_all
 User.destroy_all
 
-MealDrink.destroy_all
 #Drink.destroy_all
 
 puts "\n👥 Création des utilisateurs..."
@@ -112,36 +112,29 @@ friends.each do |friend|
   Friend.create!(user_main_id: @mail_aureo.id,  user_friend_id: friend.id)
 end
 
-puts "\n👥 Création des Stock..."
-drinks = Drink.all
-@mail_aureo = User.find_by(email: "aurelien@example.com")
-
-csv_file = Rails.root.join('db', 'wines.csv')
-
-if File.exist?(csv_file)
-  puts "📥 Importation des vins en cours..."
-  count = 0
-
-  CSV.foreach(csv_file, headers: true, encoding: 'utf-8') do |row|
-    sleep(10)
-    drink = Drink.find_or_create_by!(
-      title: row['title'],
-      year: row['year'],
-      category: row['category'],
-      region: row['region'],
-      photo: row['photo']
-    )
-    count += 1
-  end
-
-  puts "✅ #{count} vins importés avec succès !"
-else
-  puts "❌ Erreur : wines.csv introuvable dans db/"
-end
-
-# db/seeds.rb
-
 drinks = [
+
+  { title: "Bordeaux Rouge", category: "Vin", region: "Bordeaux", year: 2019, photo: "https://source.unsplash.com/1200x1200/?bordeaux+red+wine" },
+  { title: "Bourgogne Pinot Noir", category: "Vin", region: "Bourgogne", year: 2020, photo: "https://source.unsplash.com/1200x1200/?burgundy+pinot+noir+wine" },
+  { title: "Côtes du Rhône", category: "Vin", region: "Vallée du Rhône", year: 2021, photo: "https://source.unsplash.com/1200x1200/?rhone+valley+wine" },
+  { title: "Beaujolais", category: "Vin", region: "Beaujolais", year: 2022, photo: "https://source.unsplash.com/1200x1200/?beaujolais+wine" },
+  { title: "Chianti", category: "Vin", region: "Italie - Toscane", year: 2019, photo: "https://source.unsplash.com/1200x1200/?chianti+wine" },
+  { title: "Rioja", category: "Vin", region: "Espagne", year: 2020, photo: "https://source.unsplash.com/1200x1200/?rioja+wine" },
+  { title: "Merlot", category: "Vin", region: "France", year: 2021, photo: "https://source.unsplash.com/1200x1200/?merlot+wine" },
+  { title: "Cabernet Sauvignon", category: "Vin", region: "France", year: 2020, photo: "https://source.unsplash.com/1200x1200/?cabernet+sauvignon+wine" },
+  { title: "Syrah", category: "Vin", region: "France", year: 2021, photo: "https://source.unsplash.com/1200x1200/?syrah+wine" },
+  { title: "Chardonnay", category: "Vin", region: "France", year: 2022, photo: "https://source.unsplash.com/1200x1200/?chardonnay+wine" },
+  { title: "Sauvignon Blanc", category: "Vin", region: "Loire", year: 2022, photo: "https://source.unsplash.com/1200x1200/?sauvignon+blanc+wine" },
+  { title: "Muscadet", category: "Vin", region: "Loire", year: 2021, photo: "https://source.unsplash.com/1200x1200/?muscadet+wine" },
+  { title: "Riesling", category: "Vin", region: "Alsace", year: 2020, photo: "https://source.unsplash.com/1200x1200/?riesling+wine" },
+  { title: "Gewurztraminer", category: "Vin", region: "Alsace", year: 2019, photo: "https://source.unsplash.com/1200x1200/?gewurztraminer+wine" },
+  { title: "Rosé de Provence", category: "Vin", region: "Provence", year: 2022, photo: "https://source.unsplash.com/1200x1200/?provence+rose+wine" },
+  { title: "Champagne Brut", category: "Vin", region: "Champagne", year: 2018, photo: "https://source.unsplash.com/1200x1200/?champagne+brut" },
+  { title: "Vinho Verde", category: "Vin", region: "Portugal", year: 2021, photo: "https://source.unsplash.com/1200x1200/?vinho+verde+wine" },
+  { title: "Lambrusco", category: "Vin", region: "Italie", year: 2022, photo: "https://source.unsplash.com/1200x1200/?lambrusco+wine" },
+  { title: "Cava", category: "Vin", region: "Espagne", year: 2020, photo: "https://source.unsplash.com/1200x1200/?cava+wine" },
+  { title: "Pinot Grigio", category: "Vin", region: "Italie", year: 2021, photo: "https://source.unsplash.com/1200x1200/?pinot+grigio+wine" },
+
   # 20 Boissons alcoolisées hors vin
   { title: "Whisky", category: "Alcoolisée", region: "Écosse", year: 2018, photo: "whisky.jpg" },
   { title: "Rhum", category: "Alcoolisée", region: "Caraïbes", year: 2020, photo: "rum.jpg" },
@@ -213,7 +206,41 @@ drinks.each do |drink|
   Drink.create!(drink)
 end
 
-puts "✅ 60 boissons insérées avec succès !"
+puts "✅ 80 boissons insérées avec succès !"
+
+
+
+
+puts "\n👥 Création des Stock..."
+drinks = Drink.all
+@mail_aureo = User.find_by(email: "aurelien@example.com")
+
+csv_file = Rails.root.join('db', 'wines.csv')
+
+if File.exist?(csv_file)
+  puts "📥 Importation des vins en cours..."
+  count = 0
+
+  CSV.foreach(csv_file, headers: true, encoding: 'utf-8') do |row|
+    sleep(10)
+    drink = Drink.find_or_create_by!(
+      title: row['title'],
+      year: row['year'],
+      category: row['category'],
+      region: row['region'],
+      photo: row['photo']
+    )
+    count += 1
+  end
+
+  puts "✅ #{count} vins importés avec succès !"
+else
+  puts "❌ Erreur : wines.csv introuvable dans db/"
+end
+
+# db/seeds.rb
+
+
 
 
 
