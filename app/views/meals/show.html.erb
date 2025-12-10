@@ -77,135 +77,141 @@
         </div>
       </div>
 
-      <%# --- 🏠 Dans ma cave --- %>
-      <% my_cellar = @meal.meal_drinks.joins(drink: :stocks).where(status: "recommendation", stocks: { user_id: current_user.id }) %>
-      <% if my_cellar.any? %>
-        <h4>🏠 Dans ma cave</h4>
-        <div class="cards">
-          <% my_cellar.each do |meal_drink| %>
-            <label class="td-wine-card w-100 drink-selectable" style="cursor: pointer; position: relative; transition: all 0.2s;">
+      <%# Container pour toutes les recommandations %>
+      <div style="padding-bottom: 150px;">
 
-              <%# Checkbox CACHÉ %>
-              <%= check_box_tag "selected_meal_drink_ids[]", meal_drink.id, false,
-                  class: "drink-checkbox",
-                  id: "drink_checkbox_#{meal_drink.id}",
-                  style: "display: none;" %>
+        <%# --- 🏠 Dans ma cave --- %>
+        <% my_cellar = @meal.meal_drinks.joins(drink: :stocks).where(status: "recommendation", stocks: { user_id: current_user.id }) %>
+        <% if my_cellar.any? %>
+          <h4>🏠 Dans ma cave</h4>
+          <div class="cards">
+            <% my_cellar.each do |meal_drink| %>
+              <label class="td-wine-card w-100 drink-selectable" style="cursor: pointer; position: relative; transition: all 0.2s;">
 
-              <div class="td-wine-card-image">
-                <div class="td-wine-placeholder">
-                  <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+                <%# Checkbox CACHÉ %>
+                <%= check_box_tag "selected_meal_drink_ids[]", meal_drink.id, false,
+                    class: "drink-checkbox",
+                    id: "drink_checkbox_#{meal_drink.id}",
+                    style: "display: none;" %>
+
+                <div class="td-wine-card-image">
+                  <div class="td-wine-placeholder">
+                    <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+                  </div>
                 </div>
-              </div>
-              <div class="td-wine-card-content">
-                <span class="stock-title"><%= meal_drink.drink.title %></span>
-              </div>
-            </label>
-          <% end %>
-        </div>
-      <% end %>
-
-      <%# --- 🍷 Vins --- %>
-      <% wines = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Vin" }) %>
-      <% if wines.any? %>
-        <h4>🍷 Vins</h4>
-        <div class="cards">
-          <% wines.each do |meal_drink| %>
-            <label class="td-wine-card w-100 drink-selectable" style="cursor: pointer; position: relative; transition: all 0.2s;">
-              <%= check_box_tag "selected_meal_drink_ids[]", meal_drink.id, false,
-                  class: "drink-checkbox",
-                  id: "drink_checkbox_#{meal_drink.id}",
-                  style: "display: none;" %>
-
-              <div class="td-wine-card-image">
-                <div class="td-wine-placeholder">
-                  <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+                <div class="td-wine-card-content">
+                  <span class="stock-title"><%= meal_drink.drink.title %></span>
                 </div>
-              </div>
-              <div class="td-wine-card-content">
-                <span class="stock-title"><%= meal_drink.drink.title %></span>
-              </div>
-            </label>
-          <% end %>
-        </div>
-      <% end %>
+              </label>
+            <% end %>
+          </div>
+        <% end %>
 
-      <%# --- 🍸 Boissons alcoolisées --- %>
-      <% alcohol = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Alcoolisée" }) %>
-      <% if alcohol.any? %>
-        <h4>🍸 Boissons alcoolisées</h4>
-        <div class="cards">
-          <% alcohol.each do |meal_drink| %>
-            <label class="td-wine-card w-100 drink-selectable" style="cursor: pointer; position: relative; transition: all 0.2s;">
-              <%= check_box_tag "selected_meal_drink_ids[]", meal_drink.id, false,
-                  class: "drink-checkbox",
-                  id: "drink_checkbox_#{meal_drink.id}",
-                  style: "display: none;" %>
+        <%# --- 🍷 Vins --- %>
+        <% wines = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Vin" }) %>
+        <% if wines.any? %>
+          <h4>🍷 Vins</h4>
+          <div class="cards">
+            <% wines.each do |meal_drink| %>
+              <label class="td-wine-card w-100 drink-selectable" style="cursor: pointer; position: relative; transition: all 0.2s;">
+                <%= check_box_tag "selected_meal_drink_ids[]", meal_drink.id, false,
+                    class: "drink-checkbox",
+                    id: "drink_checkbox_#{meal_drink.id}",
+                    style: "display: none;" %>
 
-              <div class="td-wine-card-image">
-                <div class="td-wine-placeholder">
-                  <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+                <div class="td-wine-card-image">
+                  <div class="td-wine-placeholder">
+                    <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+                  </div>
                 </div>
-              </div>
-              <div class="td-wine-card-content">
-                <span class="stock-title"><%= meal_drink.drink.title %></span>
-              </div>
-            </label>
-          <% end %>
-        </div>
-      <% end %>
-
-      <%# --- 🥤 Boissons sans alcool --- %>
-      <% no_alcohol = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Non alcoolisée" }) %>
-      <% if no_alcohol.any? %>
-        <h4>🥤 Boissons sans alcool</h4>
-        <div class="cards">
-          <% no_alcohol.each do |meal_drink| %>
-            <label class="td-wine-card w-100 drink-selectable" style="cursor: pointer; position: relative; transition: all 0.2s;">
-              <%= check_box_tag "selected_meal_drink_ids[]", meal_drink.id, false,
-                  class: "drink-checkbox",
-                  id: "drink_checkbox_#{meal_drink.id}",
-                  style: "display: none;" %>
-
-              <div class="td-wine-card-image">
-                <div class="td-wine-placeholder">
-                  <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+                <div class="td-wine-card-content">
+                  <span class="stock-title"><%= meal_drink.drink.title %></span>
                 </div>
-              </div>
-              <div class="td-wine-card-content">
-                <span class="stock-title"><%= meal_drink.drink.title %></span>
-              </div>
-            </label>
-          <% end %>
-        </div>
-      <% end %>
+              </label>
+            <% end %>
+          </div>
+        <% end %>
 
-      <%# --- 🎲 Suggestions improbables --- %>
-      <% improbable = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Improbable" }) %>
-      <% if improbable.any? %>
-        <h4>🎲 Suggestions improbables</h4>
-        <div class="cards">
-          <% improbable.each do |meal_drink| %>
-            <label class="td-wine-card w-100 drink-selectable" style="cursor: pointer; position: relative; transition: all 0.2s;">
-              <%= check_box_tag "selected_meal_drink_ids[]", meal_drink.id, false,
-                  class: "drink-checkbox",
-                  id: "drink_checkbox_#{meal_drink.id}",
-                  style: "display: none;" %>
+        <%# --- 🍸 Boissons alcoolisées --- %>
+        <% alcohol = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Alcoolisée" }) %>
+        <% if alcohol.any? %>
+          <h4>🍸 Boissons alcoolisées</h4>
+          <div class="cards">
+            <% alcohol.each do |meal_drink| %>
+              <label class="td-wine-card w-100 drink-selectable" style="cursor: pointer; position: relative; transition: all 0.2s;">
+                <%= check_box_tag "selected_meal_drink_ids[]", meal_drink.id, false,
+                    class: "drink-checkbox",
+                    id: "drink_checkbox_#{meal_drink.id}",
+                    style: "display: none;" %>
 
-              <div class="td-wine-card-image">
-                <div class="td-wine-placeholder">
-                  <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+                <div class="td-wine-card-image">
+                  <div class="td-wine-placeholder">
+                    <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+                  </div>
                 </div>
-              </div>
-              <div class="td-wine-card-content">
-                <span class="stock-title"><%= meal_drink.drink.title %></span>
-              </div>
-            </label>
-          <% end %>
-        </div>
-      <% end %>
+                <div class="td-wine-card-content">
+                  <span class="stock-title"><%= meal_drink.drink.title %></span>
+                </div>
+              </label>
+            <% end %>
+          </div>
+        <% end %>
 
-      <%# Bouton de validation %>
-      <div class="td-match-submit" style="margin-top: 40px; margin-bottom: 80px;">
+        <%# --- 🥤 Boissons sans alcool --- %>
+        <% no_alcohol = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Non alcoolisée" }) %>
+        <% if no_alcohol.any? %>
+          <h4>🥤 Boissons sans alcool</h4>
+          <div class="cards">
+            <% no_alcohol.each do |meal_drink| %>
+              <label class="td-wine-card w-100 drink-selectable" style="cursor: pointer; position: relative; transition: all 0.2s;">
+                <%= check_box_tag "selected_meal_drink_ids[]", meal_drink.id, false,
+                    class: "drink-checkbox",
+                    id: "drink_checkbox_#{meal_drink.id}",
+                    style: "display: none;" %>
+
+                <div class="td-wine-card-image">
+                  <div class="td-wine-placeholder">
+                    <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+                  </div>
+                </div>
+                <div class="td-wine-card-content">
+                  <span class="stock-title"><%= meal_drink.drink.title %></span>
+                </div>
+              </label>
+            <% end %>
+          </div>
+        <% end %>
+
+        <%# --- 🎲 Suggestions improbables --- %>
+        <% improbable = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Improbable" }) %>
+        <% if improbable.any? %>
+          <h4>🎲 Suggestions improbables</h4>
+          <div class="cards">
+            <% improbable.each do |meal_drink| %>
+              <label class="td-wine-card w-100 drink-selectable" style="cursor: pointer; position: relative; transition: all 0.2s;">
+                <%= check_box_tag "selected_meal_drink_ids[]", meal_drink.id, false,
+                    class: "drink-checkbox",
+                    id: "drink_checkbox_#{meal_drink.id}",
+                    style: "display: none;" %>
+
+                <div class="td-wine-card-image">
+                  <div class="td-wine-placeholder">
+                    <%= image_tag(meal_drink.drink.photo, class: "stock-image-container", alt: "#{meal_drink.drink.title}") %>
+                  </div>
+                </div>
+                <div class="td-wine-card-content">
+                  <span class="stock-title"><%= meal_drink.drink.title %></span>
+                </div>
+              </label>
+            <% end %>
+          </div>
+        <% end %>
+
+      </div>
+      <%# Fin du container avec padding %>
+
+      <%# Bouton de validation STATIQUE EN BAS %>
+      <div class="td-match-submit" style="margin-top: 20px; margin-bottom: 40px;">
         <%= f.submit "Valider l'événement",
             class: "btn btn-gold td-btn-match",
             id: "validate-event-btn",
@@ -219,62 +225,59 @@
 
     <% end %>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const checkboxes = document.querySelectorAll('.drink-checkbox');
-    const submitBtn = document.getElementById('validate-event-btn');
-    const countText = document.getElementById('selection-count');
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const checkboxes = document.querySelectorAll('.drink-checkbox');
+        const submitBtn = document.getElementById('validate-event-btn');
+        const countText = document.getElementById('selection-count');
 
-    function updateButtonState() {
-      const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+        function updateButtonState() {
+          const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
 
-      submitBtn.disabled = checkedCount === 0;
+          submitBtn.disabled = checkedCount === 0;
 
-      if (checkedCount === 0) {
-        countText.textContent = 'Sélectionnez au moins une boisson';
-        countText.style.color = '#666';
-        countText.style.fontWeight = 'normal';
-      } else if (checkedCount === 1) {
-        countText.textContent = '✓ 1 boisson sélectionnée';
-        countText.style.color = '#667eea';
-        countText.style.fontWeight = '600';
-      } else {
-        countText.textContent = `✓ ${checkedCount} boissons sélectionnées`;
-        countText.style.color = '#667eea';
-        countText.style.fontWeight = '600';
-      }
-    }
-
-    // Clic sur toute la carte pour sélectionner/désélectionner
-    document.querySelectorAll('.drink-selectable').forEach((label) => {
-      label.addEventListener('click', function(e) {
-        // Empêcher la propagation
-        e.stopPropagation();
-
-        const checkbox = this.querySelector('.drink-checkbox');
-        const card = this.closest('.td-wine-card');
-
-        // Toggle la checkbox
-        checkbox.checked = !checkbox.checked;
-
-        // Effet visuel : BORDURE BLEUE élégante quand sélectionné
-        if (checkbox.checked) {
-          card.style.borderColor = '#667eea';
-          card.style.borderWidth = '3px';
-          card.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)';
-        } else {
-          card.style.borderColor = '';
-          card.style.borderWidth = '';
-          card.style.boxShadow = '';
+          if (checkedCount === 0) {
+            countText.textContent = 'Sélectionnez au moins une boisson';
+            countText.style.color = '#666';
+            countText.style.fontWeight = 'normal';
+          } else if (checkedCount === 1) {
+            countText.textContent = '✓ 1 boisson sélectionnée';
+            countText.style.color = '#667eea';
+            countText.style.fontWeight = '600';
+          } else {
+            countText.textContent = `✓ ${checkedCount} boissons sélectionnées`;
+            countText.style.color = '#667eea';
+            countText.style.fontWeight = '600';
+          }
         }
+
+        // Clic sur toute la carte pour sélectionner/désélectionner
+        document.querySelectorAll('.drink-selectable').forEach((label) => {
+          label.addEventListener('click', function(e) {
+            const checkbox = this.querySelector('.drink-checkbox');
+            const card = this.closest('.td-wine-card');
+
+            // Toggle la checkbox
+            checkbox.checked = !checkbox.checked;
+
+            // Effet visuel : BORDURE BLEUE élégante quand sélectionné
+            if (checkbox.checked) {
+              card.style.borderColor = '#667eea';
+              card.style.borderWidth = '3px';
+              card.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)';
+            } else {
+              card.style.borderColor = '';
+              card.style.borderWidth = '';
+              card.style.boxShadow = '';
+            }
+
+            updateButtonState();
+          });
+        });
 
         updateButtonState();
       });
-    });
-
-    updateButtonState();
-  });
-</script>
+    </script>
 
     <style>
       /* Transitions sur les cartes */

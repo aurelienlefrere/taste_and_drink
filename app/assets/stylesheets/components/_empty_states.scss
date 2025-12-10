@@ -1,0 +1,116 @@
+// ============================================
+// 🎨 EMPTY STATES - États vides engageants
+// À copier dans : app/assets/stylesheets/components/_empty_states.scss
+// ============================================
+
+.empty-state {
+  text-align: center;
+  padding: $spacing-xxl $spacing-lg;
+
+  .empty-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto $spacing-xl;
+    background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.2) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: float 3s ease-in-out infinite;
+
+    i {
+      font-size: 40px;
+      color: $gold-primary;
+    }
+  }
+
+  h3 {
+    color: $text-primary;
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-sm;
+  }
+
+  p {
+    color: $text-secondary;
+    margin-bottom: $spacing-xl;
+  }
+
+  .btn {
+    min-width: 200px;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+// Empty state compact (pour les cards)
+.empty-cta-compact {
+  background: $bg-card;
+  border: 2px dashed $border-gold;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  text-align: center;
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: $gold-primary;
+    background: rgba(201, 169, 98, 0.05);
+  }
+
+  i {
+    font-size: 32px;
+    color: rgba(201, 169, 98, 0.5);
+    margin-bottom: $spacing-md;
+    display: block;
+  }
+
+  p {
+    color: $text-secondary;
+    margin-bottom: $spacing-md;
+    font-size: $font-size-sm;
+  }
+}
+
+// Empty state pour cave vide
+.empty-cellar {
+  text-align: center;
+  padding: 80px 20px;
+
+  .bottles-animation {
+    margin-bottom: 32px;
+
+    i {
+      font-size: 40px;
+      color: rgba(201, 169, 98, 0.3);
+      margin: 0 8px;
+      animation: bottle-sway 2s ease-in-out infinite;
+
+      &:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+    }
+  }
+
+  h3 {
+    font-size: 24px;
+    color: $text-primary;
+    margin-bottom: 16px;
+  }
+
+  p {
+    color: $text-secondary;
+    margin-bottom: 32px;
+  }
+}
+
+@keyframes bottle-sway {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  25% { transform: rotate(5deg) translateY(-5px); }
+  75% { transform: rotate(-5deg) translateY(-5px); }
+}

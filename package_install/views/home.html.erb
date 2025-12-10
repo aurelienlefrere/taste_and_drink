@@ -17,7 +17,7 @@
       <div class="td-hero-content">
         <h2 class="td-hero-greeting">Bonjour <%= current_user.first_name || "Chef" %>,</h2>
         <p class="td-hero-description">
-          Prêts à créer l'accord parfait entre votre plat et votre boisson 
+          Prêts à créer l'accord parfait entre votre plat et votre boisson
           et en faire un moment inoubliable avec vos amis ?!
         </p>
       </div>
@@ -61,8 +61,8 @@
             <% rated_wines.each do |stock| %>
               <%= link_to drink_path(stock.drink), class: "td-wine-card" do %>
                 <div class="td-wine-card-image">
-                  <% if stock.drink.photo.attached? %>
-                    <%= image_tag stock.drink.photo, alt: stock.drink.name %>
+                  <% if stock.drink.photo.present? %>
+                    <%= image_tag stock.drink.photo, alt: stock.drink.title %>
                   <% else %>
                     <div class="td-wine-placeholder">
                       <i class="fas fa-wine-bottle"></i>
@@ -70,8 +70,7 @@
                   <% end %>
                 </div>
                 <div class="td-wine-card-content">
-                  <span class="td-wine-name"><%= truncate(stock.drink.name, length: 18) %></span>
-                  <span class="td-wine-type"><%= stock.drink.color %></span>
+                  <span class="td-wine-name"><%= truncate(stock.drink.title, length: 18) %></span>
                   <div class="td-wine-rating">
                     <%# Affiche les étoiles pleines %>
                     <% stock.rating.to_i.times do %>
@@ -125,19 +124,19 @@
                   <span class="td-event-day"><%= event.date&.strftime("%d") || event.created_at.strftime("%d") %></span>
                   <span class="td-event-month"><%= event.date&.strftime("%b") || event.created_at.strftime("%b") %></span>
                 </div>
-                
+
                 <%# Nom du plat %>
                 <div class="td-event-dish-name">
                   <%= truncate(event.dish_name, length: 30) %>
                 </div>
-                
+
                 <%# Boisson associée %>
                 <% if event.meal_drinks.first %>
                   <div class="td-event-drink-info">
                     <%= truncate(event.meal_drinks.first.drink.title, length: 25) %>
                   </div>
                 <% end %>
-                
+
                 <%# Avatars des amis %>
                 <% if event.guests.any? %>
                   <div class="td-event-guests-mini">
