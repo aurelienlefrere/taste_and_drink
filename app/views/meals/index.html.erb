@@ -5,18 +5,11 @@
 <div class="td-events-page">
 
   <%# === HEADER === %>
-  <div class="td-events-header">
-    <div>
-      <h1 class="td-page-title">Mes Events</h1>
-      <p class="td-page-subtitle">
-        <%= @meals.count %> accord<%= @meals.count > 1 ? 's' : '' %> créé<%= @meals.count > 1 ? 's' : '' %>
-      </p>
-    </div>
-    <%# Bouton rond pour créer un nouveau match %>
-    <%= link_to new_meal_path, class: "td-btn-new-event" do %>
-      <i class="fas fa-plus"></i>
-    <% end %>
+  <%# === EN-TÊTE DE PAGE === %>
+  <div class="td-page-header">
+    <h1 class="td-page-title">Mes Events</h1>
   </div>
+
 
   <%# === LISTE DES EVENTS === %>
   <% if @meals.any? %>

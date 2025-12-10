@@ -1,6 +1,5 @@
 // ============================================
-// 🍷 TASTE & DRINK - FOOTBAR STYLES
-// Style: Rose glossy inspiré du logo Taste & Drink
+// 🍷 TASTE & DRINK - FOOTBAR TOUT EN DORÉ
 // ============================================
 
 .td-footbar {
@@ -11,8 +10,9 @@
   width: 100%;
   max-width: 430px;
   height: 70px;
-  background: $dark-bg;
-  border-top: 1px solid rgba($pink-glossy, 0.3);  // Changé de $gold
+  background: linear-gradient(180deg, transparent 0%, rgba(18, 18, 18, 0.98) 20%);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(201, 169, 98, 0.2);
   z-index: 1000;
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -26,7 +26,7 @@
   padding: 0 8px;
 }
 
-// === ITEM DE LA FOOTBAR (style glossy rose) ===
+// === ITEMS EN DORÉ ===
 .td-footbar-item {
   display: flex;
   flex-direction: column;
@@ -36,34 +36,47 @@
   height: 100%;
   padding: 8px 4px;
   text-decoration: none;
-  color: rgba($pink-glossy, 0.6);  // Rose avec transparence
-  transition: all 0.3s ease;
+  color: rgba(201, 169, 98, 0.6);  // Doré désaturé par défaut
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 
   &:hover {
-    color: $pink-glossy;
+    color: #C9A962;  // Doré vif
+    transform: translateY(-2px);
   }
 
-  // État actif - effet glossy plus prononcé
+  // État actif
   &.active {
-    color: $pink-glossy-light;
+    color: #D4BC7B;  // Doré clair
 
     .td-footbar-icon {
-      transform: translateY(-2px);
-      text-shadow: 0 0 10px rgba($pink-glossy, 0.5);  // Lueur rose
+      transform: translateY(-2px) scale(1.1);
     }
 
-    .td-footbar-label {
-      text-shadow: 0 0 8px rgba($pink-glossy, 0.4);
+    // Indicateur en haut
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #D4BC7B, transparent);
+      border-radius: 2px;
     }
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 }
 
-// === ICÔNE STANDARD (rose glossy) ===
 .td-footbar-icon {
   font-size: 20px;
   margin-bottom: 4px;
   transition: all 0.3s ease;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);  // Effet glossy
+  position: relative;
 }
 
 .td-footbar-label {
@@ -74,33 +87,36 @@
 }
 
 // ============================================
-// === BOUTON "MATCH" (Central - Rose Glossy Premium) ===
+// ✨ BOUTON MATCH CENTRAL (DORÉ BRILLANT)
 // ============================================
 .td-footbar-match {
   position: relative;
+  top: -20px;
 
   .td-footbar-icon-match {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 4px;
-    width: 56px;
-    height: 56px;
-    // Gradient rose glossy premium
-    background: linear-gradient(135deg, $pink-glossy-dark, $pink-glossy, $pink-glossy-light);
+    width: 64px;
+    height: 64px;
+    // Gradient doré brillant
+    background: linear-gradient(135deg, #C9A962 0%, #D4BC7B 50%, #F4D03F 100%);
+    border: 4px solid #121212;
     border-radius: 50%;
     margin-bottom: 4px;
-    margin-top: -20px;
-    // Ombre et effet glossy multicouche
+    // Ombre dorée prononcée
     box-shadow:
-      0 4px 15px rgba($pink-glossy, 0.4),           // Ombre colorée
-      inset 0 2px 4px rgba(255, 255, 255, 0.25),    // Reflet interne haut
-      inset 0 -2px 4px rgba(0, 0, 0, 0.1);          // Ombre interne bas
+      0 8px 24px rgba(201, 169, 98, 0.6),
+      0 0 40px rgba(212, 188, 123, 0.4),
+      inset 0 2px 4px rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    // Animation de brillance
+    animation: shine 3s ease-in-out infinite;
 
-    // Reflet glossy en haut (effet "bulle")
+    // Reflet en haut
     &::before {
       content: '';
       position: absolute;
@@ -110,34 +126,77 @@
       height: 40%;
       background: linear-gradient(
         to bottom,
-        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0.4),
         rgba(255, 255, 255, 0)
       );
       border-radius: 50%;
     }
 
+    // Effet de brillance qui bouge
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 70%
+      );
+      animation: shimmer 2s infinite;
+    }
+
     i {
       font-size: 14px;
-      color: $dark-bg;
+      color: #1a1a1a;  // Icônes sombres sur fond doré
       position: relative;
       z-index: 1;
     }
   }
 
   &:hover .td-footbar-icon-match {
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(90deg);
     box-shadow:
-      0 6px 20px rgba($pink-glossy, 0.6),
-      inset 0 2px 4px rgba(255, 255, 255, 0.3),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+      0 12px 32px rgba(201, 169, 98, 0.8),
+      0 0 50px rgba(212, 188, 123, 0.6),
+      inset 0 2px 4px rgba(255, 255, 255, 0.4);
   }
 
-  &.active .td-footbar-icon-match {
-    background: linear-gradient(135deg, $pink-glossy, $pink-glossy-light);
+  &:active .td-footbar-icon-match {
+    transform: scale(1.05) rotate(90deg);
   }
 
   .td-footbar-label {
-    color: $pink-glossy;
+    color: #D4BC7B;
     font-weight: 600;
+    text-shadow: 0 0 10px rgba(212, 188, 123, 0.5);
+  }
+}
+
+// Animation de brillance permanente
+@keyframes shine {
+  0%, 100% {
+    box-shadow:
+      0 8px 24px rgba(201, 169, 98, 0.6),
+      0 0 40px rgba(212, 188, 123, 0.4),
+      inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 8px 24px rgba(201, 169, 98, 0.8),
+      0 0 60px rgba(244, 208, 63, 0.6),
+      inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
   }
 }
