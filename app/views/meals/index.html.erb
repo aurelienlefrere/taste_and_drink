@@ -76,7 +76,7 @@
                     <%# Image de la bouteille %>
                     <div class="td-drink-image">
                       <% if meal_drink.drink.photo.present? %>
-                        <img src="<%= meal_drink.drink.photo %>" alt="<%= meal_drink.drink.title %>">
+                        <%= image_tag meal_drink.drink.photo, alt: meal_drink.drink.title %>
                       <% else %>
                         <%# Placeholder si pas d'image %>
                         <div class="td-drink-placeholder">
