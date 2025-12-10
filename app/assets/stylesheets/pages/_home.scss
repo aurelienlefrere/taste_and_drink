@@ -3,7 +3,9 @@
 // ============================================
 
 .td-home {
-  padding: 0 16px;
+  padding: 0 20px;
+  padding-top: 70px;
+  padding-bottom: 100px;
 }
 
 // === HEADER CONNECTÉ ===
@@ -113,6 +115,13 @@
     font-size: 16px;
     color: $text-primary;
     margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    i {
+      color: $gold;
+    }
   }
 }
 
@@ -239,21 +248,31 @@
 }
 
 // ============================================
-// === SWIPER (Carousel horizontal) ===
+// === SWIPER (Carousel horizontal) - VERSION CORRIGÉE ===
 // ============================================
 .td-swiper {
   position: relative;
-  margin: 0 -16px;      // Déborde du padding parent pour effet pleine largeur
-  padding: 0 16px;
+  // Force le débordement complet du padding parent
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  margin-right: -20px;
+  overflow: visible;
 }
 
 .td-swiper-track {
   display: flex;
   gap: 12px;
-  overflow-x: auto;     // Permet le scroll horizontal
+  overflow-x: scroll;
+  overflow-y: visible;
   scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
   cursor: grab;
-  padding: 4px 0 12px 0;
+  // Padding identique au padding de .td-home
+  padding: 4px 20px 16px 20px;
+
+  &:active {
+    cursor: grabbing;
+  }
 
   // Masquer la scrollbar
   scrollbar-width: none;
@@ -265,23 +284,60 @@
 
   // Scroll fluide sur iOS
   -webkit-overflow-scrolling: touch;
+
+  // CRITIQUE : Les enfants ne doivent JAMAIS rétrécir
+  > * {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
 }
 
 // ============================================
 // === WINE CARDS (Vins notés) ===
 // ============================================
 .td-wine-card {
-  flex: 0 0 130px;      // Largeur fixe, ne rétrécit pas
+  flex: 0 0 130px;
+  width: 130px;
   background: $dark-bg-card;
   border-radius: 14px;
   padding: 12px;
   text-decoration: none;
   border: 1px solid rgba($gold, 0.1);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  // Effet de brillance au hover
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(201, 169, 98, 0.1) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    transition: transform 0.6s ease;
+  }
 
   &:hover {
     border-color: rgba($gold, 0.3);
-    transform: translateY(-2px);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(201, 169, 98, 0.3);
+
+    &::before {
+      transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+  }
+
+  &:active {
+    transform: translateY(-2px) scale(1.01);
   }
 
   &.td-card-empty {
@@ -353,6 +409,7 @@
 // ============================================
 .td-reco-card {
   flex: 0 0 160px;
+  width: 160px;
   background: $dark-bg-card;
   border-radius: 14px;
   padding: 16px;
@@ -410,6 +467,7 @@
 // ============================================
 .td-friend-card {
   flex: 0 0 100px;
+  width: 100px;
   background: $dark-bg-card;
   border-radius: 14px;
   padding: 16px 12px;
@@ -471,11 +529,8 @@
 }
 
 // ============================================
-// 🍷 NOUVEAUX STYLES À AJOUTER À _home.scss
-// À ajouter à la FIN du fichier existant
-// ============================================
-
 // === LOGO DORÉ FLOTTANT ===
+// ============================================
 .td-floating-logo {
   text-align: center;
   margin-bottom: 20px;
@@ -483,24 +538,18 @@
 }
 
 .td-logo-float {
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   filter: drop-shadow(0 4px 12px rgba($gold, 0.3));
   animation: float 3s ease-in-out infinite;
 }
 
-// Animation de flottement
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
+// ============================================
 // === CARDS EVENTS MINI (pour la home) ===
+// ============================================
 .td-event-mini-card {
+  flex: 0 0 200px;
+  width: 200px;
   background: $dark-bg-card;
   border-radius: 12px;
   padding: 12px;
@@ -510,10 +559,41 @@
   flex-direction: column;
   gap: 8px;
   transition: all 0.3s ease;
-  
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+
+  // Effet de brillance
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(201, 169, 98, 0.1) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    transition: transform 0.6s ease;
+  }
+
   &:hover {
     border-color: rgba($gold, 0.4);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(201, 169, 98, 0.2);
+
+    &::before {
+      transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+  }
+
+  &.td-card-empty {
+    border-style: dashed;
+    opacity: 0.6;
   }
 }
 
@@ -525,14 +605,14 @@
   border-radius: 8px;
   padding: 4px 8px;
   width: fit-content;
-  
+
   .td-event-day {
     font-size: 18px;
     font-weight: 700;
     color: $gold;
     line-height: 1;
   }
-  
+
   .td-event-month {
     font-size: 11px;
     text-transform: uppercase;
@@ -555,7 +635,7 @@
 
 .td-event-guests-mini {
   display: flex;
-  gap: -8px; // Pour que les avatars se chevauchent légèrement
+  gap: -8px;
   margin-top: 4px;
 }
 
@@ -569,19 +649,19 @@
   align-items: center;
   justify-content: center;
   background: $lie-de-vin;
-  
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  
+
   span {
     font-size: 12px;
     font-weight: 600;
     color: $text-primary;
   }
-  
+
   &.td-avatar-more {
     background: rgba($gold, 0.2);
     font-size: 11px;
@@ -593,4 +673,26 @@
   font-size: 32px;
   color: $text-muted;
   margin-bottom: 8px;
+}
+
+// ============================================
+// === HERO COMPACT ===
+// ============================================
+.td-home-hero-compact {
+  text-align: center;
+  padding: 20px 0;
+  margin-bottom: 20px;
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: $gold-primary;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: 14px;
+    margin: 0;
+  }
 }

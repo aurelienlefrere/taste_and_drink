@@ -13,14 +13,9 @@
     </div>
 
     <%# Carte principale - Message de bienvenue personnalisé %>
-    <div class="td-home-hero">
-      <div class="td-hero-content">
-        <h2 class="td-hero-greeting">Bonjour <%= current_user.first_name || "Chef" %>,</h2>
-        <p class="td-hero-description">
-          Prêts à créer l'accord parfait entre votre plat et votre boisson
-          et en faire un moment inoubliable avec vos amis ?!
-        </p>
-      </div>
+    <div class="td-home-hero-compact">
+      <h2>Bonjour <%= current_user.first_name || "Chef" %> </h2>
+      <p>Trouvez l'accord parfait pour votre prochain repas</p>
     </div>
 
     <%# Stats rapides (Events, Bouteilles, Amis) %>
@@ -38,19 +33,20 @@
         <span class="td-stat-label">Amis</span>
       </div>
     </div>
+</div>
 
     <%# ============================================ %>
     <%# SECTION 1: Mes Vins Notés (Swipable) %>
     <%# ============================================ %>
     <div class="td-home-section">
       <div class="td-section-header-row">
-        <h3><i class="fas fa-star me-2"></i>Mes Vins Notés</h3>
+        <h3><i class="fas fa-star"></i> Mes Vins Notés</h3>
         <%= link_to "Voir tout", stocks_path, class: "td-link-gold" %>
       </div>
 
       <%# Le data-controller connecte au Stimulus controller %>
-      <div class="td-swiper" data-controller="swiper">
-        <div class="td-swiper-track" data-swiper-target="track">
+      <div class="td-swiper">
+        <div class="td-swiper-track">
           <% rated_wines = current_user.stocks.includes(:drink).where.not(rating: nil).order(rating: :desc).limit(10) %>
           <% if rated_wines.any? %>
             <% rated_wines.each do |stock| %>
@@ -81,8 +77,8 @@
               <% end %>
             <% end %>
           <% else %>
-            <%# Placeholder si pas de vins notés %>
-            <% 3.times do %>
+            <%# Cards vides scrollables similaires aux events %>
+            <% 3.times do |i| %>
               <div class="td-wine-card td-card-empty">
                 <div class="td-wine-card-image">
                   <div class="td-wine-placeholder">
@@ -90,8 +86,13 @@
                   </div>
                 </div>
                 <div class="td-wine-card-content">
-                  <span class="td-wine-name">Notez vos vins</span>
-                  <span class="td-wine-type">Ajoutez des notes</span>
+                  <span class="td-wine-name">Vin <%= i + 1 %></span>
+                  <span class="td-wine-type">À noter</span>
+                  <div class="td-wine-rating">
+                    <% 5.times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             <% end %>
@@ -105,12 +106,12 @@
     <%# ============================================ %>
     <div class="td-home-section">
       <div class="td-section-header-row">
-        <h3><i class="fas fa-calendar-alt me-2"></i>Vos Derniers Events</h3>
+        <h3><i class="fas fa-calendar-alt"></i> Vos Derniers Events</h3>
         <%= link_to "Voir tout", meals_path, class: "td-link-gold" %>
       </div>
 
-      <div class="td-swiper" data-controller="swiper">
-        <div class="td-swiper-track" data-swiper-target="track">
+      <div class="td-swiper">
+        <div class="td-swiper-track">
           <% recent_events = current_user.meals.order(created_at: :desc).limit(10) %>
           <% if recent_events.any? %>
             <% recent_events.each do |event| %>
@@ -198,4 +199,3 @@
       </div>
     </div>
   <% end %>
-</div>

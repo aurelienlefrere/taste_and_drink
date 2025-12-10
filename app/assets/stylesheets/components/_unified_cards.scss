@@ -1,0 +1,143 @@
+// ============================================
+// 📦 CARTES UNIFIÉES - Composants réutilisables
+// À copier dans : app/assets/stylesheets/components/_unified_cards.scss
+// ============================================
+
+// Carte de base utilisée partout
+.unified-card {
+  background: linear-gradient(135deg, $bg-card 0%, $bg-card-hover 100%);
+  border: 1px solid $border-gold;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-md;
+  transition: all $transition-smooth;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    border-color: $border-gold-hover;
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+  }
+
+  // Variantes
+  &--clickable {
+    cursor: pointer;
+  }
+
+  &--no-hover {
+    &:hover {
+      transform: none;
+    }
+  }
+
+  &--highlight {
+    border-color: $gold-primary;
+    background: linear-gradient(135deg,
+      rgba(139, 38, 53, 0.1) 0%,
+      $bg-card 100%
+    );
+  }
+}
+
+// Header de section standardisé
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-md;
+
+  h2, h3 {
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    i {
+      color: $gold-primary;
+    }
+  }
+
+  .view-all {
+    color: $gold-primary;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color $transition-base;
+
+    &:hover {
+      color: $gold-light;
+    }
+  }
+}
+
+// Container de page standardisé
+.page-container {
+  padding: $spacing-lg;
+  padding-bottom: 100px;
+  min-height: 100vh;
+}
+
+// Header de page
+.page-header {
+  margin-bottom: $spacing-xl;
+
+  h1 {
+    font-size: $font-size-xxl;
+    font-weight: 700;
+    margin: 0 0 $spacing-xs 0;
+    background: linear-gradient(90deg, #fff 0%, $gold-primary 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .subtitle {
+    color: $text-secondary;
+    font-size: $font-size-sm;
+    margin: 0;
+  }
+}
+
+// Boutons standardisés
+.btn-gold {
+  background: linear-gradient(135deg, $gold-primary 0%, $gold-light 100%);
+  color: $bg-dark;
+  border: none;
+  padding: 12px 24px;
+  border-radius: $radius-md;
+  font-weight: 600;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-gold;
+    color: $bg-dark;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-wine {
+  background: linear-gradient(135deg, $wine-red 0%, $wine-red-light 100%);
+  color: $gold-primary;
+  border: none;
+  padding: 12px 24px;
+  border-radius: $radius-md;
+  font-weight: 600;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 38, 53, 0.5);
+    color: $gold-primary;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
