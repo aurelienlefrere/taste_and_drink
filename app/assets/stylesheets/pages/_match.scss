@@ -246,10 +246,8 @@
 
 // === BOUTON MATCH (Submit) ===
 .td-match-submit {
-  position: sticky;
   bottom: 80px;
   padding: 16px 0;
-  background: linear-gradient(to top, $dark-bg 80%, transparent);
   margin: 0 -16px;
   padding-left: 16px;
   padding-right: 16px;
@@ -861,7 +859,7 @@
 
 .td-match-page {
   padding-top: 10px;
-  
+
   // Animation d'entrée
   animation: fadeIn 0.4s ease-out;
 }
@@ -869,7 +867,7 @@
 .td-match-header {
   text-align: center;
   margin-bottom: 30px;
-  
+
   .td-page-title {
     display: flex;
     align-items: center;
@@ -877,13 +875,13 @@
     gap: 16px;
     margin-bottom: 12px;
     font-size: 28px;
-    
+
     .td-match-icon {
       color: $gold;
       font-size: 32px;
       filter: drop-shadow(0 2px 8px rgba($gold, 0.3));
     }
-    
+
     .td-match-ampersand {
       font-size: 36px;
       font-weight: 700;
@@ -891,7 +889,7 @@
       font-style: italic;
     }
   }
-  
+
   .td-page-subtitle {
     color: $text-secondary;
     font-size: 16px;
@@ -906,7 +904,7 @@
   border-radius: 16px;
   padding: 20px;
   transition: all 0.3s ease;
-  
+
   &:hover {
     border-color: rgba($gold, 0.3);
   }
@@ -917,7 +915,7 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 16px;
-  
+
   .td-section-number {
     width: 32px;
     height: 32px;
@@ -931,7 +929,7 @@
     font-size: 16px;
     flex-shrink: 0;
   }
-  
+
   .td-section-title {
     margin: 0;
     font-size: 18px;
@@ -939,7 +937,7 @@
     color: $text-primary;
     flex: 1;
   }
-  
+
   .td-section-optional {
     font-size: 13px;
     color: $text-muted;
@@ -953,7 +951,7 @@
   padding: 14px 16px;
   background: $dark-bg-light;
   border: 2px solid rgba($text-muted, 0.2);
-  
+
   &:focus {
     background: $dark-bg;
     border-color: $gold;
@@ -971,13 +969,13 @@
 .td-friend-chip {
   position: relative;
   cursor: pointer;
-  
+
   input[type="checkbox"] {
     position: absolute;
     opacity: 0;
     pointer-events: none;
   }
-  
+
   .td-friend-chip-content {
     display: flex;
     align-items: center;
@@ -988,18 +986,18 @@
     border: 2px solid rgba($text-muted, 0.3);
     transition: all 0.3s ease;
   }
-  
+
   // État checked
   input:checked + .td-friend-chip-content {
     background: rgba($gold, 0.15);
     border-color: $gold;
-    
+
     .td-friend-chip-avatar {
       background: $gold;
       color: $dark-bg;
     }
   }
-  
+
   &:hover .td-friend-chip-content {
     border-color: rgba($gold, 0.5);
     transform: translateY(-1px);
@@ -1029,7 +1027,7 @@
 // Bouton submit
 .td-match-submit {
   margin-top: 30px;
-  
+
   .td-btn-match {
     width: 100%;
     padding: 16px;
@@ -1044,13 +1042,13 @@
   text-align: center;
   padding: 20px;
   color: $text-muted;
-  
+
   i {
     font-size: 32px;
     margin-bottom: 8px;
     opacity: 0.5;
   }
-  
+
   p {
     margin: 0;
     font-size: 14px;
