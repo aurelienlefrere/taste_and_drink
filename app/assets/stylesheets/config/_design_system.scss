@@ -33,12 +33,11 @@ $text-secondary: #B3B3B3;
 $text-muted: #707070;
 
 // === TYPOGRAPHY ===
-$font-size-xs: 11px;
-$font-size-sm: 13px;
-$font-size-base: 15px;
-$font-size-lg: 18px;
-$font-size-xl: 24px;
-$font-size-xxl: 32px;
+$font-size-xs: 0,6875rem;
+$font-size-sm: 0.8125rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.5rem;
+$font-size-xxl: 2rem;
 
 // === BORDER RADIUS ===
 $radius-sm: 8px;
