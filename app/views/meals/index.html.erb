@@ -23,84 +23,96 @@
     <div class="td-events-list">
       <% @meals.each do |meal| %>
 
-        <%# === CARD D'UN EVENT === %>
-        <div class="td-event-card">
+        <%# Récupérer uniquement les drinks VALIDÉES (status = "validated") %>
+        <% validated_drinks = meal.meal_drinks.where(status: "validated") %>
 
-          <%# --- En-tête : Date, Plat et Avatars --- %>
-          <div class="td-event-header-new">
-            <%# Badge de date (à gauche) %>
-            <div class="td-event-date">
-              <span class="td-date-day">
-                <%= meal.date&.strftime("%d") || meal.created_at.strftime("%d") %>
-              </span>
-              <span class="td-date-month">
-                <%= meal.date&.strftime("%b") || meal.created_at.strftime("%b") %>
-              </span>
-            </div>
-            
-            <%# Nom du plat (au centre, plus gros) %>
-            <div class="td-event-dish-main">
-              <h3><%= meal.dish_name %></h3>
-            </div>
-            
-            <%# Avatars des amis (à droite) %>
-            <% if meal.guests.any? %>
-              <div class="td-event-avatars-inline">
-                <% meal.guests.first(3).each do |guest| %>
-                  <div class="td-guest-avatar-inline" title="<%= guest.user.first_name %>">
-                    <% if guest.user.photo.present? %>
-                      <%= image_tag guest.user.photo, alt: guest.user.first_name %>
-                    <% else %>
-                      <span><%= guest.user.first_name&.first&.upcase || "?" %></span>
+        <%# Afficher la card seulement si au moins une drink a été validée %>
+        <% if validated_drinks.any? %>
+
+          <%# === CARD D'UN EVENT === %>
+          <%= link_to meal_path(meal), style: "text-decoration: none; color: inherit;" do %>
+            <div class="td-event-card">
+
+              <%# --- En-tête : Date, Plat et Avatars --- %>
+              <div class="td-event-header-new">
+                <%# Badge de date (à gauche) %>
+                <div class="td-event-date">
+                  <span class="td-date-day">
+                    <%= meal.date&.strftime("%d") || meal.created_at.strftime("%d") %>
+                  </span>
+                  <span class="td-date-month">
+                    <%= meal.date&.strftime("%b") || meal.created_at.strftime("%b") %>
+                  </span>
+                </div>
+
+                <%# Nom du plat (au centre, plus gros) %>
+                <div class="td-event-dish-main">
+                  <h3><%= meal.dish_name %></h3>
+                  <%# Afficher le nombre de drinks validées %>
+                  <p style="font-size: 0.85em; color: #667eea; margin-top: 5px;">
+                    🍷 <%= validated_drinks.count %> boisson<%= validated_drinks.count > 1 ? 's' : '' %>
+                  </p>
+                </div>
+
+                <%# Avatars des amis (à droite) %>
+                <% if meal.guests.any? %>
+                  <div class="td-event-avatars-inline">
+                    <% meal.guests.first(3).each do |guest| %>
+                      <div class="td-guest-avatar-inline" title="<%= guest.user.first_name %>">
+                        <% if guest.user.photo.present? %>
+                          <%= image_tag guest.user.photo, alt: guest.user.first_name %>
+                        <% else %>
+                          <span><%= guest.user.first_name&.first&.upcase || "?" %></span>
+                        <% end %>
+                      </div>
                     <% end %>
-                  </div>
-                <% end %>
-                <% if meal.guests.count > 3 %>
-                  <div class="td-guest-avatar-inline td-avatar-more">
-                    <span>+<%= meal.guests.count - 3 %></span>
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-
-          <%# --- Section Boissons --- %>
-          <% if meal.meal_drinks.any? %>
-            <div class="td-event-drinks">
-              <% meal.meal_drinks.each do |meal_drink| %>
-                <div class="td-drink-item">
-                  <%# Image de la bouteille %>
-                  <div class="td-drink-image">
-                    <% if meal_drink.drink.photo.present? %>
-                      <img src="<%= meal_drink.drink.photo %>" alt="<%= meal_drink.drink.title %>">
-                    <% else %>
-                      <%# Placeholder si pas d'image %>
-                      <div class="td-drink-placeholder">
-                        <i class="fas fa-wine-bottle"></i>
+                    <% if meal.guests.count > 3 %>
+                      <div class="td-guest-avatar-inline td-avatar-more">
+                        <span>+<%= meal.guests.count - 3 %></span>
                       </div>
                     <% end %>
                   </div>
+                <% end %>
+              </div>
 
-                  <%# Infos de la boisson %>
-                  <div class="td-drink-info">
-                    <span class="td-drink-name">
-                      <%= truncate(meal_drink.drink.title, length: 25) %>
-                    </span>
-                    <span class="td-drink-details">
-                      <%= meal_drink.drink.category %>
-                      <% if meal_drink.drink.year.present? %>
-                        • <%= meal_drink.drink.year %>
+              <%# --- Section Boissons VALIDÉES UNIQUEMENT --- %>
+              <div class="td-event-drinks">
+                <% validated_drinks.each do |meal_drink| %>
+                  <div class="td-drink-item">
+
+                    <%# Image de la bouteille %>
+                    <div class="td-drink-image">
+                      <% if meal_drink.drink.photo.present? %>
+                        <img src="<%= meal_drink.drink.photo %>" alt="<%= meal_drink.drink.title %>">
+                      <% else %>
+                        <%# Placeholder si pas d'image %>
+                        <div class="td-drink-placeholder">
+                          <i class="fas fa-wine-bottle"></i>
+                        </div>
                       <% end %>
-                    </span>
+                    </div>
+
+                    <%# Infos de la boisson %>
+                    <div class="td-drink-info">
+                      <span class="td-drink-name">
+                        <%= truncate(meal_drink.drink.title, length: 25) %>
+                      </span>
+                      <span class="td-drink-details">
+                        <%= meal_drink.drink.category %>
+                        <% if meal_drink.drink.year.present? %>
+                          • <%= meal_drink.drink.year %>
+                        <% end %>
+                      </span>
+                    </div>
                   </div>
-                </div>
-              <% end %>
+                <% end %>
+              </div>
+
             </div>
           <% end %>
+          <%# === FIN CARD === %>
 
-        </div>
-        <%# === FIN CARD === %>
-
+        <% end %>
       <% end %>
     </div>
 
@@ -117,3 +129,15 @@
   <% end %>
 
 </div>
+
+<style>
+  /* Hover sur les cards */
+  .td-event-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .td-event-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+</style>
