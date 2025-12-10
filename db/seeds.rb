@@ -1,14 +1,3 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
-
 require 'csv'
 Guest.destroy_all
 MealDrink.destroy_all
@@ -28,11 +17,22 @@ users_data = [
     password: 'password123',
     first_name: 'Pierre',
     last_name: 'Gozard',
-    diet: 'Vegan',
-    allergy: 'Nuts',
-    like: 'Red wines, Bordeaux',
+    diet: 'Vegetarien',
+    allergy: '',
+    like: 'Vin rouge, Bordeaux',
     dislike: 'Champagne',
     photo: 'Pierre.jpeg'
+  },
+    {
+    email: 'chuck@example.com',
+    password: 'password123',
+    first_name: 'Chuck',
+    last_name: 'Norris',
+    diet: 'Omnivore',
+    allergy: '',
+    like: 'Chuck Norris',
+    dislike: '',
+    photo: 'chuck.png'
   },
   {
     email: 'Franck@example.com',
@@ -40,9 +40,9 @@ users_data = [
     first_name: 'Franck',
     last_name: 'Abeille',
     diet: 'Omnivore',
-    allergy: 'Shellfish',
-    like: 'White wines, Burgundy',
-    dislike: 'Sweet wines',
+    allergy: '',
+    like: 'vins rouges, wisky',
+    dislike: 'vin blanc',
     photo: 'Franck.jpeg'
   },
   {
@@ -50,10 +50,10 @@ users_data = [
     password: 'password123',
     first_name: 'Vitor',
     last_name: 'de Castro',
-    diet: 'Vegetarian',
+    diet: 'Omnivore',
     allergy: 'Gluten',
-    like: 'Rosé wines, Provence',
-    dislike: 'Dry wines',
+    like: 'bières, vins rouges',
+    dislike: 'vodka',
     photo: 'Vitor.jpeg'
   },
   {
@@ -62,9 +62,9 @@ users_data = [
     first_name: 'Tom',
     last_name: 'Grenié',
     diet: 'Omnivore',
-    allergy: 'Dairy',
-    like: 'Sparkling wines, Champagne',
-    dislike: 'Heavy wines',
+    allergy: '',
+    like: 'bières, tequila',
+    dislike: 'gin',
     photo: 'Tom.jpeg'
   },
   {
@@ -72,10 +72,10 @@ users_data = [
     password: 'password123',
     first_name: 'Bassam',
     last_name: 'Renaud',
-    diet: 'Pescatarian',
+    diet: 'Hallal',
     allergy: 'None',
-    like: 'Italian wines, Tuscan',
-    dislike: 'Bitter wines',
+    like: 'thé glaçé',
+    dislike: 'boissons alcoolisés',
     photo: 'Bassam.jpeg'
   },
   {
@@ -84,9 +84,9 @@ users_data = [
     first_name: 'Aurelien',
     last_name: 'Lefrère',
     diet: 'Omnivore',
-    allergy: 'Sulfites',
-    like: 'Spanish wines, Rioja',
-    dislike: 'Light wines',
+    allergy: '',
+    like: 'vins rouges',
+    dislike: 'vins rosés',
     photo: 'Aurélien.jpeg'
   }
 ]
@@ -108,80 +108,64 @@ end
 puts "\n👥 Création des friends..."
 friends = User.where.not(id: User.last.id)
 @mail_aureo = User.find_by(email: "aurelien@example.com")
+@mail_pierre = User.find_by(email: "pierre@example.com")
 
 friends.each do |friend|
   Friend.create!(user_main_id: @mail_aureo.id,  user_friend_id: friend.id)
 end
 
 
-csv_file = Rails.root.join('db', 'wines.csv')
 
-if File.exist?(csv_file)
-  puts "📥 Importation des vins en cours..."
-  count = 0
-
-  CSV.foreach(csv_file, headers: true, encoding: 'utf-8') do |row|
-    drink = Drink.find_or_create_by!(
-      title: row['title'],
-      year: row['year'],
-      category: row['category'],
-      region: row['region'],
-      photo: row['photo']
-    )
-    count += 1
-  end
-
-  puts "✅ #{count} vins importés avec succès !"
-else
-  puts "❌ Erreur : wines.csv introuvable dans db/"
-end
 
 # db/seeds.rb
-
+puts "\n Création des vins..."
+ # 30 vins
 drinks = [
+  { title: "Château Margaux, Bordeaux", category: "Wine", region: "Bordeaux", year: 2007, photo: "margaux.png" },
+  { title: "Château Lafite Rothschild, Pauillac", category: "Wine", region: "Bordeaux", year: 2013, photo: "rothschild.png" },
+  { title: "Château Mouton Rothschild, Pauillac", category: "Wine", region: "Bordeaux", year: 2011, photo: "rothschild.png" },
+  { title: "Château Latour, Pauillac", category: "Wine", region: "Bordeaux", year: 2015, photo: "latour.png" },
+  { title: "Château Haut-Brion, Pessac-Léognan", category: "Wine", region: "Bordeaux", year: 2017, photo: "hautbrion.png" },
+  { title: "Romanée-Conti, Domaine de la Romanée-Conti", category: "Wine", region: "Burgundy", year: 2014, photo: "romane.png" },
+  { title: "La Tâche, Domaine de la Romanée-Conti", category: "Wine", region: "Burgundy", year: 2005, photo: "romane.png" },
+  { title: "Richebourg, Domaine de la Romanée-Conti", category: "Wine", region: "Burgundy", year: 2014, photo: "richebourg.png" },
+  { title: "Clos Vougeot, Grand Cru", category: "Wine", region: "Burgundy", year: 2011, photo: "vougeot.png" },
+  { title: "Musigny, Grand Cru", category: "Wine", region: "Burgundy", year: 2014, photo: "musigny.png" },
+  { title: "Cristal, Louis Roederer", category: "Wine", region: "Champagne", year: 2007, photo: "cristal.png" },
+  { title: "Dom Pérignon, Moët & Chandon", category: "Wine", region: "Champagne", year: 2007, photo: "dom.png" },
+  { title: "Krug Clos d'Ambonnay", category: "Wine", region: "Champagne", year: 2013, photo: "krug.png" },
+  { title: "Salon Blanc de Blancs", category: "Wine", region: "Champagne", year: 2012, photo: "salon.png" },
+  { title: "Taittinger Comtes de Champagne", category: "Wine", region: "Champagne", year: 2008, photo: "tai.png" },
+  { title: "Sassicaia, Tenuta San Guido", category: "Wine", region: "Tuscany", year: 2015, photo: "sassicaia.png" },
+  { title: "Ornellaia, Tenuta dell'Ornellaia", category: "Wine", region: "Tuscany", year: 2016, photo: "ornellaia.png" },
+  { title: "Masseto, Tenuta dell'Ornellaia", category: "Wine", region: "Tuscany", year: 2014, photo: "masseto.png" },
+  { title: "Tignanello, Antinori", category: "Wine", region: "Tuscany", year: 2015, photo: "tignanello.png" },
+  { title: "Brunello di Montalcino, Biondi-Santi", category: "Wine", region: "Tuscany", year: 2010, photo: "brunello.png" },
 
-  { title: "Bordeaux Rouge", category: "Vin", region: "Bordeaux", year: 2019, photo: "Aurélien.jpeg" },
-  { title: "Bourgogne Pinot Noir", category: "Vin", region: "Bourgogne", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Côtes du Rhône", category: "Vin", region: "Vallée du Rhône", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Beaujolais", category: "Vin", region: "Beaujolais", year: 2022, photo: "Aurélien.jpeg" },
-  { title: "Chianti", category: "Vin", region: "Italie - Toscane", year: 2019, photo: "Aurélien.jpeg" },
-  { title: "Rioja", category: "Vin", region: "Espagne", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Merlot", category: "Vin", region: "France", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Cabernet Sauvignon", category: "Vin", region: "France", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Syrah", category: "Vin", region: "France", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Chardonnay", category: "Vin", region: "France", year: 2022, photo: "Aurélien.jpeg" },
-  { title: "Sauvignon Blanc", category: "Vin", region: "Loire", year: 2022, photo: "Aurélien.jpeg" },
-  { title: "Muscadet", category: "Vin", region: "Loire", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Riesling", category: "Vin", region: "Alsace", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Gewurztraminer", category: "Vin", region: "Alsace", year: 2019, photo: "Aurélien.jpeg" },
-  { title: "Rosé de Provence", category: "Vin", region: "Provence", year: 2022, photo: "Aurélien.jpeg" },
-  { title: "Champagne Brut", category: "Vin", region: "Champagne", year: 2018, photo: "Aurélien.jpeg" },
-  { title: "Vinho Verde", category: "Vin", region: "Portugal", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Lambrusco", category: "Vin", region: "Italie", year: 2022, photo: "Aurélien.jpeg" },
-  { title: "Cava", category: "Vin", region: "Espagne", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Pinot Grigio", category: "Vin", region: "Italie", year: 2021, photo: "Aurélien.jpeg" },
+
 
   # 20 Boissons alcoolisées hors vin
-  { title: "Whisky", category: "Alcoolisée", region: "Écosse", year: 2018, photo: "Aurélien.jpeg" },
-  { title: "Rhum", category: "Alcoolisée", region: "Caraïbes", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Vodka", category: "Alcoolisée", region: "Russie", year: 2019, photo: "Aurélien.jpeg" },
-  { title: "Gin", category: "Alcoolisée", region: "Angleterre", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Tequila", category: "Alcoolisée", region: "Mexique", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Cognac", category: "Alcoolisée", region: "France", year: 2017, photo: "Aurélien.jpeg" },
-  { title: "Bière Blonde", category: "Alcoolisée", region: "Belgique", year: 2023, photo: "Aurélien.jpeg" },
-  { title: "Bière Brune", category: "Alcoolisée", region: "Allemagne", year: 2022, photo: "Aurélien.jpeg" },
-  { title: "Bière IPA", category: "Alcoolisée", region: "USA", year: 2023, photo: "Aurélien.jpeg" },
-  { title: "Saké", category: "Alcoolisée", region: "Japon", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Amaretto", category: "Alcoolisée", region: "Italie", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Baileys", category: "Alcoolisée", region: "Irlande", year: 2022, photo: "Aurélien.jpeg" },
-  { title: "Cachaça", category: "Alcoolisée", region: "Brésil", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Mezcal", category: "Alcoolisée", region: "Mexique", year: 2022, photo: "Aurélien.jpeg" },
-  { title: "Pisco", category: "Alcoolisée", region: "Pérou", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Pastis", category: "Alcoolisée", region: "France", year: 2019, photo: "Aurélien.jpeg" },
-  { title: "Grappa", category: "Alcoolisée", region: "Italie", year: 2018, photo: "Aurélien.jpeg" },
-  { title: "Whisky Japonais", category: "Alcoolisée", region: "Japon", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Porto", category: "Alcoolisée", region: "Portugal", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Sherry", category: "Alcoolisée", region: "Espagne", year: 2019, photo: "Aurélien.jpeg" },
+  { title: "Whisky", category: "Alcoolisée", region: "Écosse", year: 2018, photo: "wisky.png" },
+  { title: "Rhum", category: "Alcoolisée", region: "Caraïbes", year: 2020, photo: "rhum.png" },
+  { title: "Vodka", category: "Alcoolisée", region: "Russie", year: 2019, photo: "wodka.png" },
+  { title: "Gin", category: "Alcoolisée", region: "Angleterre", year: 2021, photo: "gin.png" },
+  { title: "Tequila", category: "Alcoolisée", region: "Mexique", year: 2020, photo: "tequila.png" },
+  { title: "Cognac", category: "Alcoolisée", region: "France", year: 2017, photo: "cognac.png" },
+  { title: "Bière Blonde", category: "Alcoolisée", region: "Belgique", year: 2023, photo: "biere.jpg" },
+  { title: "Bière Brune", category: "Alcoolisée", region: "Allemagne", year: 2022, photo: "biere brune.png" },
+  { title: "Bière IPA", category: "Alcoolisée", region: "USA", year: 2023, photo: "biere ipa.png" },
+  { title: "Saké", category: "Alcoolisée", region: "Japon", year: 2021, photo: "sake.png" },
+  { title: "Amaretto", category: "Alcoolisée", region: "Italie", year: 2020, photo: "amaretto.png" },
+  { title: "Baileys", category: "Alcoolisée", region: "Irlande", year: 2022, photo: "baileys.png" },
+  { title: "Cachaça", category: "Alcoolisée", region: "Brésil", year: 2021, photo: "Cachaça.png" },
+  { title: "Mezcal", category: "Alcoolisée", region: "Mexique", year: 2022, photo: "mezcal.png" },
+  { title: "Pisco", category: "Alcoolisée", region: "Pérou", year: 2020, photo: "pisco.png" },
+  { title: "Pastis", category: "Alcoolisée", region: "France", year: 2019, photo: "pastis.png" },
+  { title: "Grappa", category: "Alcoolisée", region: "Italie", year: 2018, photo: "grappa.png" },
+  { title: "Whisky Japonais", category: "Alcoolisée", region: "Japon", year: 2021, photo: "wisky jap.png" },
+  { title: "Porto", category: "Alcoolisée", region: "Portugal", year: 2020, photo: "porto.png" },
+  { title: "Sherry", category: "Alcoolisée", region: "Espagne", year: 2019, photo: "sherry.png" },
+
 
   # 20 Boissons non alcoolisées
   { title: "Eau plate", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "eau plate.png" },
@@ -235,32 +219,61 @@ end
 
 puts "✅ 80 boissons insérées avec succès !"
 
+# Création des stocks pour Aurélien
+puts "\n📦 Création des stocks pour Aurélien..."
 
 
+# 5 vins aléatoires avec des quantités variables
+wine_drinks = Drink.where(category: "Wine").sample(5)
 
-puts "\n👥 Création des Stock..."
-drinks = Drink.all
-@mail_aureo = User.find_by(email: "aurelien@example.com")
+wine_drinks.each do |drink|
+  stock = Stock.create!(
+    user: @mail_aureo,
+    drink: drink,
+    quantity: rand(1..6),
+    rating: rand(3..5)
+  )
+  puts "✅ Stock créé: #{drink.title} - Quantité: #{stock.quantity}"
+end
 
-csv_file = Rails.root.join('db', 'wines.csv')
+# Création de repas avec des meal_drinks
+puts "\n🍽️ Création des repas et meal_drinks pour Aurélien..."
 
-if File.exist?(csv_file)
-  puts "📥 Importation des vins en cours..."
-  count = 0
+meals_data = [
+  { dish_name: "Boeuf Bourguignon", date: Date.today - 7.days, with_stock: true },
+  { dish_name: "Magret de canard", date: Date.today - 3.days, with_stock: true },
+  { dish_name: "Risotto aux champignons", date: Date.today - 1.day, with_stock: false }
+]
 
-  CSV.foreach(csv_file, headers: true, encoding: 'utf-8') do |row|
+meals_data.each_with_index do |meal_data, index|
+  meal = Meal.create!(
+    user: @mail_aureo,
+    dish_name: meal_data[:dish_name],
+    date: meal_data[:date],
+    with_stock: meal_data[:with_stock]
+  )
 
-    drink = Drink.find_or_create_by!(
-      title: row['title'],
-      year: row['year'],
-      category: row['category'],
-      region: row['region'],
-      photo: row['photo']
+  # Ajouter Pierre comme invité au dernier repas
+  if index == meals_data.length - 1
+
+    Guest.create!(
+      user: @mail_pierre,
+      meal: meal
     )
-    count += 1
+    puts "👤 Pierre ajouté comme invité au repas: #{meal.dish_name}"
   end
 
-  puts "✅ #{count} vins importés avec succès !"
-else
-  puts "❌ Erreur : wines.csv introuvable dans db/"
+  # Ajouter 2-3 boissons par repas
+  selected_drinks = Drink.all.sample(rand(2..3))
+  selected_drinks.each do |drink|
+    MealDrink.create!(
+      meal: meal,
+      drink: drink,
+      status: ["suggested", "selected", "served"].sample
+    )
+  end
+
+  puts "✅ Repas créé: #{meal.dish_name} avec #{selected_drinks.count} boissons"
 end
+
+puts "\n✨ Seed complété avec succès!"

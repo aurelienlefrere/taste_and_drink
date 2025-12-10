@@ -9,6 +9,21 @@ class MealsController < ApplicationController
   def show
     @meal = Meal.find(params[:id])
     @drinks = @meal.drinks
+    @drinks_stocks = current_user.drinks
+
+    @drinks_wine = Drink.where(category: "Wine").excluding(@drinks_stocks)
+    @wines = @meal.meal_drinks.where(drink: @drinks_wine)
+
+    @my_cellar = @meal.meal_drinks.where(drink: @drinks_stocks)
+
+    @drinks_alcohol = Drink.where(category: "Alcoolisée")
+    @alcohol = @meal.meal_drinks.where(drink: @drinks_alcohol)
+
+    @drinks_no_alcohol = Drink.where(category: "Non alcoolisée")
+    @no_alcohol = @meal.meal_drinks.where(drink: @drinks_no_alcohol)
+
+    @drinks_impro = Drink.where(category: "Improbable")
+    @improbable = @meal.meal_drinks.where(drink: @drinks_impro)
   end
 
   def new
@@ -31,7 +46,7 @@ class MealsController < ApplicationController
       embedding = RubyLLM.embed(prompt)
 
       # Vin
-      @drinks_wine = Drink.where(category: "Vin").nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
+      @drinks_wine = Drink.where(category: "Wine").excluding(current_user.drinks).nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
       @drinks_wine.each do |drink|
         MealDrink.create(meal: @meal, drink: drink, status: "recommendation")
       end
@@ -48,13 +63,13 @@ class MealsController < ApplicationController
       end
 
     # Drink no-alcohol
-           @drinks_no_alcohol = Drink.where(category: "Non alcoolisée").nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
+      @drinks_no_alcohol = Drink.where(category: "Non alcoolisée").nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
       @drinks_no_alcohol.each do |drink|
         MealDrink.create(meal: @meal, drink: drink, status: "recommendation")
       end
 
        # Drink improbable
-           @drinks_impro = Drink.where(category: "Improbable").nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
+      @drinks_impro = Drink.where(category: "Improbable").nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
       @drinks_impro.each do |drink|
         MealDrink.create(meal: @meal, drink: drink, status: "recommendation")
       end
