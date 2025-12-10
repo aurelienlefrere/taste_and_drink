@@ -1,14 +1,3 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
-
 require 'csv'
 Guest.destroy_all
 MealDrink.destroy_all
@@ -114,52 +103,37 @@ friends.each do |friend|
 end
 
 
-csv_file = Rails.root.join('db', 'wines.csv')
 
-if File.exist?(csv_file)
-  puts "📥 Importation des vins en cours..."
-  count = 0
-
-  CSV.foreach(csv_file, headers: true, encoding: 'utf-8') do |row|
-    drink = Drink.find_or_create_by!(
-      title: row['title'],
-      year: row['year'],
-      category: row['category'],
-      region: row['region'],
-      photo: row['photo']
-    )
-    count += 1
-  end
-
-  puts "✅ #{count} vins importés avec succès !"
-else
-  puts "❌ Erreur : wines.csv introuvable dans db/"
-end
 
 # db/seeds.rb
-
+puts "\n Création des vins..."
+ # 30 vins
 drinks = [
+  { title: "Château Margaux, Bordeaux", category: "Wine", region: "Bordeaux", year: 2007, photo: "https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg" },
+  { title: "Château Lafite Rothschild, Pauillac", category: "Wine", region: "Bordeaux", year: 2013, photo: "https://images.pexels.com/photos/4553383/pexels-photo-4553383.jpeg" },
+  { title: "Château Mouton Rothschild, Pauillac", category: "Wine", region: "Bordeaux", year: 2011, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
+  { title: "Château Latour, Pauillac", category: "Wine", region: "Bordeaux", year: 2015, photo: "https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg" },
+  { title: "Château Haut-Brion, Pessac-Léognan", category: "Wine", region: "Bordeaux", year: 2017, photo: "https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg" },
 
-  { title: "Bordeaux Rouge", category: "Vin", region: "Bordeaux", year: 2019, photo: "Aurélien.jpeg" },
-  { title: "Bourgogne Pinot Noir", category: "Vin", region: "Bourgogne", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Côtes du Rhône", category: "Vin", region: "Vallée du Rhône", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Beaujolais", category: "Vin", region: "Beaujolais", year: 2022, photo: "Aurélien.jpeg" },
-  { title: "Chianti", category: "Vin", region: "Italie - Toscane", year: 2019, photo: "Aurélien.jpeg" },
-  { title: "Rioja", category: "Vin", region: "Espagne", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Merlot", category: "Vin", region: "France", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Cabernet Sauvignon", category: "Vin", region: "France", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Syrah", category: "Vin", region: "France", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Chardonnay", category: "Vin", region: "France", year: 2022, photo: "Aurélien.jpeg" },
-  { title: "Sauvignon Blanc", category: "Vin", region: "Loire", year: 2022, photo: "Aurélien.jpeg" },
-  { title: "Muscadet", category: "Vin", region: "Loire", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Riesling", category: "Vin", region: "Alsace", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Gewurztraminer", category: "Vin", region: "Alsace", year: 2019, photo: "Aurélien.jpeg" },
-  { title: "Rosé de Provence", category: "Vin", region: "Provence", year: 2022, photo: "Aurélien.jpeg" },
-  { title: "Champagne Brut", category: "Vin", region: "Champagne", year: 2018, photo: "Aurélien.jpeg" },
-  { title: "Vinho Verde", category: "Vin", region: "Portugal", year: 2021, photo: "Aurélien.jpeg" },
-  { title: "Lambrusco", category: "Vin", region: "Italie", year: 2022, photo: "Aurélien.jpeg" },
-  { title: "Cava", category: "Vin", region: "Espagne", year: 2020, photo: "Aurélien.jpeg" },
-  { title: "Pinot Grigio", category: "Vin", region: "Italie", year: 2021, photo: "Aurélien.jpeg" },
+  { title: "Romanée-Conti, Domaine de la Romanée-Conti", category: "Wine", region: "Burgundy", year: 2014, photo: "https://images.pexels.com/photos/4553383/pexels-photo-4553383.jpeg" },
+  { title: "La Tâche, Domaine de la Romanée-Conti", category: "Wine", region: "Burgundy", year: 2005, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
+  { title: "Richebourg, Domaine de la Romanée-Conti", category: "Wine", region: "Burgundy", year: 2014, photo: "https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg" },
+  { title: "Clos Vougeot, Grand Cru", category: "Wine", region: "Burgundy", year: 2011, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
+  { title: "Musigny, Grand Cru", category: "Wine", region: "Burgundy", year: 2014, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
+
+  { title: "Cristal, Louis Roederer", category: "Wine", region: "Champagne", year: 2007, photo: "https://images.pexels.com/photos/4553383/pexels-photo-4553383.jpeg" },
+  { title: "Dom Pérignon, Moët & Chandon", category: "Wine", region: "Champagne", year: 2007, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
+  { title: "Krug Clos d'Ambonnay", category: "Wine", region: "Champagne", year: 2013, photo: "https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg" },
+  { title: "Salon Blanc de Blancs", category: "Wine", region: "Champagne", year: 2012, photo: "https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg" },
+  { title: "Taittinger Comtes de Champagne", category: "Wine", region: "Champagne", year: 2008, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
+
+  { title: "Sassicaia, Tenuta San Guido", category: "Wine", region: "Tuscany", year: 2015, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
+  { title: "Ornellaia, Tenuta dell'Ornellaia", category: "Wine", region: "Tuscany", year: 2016, photo: "https://images.pexels.com/photos/4553383/pexels-photo-4553383.jpeg" },
+  { title: "Masseto, Tenuta dell'Ornellaia", category: "Wine", region: "Tuscany", year: 2014, photo: "https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg" },
+  { title: "Tignanello, Antinori", category: "Wine", region: "Tuscany", year: 2015, photo: "https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg" },
+  { title: "Brunello di Montalcino, Biondi-Santi", category: "Wine", region: "Tuscany", year: 2010, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
+
+
 
   # 20 Boissons alcoolisées hors vin
   { title: "Whisky", category: "Alcoolisée", region: "Écosse", year: 2018, photo: "wisky.png" },
@@ -182,6 +156,7 @@ drinks = [
   { title: "Whisky Japonais", category: "Alcoolisée", region: "Japon", year: 2021, photo: "wisky jap.png" },
   { title: "Porto", category: "Alcoolisée", region: "Portugal", year: 2020, photo: "porto.png" },
   { title: "Sherry", category: "Alcoolisée", region: "Espagne", year: 2019, photo: "sherry.png" },
+
 
   # 20 Boissons non alcoolisées
   { title: "Eau plate", category: "Non alcoolisée", region: "Mondiale", year: nil, photo: "eau plate.png" },
@@ -234,33 +209,3 @@ drinks.each do |drink|
 end
 
 puts "✅ 80 boissons insérées avec succès !"
-
-
-
-
-puts "\n👥 Création des Stock..."
-drinks = Drink.all
-@mail_aureo = User.find_by(email: "aurelien@example.com")
-
-csv_file = Rails.root.join('db', 'wines.csv')
-
-if File.exist?(csv_file)
-  puts "📥 Importation des vins en cours..."
-  count = 0
-
-  CSV.foreach(csv_file, headers: true, encoding: 'utf-8') do |row|
-
-    drink = Drink.find_or_create_by!(
-      title: row['title'],
-      year: row['year'],
-      category: row['category'],
-      region: row['region'],
-      photo: row['photo']
-    )
-    count += 1
-  end
-
-  puts "✅ #{count} vins importés avec succès !"
-else
-  puts "❌ Erreur : wines.csv introuvable dans db/"
-end
