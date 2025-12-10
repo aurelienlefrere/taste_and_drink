@@ -19,11 +19,11 @@
       </div>
     </div>
 
-    <!-- Section 2 : Ma Cave -->
+    <!-- Section 2 : Mes choix -->
     <div class="td-card td-form-section">
       <div class="td-section-header">
         <span class="td-section-number">2</span>
-        <h3 class="td-section-title">Ma Cave</h3>
+        <h3 class="td-section-title">Vos choix</h3>
         <span class="td-section-optional">Optionnel</span>
       </div>
 
@@ -31,6 +31,19 @@
         <%= check_box_tag :with_stock, "true", false %>
         <div class="td-friend-chip-content">
           <span class="td-friend-chip-name">Utiliser ma cave</span>
+        </div>
+      </label>
+
+      <!-- NOUVEAU : Champ photo -->
+      <label class="td-friend-chip" style="cursor: pointer;">
+        <%= f.file_field :photo,
+            accept: "image/*",
+            capture: "environment",
+            style: "display: none;",
+            id: "photo-input" %>
+        <div class="td-friend-chip-content">
+          <span class="td-friend-chip-icon">📷</span>
+          <span class="td-friend-chip-name" id="photo-label"></span>
         </div>
       </label>
     </div>
