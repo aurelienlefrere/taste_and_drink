@@ -17,11 +17,22 @@ users_data = [
     password: 'password123',
     first_name: 'Pierre',
     last_name: 'Gozard',
-    diet: 'Vegan',
-    allergy: 'Nuts',
-    like: 'Red wines, Bordeaux',
+    diet: 'Vegetarien',
+    allergy: '',
+    like: 'Vin rouge, Bordeaux',
     dislike: 'Champagne',
     photo: 'Pierre.jpeg'
+  },
+    {
+    email: 'chuck@example.com',
+    password: 'password123',
+    first_name: 'Chuck',
+    last_name: 'Norris',
+    diet: 'Omnivore',
+    allergy: '',
+    like: 'Chuck Norris',
+    dislike: '',
+    photo: 'chuck.png'
   },
   {
     email: 'Franck@example.com',
@@ -29,9 +40,9 @@ users_data = [
     first_name: 'Franck',
     last_name: 'Abeille',
     diet: 'Omnivore',
-    allergy: 'Shellfish',
-    like: 'White wines, Burgundy',
-    dislike: 'Sweet wines',
+    allergy: '',
+    like: 'vins rouges, wisky',
+    dislike: 'vin blanc',
     photo: 'Franck.jpeg'
   },
   {
@@ -39,10 +50,10 @@ users_data = [
     password: 'password123',
     first_name: 'Vitor',
     last_name: 'de Castro',
-    diet: 'Vegetarian',
+    diet: 'Omnivore',
     allergy: 'Gluten',
-    like: 'Rosé wines, Provence',
-    dislike: 'Dry wines',
+    like: 'bières, vins rouges',
+    dislike: 'vodka',
     photo: 'Vitor.jpeg'
   },
   {
@@ -51,9 +62,9 @@ users_data = [
     first_name: 'Tom',
     last_name: 'Grenié',
     diet: 'Omnivore',
-    allergy: 'Dairy',
-    like: 'Sparkling wines, Champagne',
-    dislike: 'Heavy wines',
+    allergy: '',
+    like: 'bières, tequila',
+    dislike: 'gin',
     photo: 'Tom.jpeg'
   },
   {
@@ -61,10 +72,10 @@ users_data = [
     password: 'password123',
     first_name: 'Bassam',
     last_name: 'Renaud',
-    diet: 'Pescatarian',
+    diet: 'Hallal',
     allergy: 'None',
-    like: 'Italian wines, Tuscan',
-    dislike: 'Bitter wines',
+    like: 'thé glaçé',
+    dislike: 'boissons alcoolisés',
     photo: 'Bassam.jpeg'
   },
   {
@@ -73,9 +84,9 @@ users_data = [
     first_name: 'Aurelien',
     last_name: 'Lefrère',
     diet: 'Omnivore',
-    allergy: 'Sulfites',
-    like: 'Spanish wines, Rioja',
-    dislike: 'Light wines',
+    allergy: '',
+    like: 'vins rouges',
+    dislike: 'vins rosés',
     photo: 'Aurélien.jpeg'
   }
 ]
@@ -97,6 +108,7 @@ end
 puts "\n👥 Création des friends..."
 friends = User.where.not(id: User.last.id)
 @mail_aureo = User.find_by(email: "aurelien@example.com")
+@mail_pierre = User.find_by(email: "pierre@example.com")
 
 friends.each do |friend|
   Friend.create!(user_main_id: @mail_aureo.id,  user_friend_id: friend.id)
@@ -109,29 +121,26 @@ end
 puts "\n Création des vins..."
  # 30 vins
 drinks = [
-  { title: "Château Margaux, Bordeaux", category: "Wine", region: "Bordeaux", year: 2007, photo: "https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg" },
-  { title: "Château Lafite Rothschild, Pauillac", category: "Wine", region: "Bordeaux", year: 2013, photo: "https://images.pexels.com/photos/4553383/pexels-photo-4553383.jpeg" },
-  { title: "Château Mouton Rothschild, Pauillac", category: "Wine", region: "Bordeaux", year: 2011, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
-  { title: "Château Latour, Pauillac", category: "Wine", region: "Bordeaux", year: 2015, photo: "https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg" },
-  { title: "Château Haut-Brion, Pessac-Léognan", category: "Wine", region: "Bordeaux", year: 2017, photo: "https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg" },
-
-  { title: "Romanée-Conti, Domaine de la Romanée-Conti", category: "Wine", region: "Burgundy", year: 2014, photo: "https://images.pexels.com/photos/4553383/pexels-photo-4553383.jpeg" },
-  { title: "La Tâche, Domaine de la Romanée-Conti", category: "Wine", region: "Burgundy", year: 2005, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
-  { title: "Richebourg, Domaine de la Romanée-Conti", category: "Wine", region: "Burgundy", year: 2014, photo: "https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg" },
-  { title: "Clos Vougeot, Grand Cru", category: "Wine", region: "Burgundy", year: 2011, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
-  { title: "Musigny, Grand Cru", category: "Wine", region: "Burgundy", year: 2014, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
-
-  { title: "Cristal, Louis Roederer", category: "Wine", region: "Champagne", year: 2007, photo: "https://images.pexels.com/photos/4553383/pexels-photo-4553383.jpeg" },
-  { title: "Dom Pérignon, Moët & Chandon", category: "Wine", region: "Champagne", year: 2007, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
-  { title: "Krug Clos d'Ambonnay", category: "Wine", region: "Champagne", year: 2013, photo: "https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg" },
-  { title: "Salon Blanc de Blancs", category: "Wine", region: "Champagne", year: 2012, photo: "https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg" },
-  { title: "Taittinger Comtes de Champagne", category: "Wine", region: "Champagne", year: 2008, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
-
-  { title: "Sassicaia, Tenuta San Guido", category: "Wine", region: "Tuscany", year: 2015, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
-  { title: "Ornellaia, Tenuta dell'Ornellaia", category: "Wine", region: "Tuscany", year: 2016, photo: "https://images.pexels.com/photos/4553383/pexels-photo-4553383.jpeg" },
-  { title: "Masseto, Tenuta dell'Ornellaia", category: "Wine", region: "Tuscany", year: 2014, photo: "https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg" },
-  { title: "Tignanello, Antinori", category: "Wine", region: "Tuscany", year: 2015, photo: "https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg" },
-  { title: "Brunello di Montalcino, Biondi-Santi", category: "Wine", region: "Tuscany", year: 2010, photo: "https://images.pexels.com/photos/3407881/pexels-photo-3407881.jpeg" },
+  { title: "Château Margaux, Bordeaux", category: "Wine", region: "Bordeaux", year: 2007, photo: "margaux.png" },
+  { title: "Château Lafite Rothschild, Pauillac", category: "Wine", region: "Bordeaux", year: 2013, photo: "rothschild.png" },
+  { title: "Château Mouton Rothschild, Pauillac", category: "Wine", region: "Bordeaux", year: 2011, photo: "rothschild.png" },
+  { title: "Château Latour, Pauillac", category: "Wine", region: "Bordeaux", year: 2015, photo: "latour.png" },
+  { title: "Château Haut-Brion, Pessac-Léognan", category: "Wine", region: "Bordeaux", year: 2017, photo: "hautbrion.png" },
+  { title: "Romanée-Conti, Domaine de la Romanée-Conti", category: "Wine", region: "Burgundy", year: 2014, photo: "romane.png" },
+  { title: "La Tâche, Domaine de la Romanée-Conti", category: "Wine", region: "Burgundy", year: 2005, photo: "romane.png" },
+  { title: "Richebourg, Domaine de la Romanée-Conti", category: "Wine", region: "Burgundy", year: 2014, photo: "richebourg.png" },
+  { title: "Clos Vougeot, Grand Cru", category: "Wine", region: "Burgundy", year: 2011, photo: "vougeot.png" },
+  { title: "Musigny, Grand Cru", category: "Wine", region: "Burgundy", year: 2014, photo: "musigny.png" },
+  { title: "Cristal, Louis Roederer", category: "Wine", region: "Champagne", year: 2007, photo: "cristal.png" },
+  { title: "Dom Pérignon, Moët & Chandon", category: "Wine", region: "Champagne", year: 2007, photo: "dom.png" },
+  { title: "Krug Clos d'Ambonnay", category: "Wine", region: "Champagne", year: 2013, photo: "krug.png" },
+  { title: "Salon Blanc de Blancs", category: "Wine", region: "Champagne", year: 2012, photo: "salon.png" },
+  { title: "Taittinger Comtes de Champagne", category: "Wine", region: "Champagne", year: 2008, photo: "tai.png" },
+  { title: "Sassicaia, Tenuta San Guido", category: "Wine", region: "Tuscany", year: 2015, photo: "sassicaia.png" },
+  { title: "Ornellaia, Tenuta dell'Ornellaia", category: "Wine", region: "Tuscany", year: 2016, photo: "ornellaia.png" },
+  { title: "Masseto, Tenuta dell'Ornellaia", category: "Wine", region: "Tuscany", year: 2014, photo: "masseto.png" },
+  { title: "Tignanello, Antinori", category: "Wine", region: "Tuscany", year: 2015, photo: "tignanello.png" },
+  { title: "Brunello di Montalcino, Biondi-Santi", category: "Wine", region: "Tuscany", year: 2010, photo: "brunello.png" },
 
 
 
@@ -209,3 +218,62 @@ drinks.each do |drink|
 end
 
 puts "✅ 80 boissons insérées avec succès !"
+
+# Création des stocks pour Aurélien
+puts "\n📦 Création des stocks pour Aurélien..."
+
+
+# 5 vins aléatoires avec des quantités variables
+wine_drinks = Drink.where(category: "Wine").sample(5)
+
+wine_drinks.each do |drink|
+  stock = Stock.create!(
+    user: @mail_aureo,
+    drink: drink,
+    quantity: rand(1..6),
+    rating: rand(3..5)
+  )
+  puts "✅ Stock créé: #{drink.title} - Quantité: #{stock.quantity}"
+end
+
+# Création de repas avec des meal_drinks
+puts "\n🍽️ Création des repas et meal_drinks pour Aurélien..."
+
+meals_data = [
+  { dish_name: "Boeuf Bourguignon", date: Date.today - 7.days, with_stock: true },
+  { dish_name: "Magret de canard", date: Date.today - 3.days, with_stock: true },
+  { dish_name: "Risotto aux champignons", date: Date.today - 1.day, with_stock: false }
+]
+
+meals_data.each_with_index do |meal_data, index|
+  meal = Meal.create!(
+    user: @mail_aureo,
+    dish_name: meal_data[:dish_name],
+    date: meal_data[:date],
+    with_stock: meal_data[:with_stock]
+  )
+
+  # Ajouter Pierre comme invité au dernier repas
+  if index == meals_data.length - 1
+
+    Guest.create!(
+      user: @mail_pierre,
+      meal: meal
+    )
+    puts "👤 Pierre ajouté comme invité au repas: #{meal.dish_name}"
+  end
+
+  # Ajouter 2-3 boissons par repas
+  selected_drinks = Drink.all.sample(rand(2..3))
+  selected_drinks.each do |drink|
+    MealDrink.create!(
+      meal: meal,
+      drink: drink,
+      status: ["suggested", "selected", "served"].sample
+    )
+  end
+
+  puts "✅ Repas créé: #{meal.dish_name} avec #{selected_drinks.count} boissons"
+end
+
+puts "\n✨ Seed complété avec succès!"
