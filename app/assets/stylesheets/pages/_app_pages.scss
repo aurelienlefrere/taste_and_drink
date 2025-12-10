@@ -10,7 +10,7 @@
 }
 
 .td-page-title {
-  font-family: 'Playfair Display', serif;
+  font-family: $font-didot;  // ✨ DIDOT pour tous les titres
   font-size: 28px;
   font-weight: 700;
   color: $gold;
@@ -705,4 +705,10 @@
   .btn {
     flex: 1;
   }
+}
+
+// === Bouton avec police Montserrat ===
+.btn-montserrat {
+  font-family: $font-montserrat;
+  font-weight: 600;
 }
