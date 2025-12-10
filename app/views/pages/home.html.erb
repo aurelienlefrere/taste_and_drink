@@ -46,7 +46,7 @@
 
       <%# Le data-controller connecte au Stimulus controller %>
       <div class="td-swiper">
-        <div class="td-swiper-track">
+        <div class="td-swiper-track pt-2">
           <% rated_wines = current_user.stocks.includes(:drink).where.not(rating: nil).order(rating: :desc).limit(10) %>
           <% if rated_wines.any? %>
             <% rated_wines.each do |stock| %>

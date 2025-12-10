@@ -18,7 +18,7 @@
 }
 
 .td-page-title {
-  font-family: 'Playfair Display', serif; // Police élégante
+  font-family: $font-didot; // ✨ DIDOT
   font-size: 28px;
   color: $text-primary; // Blanc
   margin: 0;
@@ -339,7 +339,7 @@
 
 .td-event-dish-main {
   flex: 1; // Prend tout l'espace disponible
-  
+
   h3 {
     margin: 0;
     font-size: 17px;
@@ -363,19 +363,19 @@
   align-items: center;
   justify-content: center;
   background: $lie-de-vin;
-  
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  
+
   span {
     font-size: 13px;
     font-weight: 600;
     color: $text-primary;
   }
-  
+
   &.td-avatar-more {
     background: rgba($gold, 0.2);
     font-size: 11px;
