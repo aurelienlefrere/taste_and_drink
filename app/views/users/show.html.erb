@@ -1,58 +1,114 @@
+<%# ============================================ %>
+<%# 🍷 TASTE & DRINK - PROFIL D'UN AMI %>
+<%# Design cohérent avec le reste de l'app %>
+<%# ============================================ %>
+
 <div class="container">
-  <h1 class="mb-4">Mon profil</h1>
-  <!-- Profil principal avec row Bootstrap -->
-  <div class="row align-items-start mb-5">
-    <div class="col-auto">
-      <%= image_tag(@user.photo,
-          alt: 'PP',
-          class: "rounded-circle",
-          style: "width: 120px; height: 120px; object-fit: cover;") %>
-    </div>
-<div class="col ">
-      <div class="mb-3">
-        <small class="text-muted">Nom</small>
-        <div><%= @user.last_name %></div>
-      </div>
-      <div class="mb-3">
-        <small class="text-muted">Prénom</small>
-        <div><%= @user.first_name %></div>
-      </div>
-      <div class="mb-3">
-        <small class="text-muted">Allergy</small>
-        <div><%= @user.allergy %></div>
-      </div>
-      <div class="mb-3">
-        <small class="text-muted">Diet</small>
-        <div><%= @user.diet %></div>
-      </div>
-      <div class="mb-3">
-        <small class="text-muted">Like</small>
-        <div><%= @user.like %></div>
-      </div>
-      <div class="mb-3">
-        <small class="text-muted">Dislike</small>
-        <div><%= @user.dislike %></div>
-      </div>
-    </div>
+  <%# === EN-TÊTE DE PAGE === %>
+  <div class="td-page-header">
+    <h1 class="td-page-title"><%= @user.first_name %> <%= @user.last_name %></h1>
   </div>
 
-  <!-- Section Friends avec scroll horizontal -->
-  <h1 class="mb-4">Friends:</h1>
-<div class="d-flex overflow-auto pb-3" style="gap: 1rem;">
-  <% @friends.each do |friend| %>
-    <div class="card-product flex-shrink-0" style="min-width: 100px;">
-      <div class="d-flex flex-column p-2">
-        <div class="mb-2">
+  <%# === CARD PRINCIPALE === %>
+  <div class="td-profile-main-card">
+    <%# Avatar et nom %>
+    <div class="td-profile-header">
+      <div class="td-profile-avatar-large">
+        <% if @user.photo.present? %>
+          <%= image_tag(@user.photo, alt: @user.first_name) %>
+        <% else %>
+          <span class="td-avatar-initials-large">
+            <%= @user.first_name&.first %><%= @user.last_name&.first %>
+          </span>
+        <% end %>
+      </div>
+    </div>
 
-          <%= link_to(image_tag(friend.photo,
-              alt: 'Image Description',
-              style: "width: 80px; height: 80px; object-fit: cover; border-radius: 8px;"),
-              user_path(friend)) %>
+    <%# === PROFIL ALIMENTAIRE === %>
+    <div class="td-profile-section">
+      <div class="td-section-divider"></div>
+
+      <div class="td-profile-badges">
+        <% if @user.diet.present? %>
+          <span class="td-profile-badge td-badge-diet">
+            <i class="fas fa-leaf"></i>
+            <%= @user.diet %>
+          </span>
+        <% end %>
+
+        <% if @user.allergy.present? %>
+          <span class="td-profile-badge td-badge-allergy">
+            <i class="fas fa-exclamation-triangle"></i>
+            <%= @user.allergy %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+
+    <%# === PRÉFÉRENCES VINICOLES === %>
+    <% if @user.like.present? || @user.dislike.present? %>
+      <div class="td-profile-section">
+        <div class="td-section-divider"></div>
+
+        <div class="td-profile-preferences">
+          <% if @user.like.present? %>
+            <div class="td-preference-row">
+              <i class="fas fa-heart text-success"></i>
+              <span class="td-preference-text">
+                <strong>Aime :</strong> <%= @user.like %>
+              </span>
+            </div>
+          <% end %>
+
+          <% if @user.dislike.present? %>
+            <div class="td-preference-row">
+              <i class="fas fa-heart-broken text-danger"></i>
+              <span class="td-preference-text">
+                <strong>N'aime pas :</strong> <%= @user.dislike %>
+              </span>
+            </div>
+          <% end %>
         </div>
-        <div class="card-product-infos">
-          <h2 class="mb-0"><%= friend.first_name %> </h2>
-        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%# === AMIS EN COMMUN === %>
+  <% if @friends.any? %>
+    <div class="td-profile-friends-section">
+      <h2 class="td-section-title-small">Amis en commun (<%= @friends.count %>)</h2>
+
+      <div class="td-profile-friends-grid">
+        <% @friends.each do |friend| %>
+          <%= link_to user_path(friend), class: "td-profile-friend-item" do %>
+            <div class="td-profile-friend-avatar">
+              <% if friend.photo.present? %>
+                <%= image_tag(friend.photo, alt: friend.first_name) %>
+              <% else %>
+                <span class="td-avatar-initials-small">
+                  <%= friend.first_name&.first %><%= friend.last_name&.first %>
+                </span>
+              <% end %>
+            </div>
+            <span class="td-profile-friend-name"><%= friend.first_name %></span>
+          <% end %>
+        <% end %>
       </div>
     </div>
   <% end %>
+
+  <%# === ACTIONS === %>
+  <div class="td-profile-actions">
+    <% if current_user == @user %>
+      <%= link_to edit_user_registration_path, class: "btn btn-gold btn-montserrat" do %>
+        <i class="fas fa-edit"></i>
+        Éditer mon profil
+      <% end %>
+    <% else %>
+      <button class="btn btn-gold btn-montserrat">
+        <i class="fas fa-envelope"></i>
+        Envoyer un message
+      </button>
+    <% end %>
+  </div>
 </div>
