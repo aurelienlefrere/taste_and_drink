@@ -69,13 +69,13 @@ class MealsController < ApplicationController
         MealDrink.create(meal: @meal, drink: drink, status: "recommendation")
       end
 
-    # Drink no-alcohol
+      # Drink no-alcohol
       @drinks_no_alcohol = Drink.where(category: "Non alcoolisée").nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
       @drinks_no_alcohol.each do |drink|
         MealDrink.create(meal: @meal, drink: drink, status: "recommendation")
       end
 
-       # Drink improbable
+      # Drink improbable
       @drinks_impro = Drink.where(category: "Improbable").nearest_neighbors(:embedding, embedding.vectors, distance: "euclidean").first(3)
       @drinks_impro.each do |drink|
         MealDrink.create(meal: @meal, drink: drink, status: "recommendation")
