@@ -41,7 +41,7 @@ users_data = [
     last_name: 'Abeille',
     diet: 'Omnivore',
     allergy: 'cacahuète',
-    like: 'vins rouges, wisky',
+    like: 'vins rouges, whisky',
     dislike: 'vin blanc',
     photo: 'Franck.jpeg'
   },
