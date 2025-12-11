@@ -101,8 +101,8 @@ class MealsController < ApplicationController
     end
 
     # Changer le status de "recommendation" à "validated"
-    meal_drink_ids.each do |meal_drink_id|
-      meal_drink = @meal.meal_drinks.find(meal_drink_id)
+    meal_drink_ids.each do |drink_id|
+      meal_drink = @meal.meal_drinks.find_by(drink_id: drink_id)
       meal_drink.update(status: "validated")
     end
 
