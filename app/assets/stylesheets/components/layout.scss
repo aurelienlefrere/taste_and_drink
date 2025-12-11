@@ -296,11 +296,11 @@ a {
 
 // Homepage - Cards vins notés
 .td-wine-card {
-  border: 2px solid $gold !important;
+  border: 2px solid $gold;
   box-shadow: 0 0 15px rgba($gold, 0.2);
 
   &:hover {
-    border-color: $gold-light !important;
+    border-color: $gold-light;
     box-shadow: 0 0 20px rgba($gold, 0.3);
   }
 
@@ -337,6 +337,11 @@ a {
 
   &:hover {
     border-color: $gold-light !important;
+    box-shadow: 0 0 20px rgba($gold, 0.3);
+  }
+
+  &:active {
+    border-color: black !important;
     box-shadow: 0 0 20px rgba($gold, 0.3);
   }
 }

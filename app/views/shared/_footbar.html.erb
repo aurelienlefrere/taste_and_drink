@@ -25,15 +25,9 @@
     <%# === 3. MATCH (Centre - Bouton principal) === %>
     <%= link_to new_meal_path, class: "td-footbar-item td-footbar-match #{'active' if controller_name == 'meals' && action_name == 'new'}" do %>
       <div class="td-footbar-icon-match">
-        <%# ✨ Icônes supprimées - Le bouton est maintenant parfaitement ROND %>
-        <%# Pour rajouter une icône : <i class="fas fa-votre-icone"></i> %>
-        <%# Exemples d'icônes sympas : %>
-        <%# <i class="fas fa-sparkles"></i> (étoiles brillantes) %>
-        <%# <i class="fas fa-magic"></i> (baguette magique) %>
-        <%# <i class="fas fa-heart"></i> (coeur) %>
-        <%# <i class="fas fa-star"></i> (étoile) %>
+        <!-- Le texte apparaît maintenant DANS le bouton -->
+        <span class="td-footbar-label-inside">MATCH</span>
       </div>
-      <span class="td-footbar-label">Match</span>
     <% end %>
 
     <%# === 4. MA CAVE (Stock de vins) === %>
