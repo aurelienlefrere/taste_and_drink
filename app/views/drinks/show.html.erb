@@ -8,7 +8,7 @@
                 <%= image_tag(@drink.photo, class: "w-100", alt: "#{@drink.title}") %>
               </div>
               <div class="my-3">
-                <h2><%= @drink.title %></h2>
+                <h2><%= @drink.title.capitalize %></h2>
                 <div class="$text-secondary pt-2" >
                   <p><%= @drink.category %></p>
                   <p><%= @drink.region %></p>

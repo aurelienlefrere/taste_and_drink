@@ -265,6 +265,31 @@
 }
 
 // ============================================
+// 🚀 ANIMATION BOUTON MATCH FOOTBAR (NOUVEAU)
+// ============================================
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+// Bouton Match actif (quand le plat est rempli)
+.td-footbar-active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4) !important;
+  transition: all 0.3s ease;
+
+  i {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+}
+
+// ============================================
 // === PAGE RÉSULTAT ===
 // ============================================
 .td-result-page {

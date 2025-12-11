@@ -1,87 +1,95 @@
 <%# === EN-TÊTE DE PAGE === %>
-  <div class="td-page-header">
-    <h1 class="td-page-title">Trouver l'accord parfait</h1>
+<div class="td-page-header">
+  <h1 class="td-page-title">Trouver l'accord parfait</h1>
+</div>
+
+<%= simple_form_for @meal,
+    html: {
+      class: "td-match-form",
+      id: "meal-form",
+      data: { controller: "meal-form" }
+    } do |f| %>
+
+  <!-- Section 1 : Le Plat -->
+  <div class="td-card td-form-section">
+    <div class="td-section-header">
+      <span class="td-section-number">1</span>
+      <h3 class="td-section-title">Votre plat</h3>
+    </div>
+    <div class="td-form-group">
+      <%= f.input :dish_name,
+          label: false,
+          placeholder: "Ex: Boeuf Bourguignon, Sushi, Pizza...",
+          input_html: {
+            class: "form-control td-input-large",
+            data: {
+              meal_form_target: "dishInput",
+              action: "input->meal-form#updateMatchButton"
+            }
+          } %>
+    </div>
   </div>
 
-  <%= simple_form_for @meal, html: { class: "td-match-form" } do |f| %>
-
-    <!-- Section 1 : Le Plat -->
-    <div class="td-card td-form-section">
-      <div class="td-section-header">
-        <span class="td-section-number">1</span>
-        <h3 class="td-section-title">Votre plat</h3>
-      </div>
-      <div class="td-form-group">
-        <%= f.input :dish_name,
-            label: false,
-            placeholder: "Ex: Boeuf Bourguignon, Sushi, Pizza...",
-            input_html: { class: "form-control td-input-large" } %>
-      </div>
+  <!-- Section 2 : Mes choix -->
+  <div class="td-card td-form-section">
+    <div class="td-section-header">
+      <span class="td-section-number">2</span>
+      <h3 class="td-section-title">Vos choix</h3>
+      <span class="td-section-optional">Optionnel</span>
     </div>
 
-    <!-- Section 2 : Mes choix -->
-    <div class="td-card td-form-section">
-      <div class="td-section-header">
-        <span class="td-section-number">2</span>
-        <h3 class="td-section-title">Vos choix</h3>
-        <span class="td-section-optional">Optionnel</span>
+    <label class="td-friend-chip">
+      <%= check_box_tag :with_stock, "true", false %>
+      <div class="td-friend-chip-content">
+        <span class="td-friend-chip-name">Utiliser ma cave</span>
       </div>
+    </label>
 
-      <label class="td-friend-chip">
-        <%= check_box_tag :with_stock, "true", false %>
-        <div class="td-friend-chip-content">
-          <span class="td-friend-chip-name">Utiliser ma cave</span>
-        </div>
-      </label>
-
-      <!-- NOUVEAU : Champ photo -->
-      <label class="td-friend-chip" style="cursor: pointer;">
-        <%= f.file_field :photo,
-            accept: "image/*",
-            capture: "environment",
-            style: "display: none;",
-            id: "photo-input" %>
-        <div class="td-friend-chip-content">
-          <span class="td-friend-chip-icon">📷</span>
-          <span class="td-friend-chip-name" id="photo-label"></span>
-        </div>
-      </label>
-    </div>
-
-    <!-- Section 3 : Les Invités -->
-    <div class="td-card td-form-section">
-      <div class="td-section-header">
-        <span class="td-section-number">3</span>
-        <h3 class="td-section-title">Vos invités</h3>
-        <span class="td-section-optional">Optionnel</span>
+    <!-- Champ photo -->
+    <label class="td-friend-chip" style="cursor: pointer;">
+      <%= f.file_field :photo,
+          accept: "image/*",
+          capture: "environment",
+          style: "display: none;",
+          data: { meal_form_target: "photoInput" } %>
+      <div class="td-friend-chip-content">
+        <span class="td-friend-chip-icon">📷</span>
+        <span class="td-friend-chip-name" data-meal-form-target="photoLabel">Prendre une photo du repas</span>
       </div>
+    </label>
+  </div>
 
-      <% if @friends.any? %>
-        <div class="td-friends-select">
-          <% @friends.each do |friend| %>
-            <label class="td-friend-chip">
-              <%= check_box_tag "meal[guest_ids][]", friend.id, false %>
-              <div class="td-friend-chip-content">
-                <span class="td-friend-chip-avatar">
-                  <%= friend.first_name&.first&.upcase || "?" %>
-                </span>
-                <span class="td-friend-chip-name"><%= friend.first_name %></span>
-              </div>
-            </label>
-          <% end %>
-        </div>
-      <% else %>
-        <div class="td-empty-mini">
-          <i class="fas fa-user-friends"></i>
-          <p>Aucun ami ajouté</p>
-        </div>
-      <% end %>
+  <!-- Section 3 : Les Invités -->
+  <div class="td-card td-form-section">
+    <div class="td-section-header">
+      <span class="td-section-number">3</span>
+      <h3 class="td-section-title">Vos invités</h3>
+      <span class="td-section-optional">Optionnel</span>
     </div>
 
-    <!-- Bouton Submit -->
-    <div class="td-match-submit">
-      <%= f.submit "Trouver l'accord parfait", class: "btn btn-gold td-btn-match" %>
-    </div>
+    <% if @friends.any? %>
+      <div class="td-friends-select">
+        <% @friends.each do |friend| %>
+          <label class="td-friend-chip">
+            <%= check_box_tag "meal[guest_ids][]", friend.id, false %>
+            <div class="td-friend-chip-content">
+              <span class="td-friend-chip-avatar">
+                <%= friend.first_name&.first&.upcase || "?" %>
+              </span>
+              <span class="td-friend-chip-name"><%= friend.first_name %></span>
+            </div>
+          </label>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="td-empty-mini">
+        <i class="fas fa-user-friends"></i>
+        <p>Aucun ami ajouté</p>
+      </div>
+    <% end %>
+  </div>
 
-  <% end %>
-</div>
+  <%# Bouton submit caché %>
+  <%= f.submit "Trouver l'accord parfait", style: "display: none;", data: { meal_form_target: "submitBtn" } %>
+
+<% end %>
