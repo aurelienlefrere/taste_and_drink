@@ -36,7 +36,7 @@
   height: 100%;
   padding: 8px 4px;
   text-decoration: none;
-  color: #403e3b;
+  color: rgba(201, 169, 98, 0.6);
   font-size: 10px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -47,7 +47,7 @@
   }
 
   &.active {
-    color: #403e3b;
+    color: #D4BC7B;
     size: 10px;
     font-size: 10px;
 
