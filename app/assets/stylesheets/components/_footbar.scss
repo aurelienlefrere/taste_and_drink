@@ -36,24 +36,22 @@
   height: 100%;
   padding: 8px 4px;
   text-decoration: none;
-  color: rgba(201, 169, 98, 0.6);  // Doré désaturé par défaut
+  color: rgba(201, 169, 98, 0.6);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 
   &:hover {
-    color: #C9A962;  // Doré vif
+    color: #C9A962;
     transform: translateY(-2px);
   }
 
-  // État actif
   &.active {
-    color: #D4BC7B;  // Doré clair
+    color: #D4BC7B;
 
     .td-footbar-icon {
       transform: translateY(-2px) scale(1.1);
     }
 
-    // Indicateur en haut
     &::before {
       content: '';
       position: absolute;
@@ -87,76 +85,72 @@
 }
 
 // ============================================
-// ✨ BOUTON MATCH CENTRAL (DORÉ BRILLANT AU HOVER)
+// ✨ BOUTON MATCH CENTRAL (DORÉ BRILLANT)
 // ============================================
 .td-footbar-match {
   position: relative;
   top: -20px;
 
-   .td-footbar-icon-match {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;   // ✨ Réduit de 64px à 60px
-  height: 60px;  // ✨ DOIT être identique au width
-  min-width: 60px;   // ✨ Force la largeur
-  min-height: 60px;  // ✨ Force la hauteur
-  // Gradient doré brillant
-  background: linear-gradient(135deg, #C9A962 0%, #D4BC7B 50%, #F4D03F 100%);
-  border: 1px solid #121212;  // ✨ Réduit de 4px à 1px (liseré fin)
-  border-radius: 50%;
-  margin-bottom: 4px;
-  // Ombre dorée de base (MOINS prononcée)
-  box-shadow:
-    0 4px 12px rgba(201, 169, 98, 0.4),
-    0 0 20px rgba(212, 188, 123, 0.2),
-    inset 0 2px 4px rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-
-  // Reflet en haut
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 10%;
-    right: 10%;
-    height: 40%;
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.4),
-      rgba(255, 255, 255, 0)
-    );
+  .td-footbar-icon-match {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    background: linear-gradient(135deg, #C9A962 0%, #D4BC7B 50%, #F4D03F 100%);
+    border: 1px solid #121212;
     border-radius: 50%;
-  }
-
-  // Effet de brillance AU HOVER SEULEMENT
-  &::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-      45deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.4) 50%,
-      transparent 70%
-    );
-    opacity: 0;
-    transform: translateX(-100%) translateY(-100%) rotate(45deg);
-    transition: opacity 0.3s ease, transform 0.6s ease;
-  }
-
-  i {
-    font-size: 18px;
-    color: #1a1a1a;
+    margin-bottom: 4px;
+    box-shadow:
+      0 4px 12px rgba(201, 169, 98, 0.4),
+      0 0 20px rgba(212, 188, 123, 0.2),
+      inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
     position: relative;
-    z-index: 1;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 40%;
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.4),
+        rgba(255, 255, 255, 0)
+      );
+      border-radius: 50%;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 70%
+      );
+      opacity: 0;
+      transform: translateX(-100%) translateY(-100%) rotate(45deg);
+      transition: opacity 0.3s ease, transform 0.6s ease;
+    }
+
+    i {
+      font-size: 18px;
+      color: #1a1a1a;
+      position: relative;
+      z-index: 1;
+    }
   }
-}
 
   &:hover .td-footbar-icon-match {
     transform: scale(1.1) rotate(90deg);
@@ -165,7 +159,6 @@
       0 0 50px rgba(212, 188, 123, 0.6),
       inset 0 2px 4px rgba(255, 255, 255, 0.4);
 
-    // ✨ Activer la brillance au hover
     &::after {
       opacity: 1;
       transform: translateX(100%) translateY(100%) rotate(45deg);
@@ -182,4 +175,50 @@
     text-shadow: 0 0 10px rgba(212, 188, 123, 0.5);
   }
 }
-// Animations supprimées car le bouton ne brille que au hover
+
+// ============================================
+// 🚀 ÉTATS DYNAMIQUES DU BOUTON MATCH
+// ============================================
+
+// Animations
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes checkPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+// MODE CRÉATION MEAL : Bouton actif violet (quand le plat est rempli)
+.td-footbar-active {
+  .td-footbar-icon-match {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4) !important;
+  }
+
+  i {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+}
+
+// MODE VALIDATION DRINKS : Bouton actif vert (quand des drinks sont sélectionnées)
+.td-footbar-validate {
+  .td-footbar-icon-match {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4) !important;
+  }
+
+  i {
+    animation: checkPulse 1.5s ease-in-out infinite;
+  }
+}
