@@ -1058,11 +1058,11 @@
 
 // MODE CRÉATION MEAL : Bouton actif violet (quand le plat est rempli)
 .td-footbar-active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  background: linear-gradient(135deg, #722F37 0%, #863f47 100%);
   transform: scale(1.1);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4) !important;
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4) !important;
 
+  transition: all 0.3s ease;
   i {
     animation: pulse 1.5s ease-in-out infinite;
   }
@@ -1070,7 +1070,7 @@
 
 // MODE VALIDATION DRINKS : Bouton actif vert (quand des drinks sont sélectionnées)
 .td-footbar-validate {
-  background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+  background: linear-gradient(135deg, #A8893F 0%, #D4BC7B 100%) !important;
   transform: scale(1.1);
   box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4) !important;
   transition: all 0.3s ease;

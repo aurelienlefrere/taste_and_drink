@@ -49,7 +49,7 @@ export default class extends Controller {
 
     // Effet visuel : BORDURE BLEUE élégante quand sélectionné
     if (checkbox.checked) {
-      card.style.borderColor = '#667eea'
+      card.style.borderColor = '#5D2A32'
       card.style.borderWidth = '3px'
       card.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)'
     } else {

@@ -270,25 +270,25 @@
 // ============================================
 // === WINE CARDS (Vins notés) ===
 // ============================================
-.td-wine-card {
-  flex: 0 0 130px;      // Largeur fixe, ne rétrécit pas
-  background: $dark-bg-card;
-  border-radius: 14px;
-  padding: 12px;
-  text-decoration: none;
-  border: 1px solid rgba($gold, 0.1);
-  transition: all 0.3s ease;
+// .td-wine-card {
+//   flex: 0 0 130px;      // Largeur fixe, ne rétrécit pas
+//   background: $dark-bg-card;
+//   border-radius: 14px;
+//   padding: 12px;
+//   text-decoration: none;
+//   border: 1px solid rgba($gold, 0.1);
+//   transition: all 0.3s ease;
 
-  &:hover {
-    border-color: rgba($gold, 0.3);
-    transform: translateY(-2px);
-  }
+//   &:hover {
+//     border-color: rgba($gold, 0.3);
+//     transform: translateY(-2px);
+//   }
 
-  &.td-card-empty {
-    opacity: 0.5;
-    border-style: dashed;
-  }
-}
+//   &.td-card-empty {
+//     opacity: 0.5;
+//     border-style: dashed;
+//   }
+// }
 
 .td-wine-card-image {
   width: 100%;
