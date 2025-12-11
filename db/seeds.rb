@@ -114,6 +114,24 @@ friends.each do |friend|
   Friend.create!(user_main_id: @mail_aureo.id,  user_friend_id: friend.id)
 end
 
+puts "\n👥 Création des friends aléatoires entre les autres users (sauf Aurélien)..."
+other_users = User.where.not(email: "Aurelien@example.com")
+
+other_users.each do |user|
+  # Chaque user a entre 2 et 4 amis aléatoires (sauf lui-même et sauf Aurélien)
+  potential_friends = other_users.where.not(id: user.id)
+  random_friends = potential_friends.sample(rand(2..4))
+
+  random_friends.each do |friend|
+    # Vérifier que la relation n'existe pas déjà dans les deux sens
+    unless Friend.exists?(user_main_id: user.id, user_friend_id: friend.id) ||
+           Friend.exists?(user_main_id: friend.id, user_friend_id: user.id)
+      Friend.create!(user_main_id: user.id, user_friend_id: friend.id)
+      puts "✅ #{user.first_name} est ami avec #{friend.first_name}"
+    end
+  end
+end
+
 
 
 
@@ -275,5 +293,81 @@ meals_data.each_with_index do |meal_data, index|
 
   puts "✅ Repas créé: #{meal.dish_name} avec #{selected_drinks.count} boissons"
 end
+# Création de plusieurs repas avec des meal_drinks
+puts "\n🍽️ Création des événements (meals) avec boissons sélectionnées..."
+
+meals_data = [
+  {
+    dish_name: "Boeuf Bourguignon",
+    date: Date.new(2025, 10, 15),
+    with_stock: true,
+    nb_drinks: 2
+  },
+  {
+    dish_name: "Magret de canard",
+    date: Date.new(2025, 11, 3),
+    with_stock: true,
+    nb_drinks: 3
+  },
+  {
+    dish_name: "Risotto aux champignons",
+    date: Date.new(2025, 11, 20),
+    with_stock: false,
+    nb_drinks: 1
+  },
+  {
+    dish_name: "pâtes au pesto vert",
+    date: Date.new(2025, 12, 5),
+    with_stock: true,
+    nb_drinks: 1,
+    add_guest: true
+  }
+]
+
+meals_data.each do |meal_data|
+  meal = Meal.create!(
+    user: @mail_aureo,
+    dish_name: meal_data[:dish_name],
+    date: meal_data[:date],
+    with_stock: meal_data[:with_stock]
+  )
+
+  # Ajouter Pierre comme invité au dernier repas (pâtes au pesto vert)
+  if meal_data[:add_guest]
+    Guest.create!(
+      user: @mail_pierre,
+      meal: meal
+    )
+    puts "👤 Pierre ajouté comme invité au repas: #{meal.dish_name}"
+  end
+
+  # Ajouter les boissons sélectionnées
+  nb_drinks = meal_data[:nb_drinks]
+
+  if meal_data[:add_guest]
+    # Pour le dernier repas, sélectionner 1 vin aléatoire
+    selected_wine = Drink.where(category: "Wine").sample(1)
+    selected_wine.each do |drink|
+      MealDrink.create!(
+        meal: meal,
+        drink: drink,
+        status: "validated"
+      )
+    end
+    puts "✅ Repas créé: #{meal.dish_name} avec #{selected_wine.count} vin sélectionné"
+  else
+    # Pour les autres repas, sélectionner 1-3 boissons aléatoires
+    selected_drinks = Drink.all.sample(nb_drinks)
+    selected_drinks.each do |drink|
+      MealDrink.create!(
+        meal: meal,
+        drink: drink,
+        status: "validated"
+      )
+    end
+    puts "✅ Repas créé: #{meal.dish_name} avec #{selected_drinks.count} boissons sélectionnées"
+  end
+end
+
 
 puts "\n✨ Seed complété avec succès!"
