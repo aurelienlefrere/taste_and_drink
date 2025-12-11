@@ -110,6 +110,20 @@ class MealsController < ApplicationController
     redirect_to meals_path
   end
 
+  def destroy
+    @meal = Meal.find(params[:id])
+
+    # Vérifier que c'est bien l'utilisateur propriétaire
+    if @meal.user == current_user
+      @meal.destroy
+      flash[:success] = "Événement supprimé avec succès"
+    else
+      flash[:alert] = "Vous ne pouvez pas supprimer cet événement"
+    end
+
+    redirect_to meals_path
+  end
+
   private
 
   def meal_params

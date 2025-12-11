@@ -15,8 +15,10 @@ Rails.application.routes.draw do
       post :create_event
     end
   end
+
   resources :stocks
   resources :drinks
   resources :friends, only: [:index]
   resources :meal_drinks, only: [:new, :show, :create]
+
 end
