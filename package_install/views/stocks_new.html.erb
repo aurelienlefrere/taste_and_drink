@@ -4,7 +4,7 @@
     <h1 class="td-page-title">Ajouter une bouteille</h1>
     <p class="td-page-subtitle">À votre cave personnelle</p>
   </div>
-  
+
   <%= simple_form_for(@stock) do |f| %>
     <%# === SECTION DRINK (avec liseré doré) === %>
     <div class="td-card td-drink-section">
@@ -12,8 +12,8 @@
         <i class="fas fa-wine-bottle me-2"></i>
         <h3 class="td-section-title">Boisson</h3>
       </div>
-      
-      <%= f.association :drink, 
+
+      <%= f.association :drink,
           label: false,
           input_html: {
             data: { controller: "tom-select" },
@@ -21,21 +21,21 @@
           },
           wrapper_html: { class: "td-drink-select-wrapper" } %>
     </div>
-    
+
     <%# === SECTION QUANTITÉ (avec boutons +/-) === %>
     <div class="td-card td-quantity-section">
       <div class="td-section-header">
         <i class="fas fa-hashtag me-2"></i>
         <h3 class="td-section-title">Quantité</h3>
       </div>
-      
+
       <div class="td-quantity-controls" data-controller="quantity">
-        <button type="button" 
+        <button type="button"
                 class="btn-quantity btn-minus"
                 data-action="click->quantity#decrease">
           <i class="fas fa-minus"></i>
         </button>
-        
+
         <%= f.input :quantity,
             label: false,
             input_html: {
@@ -45,15 +45,15 @@
               data: { quantity_target: "input" }
             },
             wrapper_html: { class: "td-quantity-input-wrapper" } %>
-        
-        <button type="button" 
+
+        <button type="button"
                 class="btn-quantity btn-plus"
                 data-action="click->quantity#increase">
           <i class="fas fa-plus"></i>
         </button>
       </div>
     </div>
-    
+
     <%# === BOUTON SUBMIT === %>
     <%= f.submit "Ajouter à ma cave", class: "btn btn-gold w-100 mt-3" %>
   <% end %>
