@@ -265,31 +265,6 @@
 }
 
 // ============================================
-// 🚀 ANIMATION BOUTON MATCH FOOTBAR (NOUVEAU)
-// ============================================
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-}
-
-// Bouton Match actif (quand le plat est rempli)
-.td-footbar-active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-  transform: scale(1.1);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4) !important;
-  transition: all 0.3s ease;
-
-  i {
-    animation: pulse 1.5s ease-in-out infinite;
-  }
-}
-
-// ============================================
 // === PAGE RÉSULTAT ===
 // ============================================
 .td-result-page {
@@ -326,11 +301,6 @@
     background: linear-gradient(135deg, $gold-dark, $gold);
     color: $dark-bg;
   }
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
 }
 
 .td-result-title {
@@ -859,16 +829,6 @@
   color: $text-muted;
 }
 
-// Mise à jour de l'item boisson sélectionnée
-.td-selected-drink-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px;
-  background: $dark-bg-light;
-  border-radius: 10px;
-}
-
 .td-drink-actions {
   display: flex;
   align-items: center;
@@ -876,16 +836,11 @@
 }
 
 // ============================================
-// 🍷 NOUVEAUX STYLES À AJOUTER À _match.scss
-// À ajouter à la FIN du fichier existant
-// ============================================
-
 // === AMÉLIORATIONS STYLE MATCH ===
+// ============================================
 
 .td-match-page {
   padding-top: 10px;
-
-  // Animation d'entrée
   animation: fadeIn 0.4s ease-out;
 }
 
@@ -1012,7 +967,6 @@
     transition: all 0.3s ease;
   }
 
-  // État checked
   input:checked + .td-friend-chip-content {
     background: rgba($gold, 0.15);
     border-color: $gold;
@@ -1049,7 +1003,6 @@
   font-size: 15px;
 }
 
-// Bouton submit
 .td-match-submit {
   margin-top: 30px;
 
@@ -1062,7 +1015,6 @@
   }
 }
 
-// État vide
 .td-empty-mini {
   text-align: center;
   padding: 20px;
@@ -1078,4 +1030,135 @@
     margin: 0;
     font-size: 14px;
   }
+}
+
+// ============================================
+// 🚀 BOUTON MATCH DYNAMIQUE (NOUVEAU)
+// ============================================
+
+// Animation pulse pour la fusée (mode création meal)
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+// Animation check pour la validation (mode sélection drinks)
+@keyframes checkPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+// MODE CRÉATION MEAL : Bouton actif violet (quand le plat est rempli)
+.td-footbar-active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4) !important;
+  transition: all 0.3s ease;
+
+  i {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+}
+
+// MODE VALIDATION DRINKS : Bouton actif vert (quand des drinks sont sélectionnées)
+.td-footbar-validate {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4) !important;
+  transition: all 0.3s ease;
+
+  i {
+    animation: checkPulse 1.5s ease-in-out infinite;
+  }
+}
+
+// ============================================
+// 📋 PAGE SHOW - SÉLECTION DES RECOMMANDATIONS
+// ============================================
+
+// Header de la sélection
+.meal-selection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .meal-selection-subtitle {
+    color: $text-secondary;
+    font-size: 0.9em;
+    margin: 5px 0 0 0;
+  }
+}
+
+// Checkbox cachée
+.drink-checkbox {
+  display: none;
+}
+
+// Cards sélectionnables
+.drink-selectable {
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// ============================================
+// 📅 PAGE SHOW - MODE HISTORIQUE
+// ============================================
+
+.meal-event-header {
+  text-align: center;
+  margin-bottom: 30px;
+
+  h2 {
+    margin-bottom: 10px;
+    font-size: 28px;
+    color: $text-primary;
+  }
+
+  .meal-event-date {
+    color: $text-secondary;
+    font-size: 0.9em;
+  }
+
+  .meal-event-count {
+    color: $gold;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+}
+
+.wine-placeholder-empty {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $dark-bg-light;
+  font-size: 3em;
+}
+
+.wine-category {
+  color: $text-secondary;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.wine-region {
+  color: $text-muted;
+  font-size: 0.85em;
+  margin-top: 3px;
 }
