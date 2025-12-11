@@ -67,15 +67,12 @@
     <%= form_with url: create_event_meal_path(@meal),
                   method: :post,
                   id: "event-form",
-                  data: {
-                    controller: "meal-show",
-                    meal_show_target: "form"
-                  } do |f| %>
+                  data: { controller: "meal-selection" } do |f| %>
 
       <div class="meal-selection-header">
         <div>
-          <h3><i class="fas fa-brain"></i> Recommandations pour <%= @meal.dish_name %></h3>
-          <p class="meal-selection-subtitle">
+          <h3 style="color: #C9A962; font-family: $font-didot;"> Recommandations pour <%= @meal.dish_name %></h3>
+          <p class="meal-selection-subtitle" style="font-family: 'Didot', serif;">
             Cliquez sur les boissons pour les sélectionner
           </p>
         </div>
@@ -88,12 +85,12 @@
         <div class="cards">
           <% @my_cellar.each do |drink| %>
             <label class="td-wine-card w-100 drink-selectable"
-                   data-meal-show-target="drinkCard"
-                   data-action="click->meal-show#toggleSelection">
+                   data-meal-selection-target="drinkCard"
+                   data-action="click->meal-selection#toggleSelection">
 
               <%= check_box_tag "selected_meal_drink_ids[]", drink.id, false,
                   class: "drink-checkbox",
-                  data: { meal_show_target: "checkbox" } %>
+                  data: { meal_selection_target: "checkbox" } %>
 
               <div class="td-wine-card-image">
                 <div class="td-wine-placeholder">
@@ -115,12 +112,12 @@
         <div class="cards">
           <% @drinks_wine.each do |drink| %>
             <label class="td-wine-card w-100 drink-selectable"
-                   data-meal-show-target="drinkCard"
-                   data-action="click->meal-show#toggleSelection">
+                   data-meal-selection-target="drinkCard"
+                   data-action="click->meal-selection#toggleSelection">
 
               <%= check_box_tag "selected_meal_drink_ids[]", drink.id, false,
                   class: "drink-checkbox",
-                  data: { meal_show_target: "checkbox" } %>
+                  data: { meal_selection_target: "checkbox" } %>
 
               <div class="td-wine-card-image">
                 <div class="td-wine-placeholder">
@@ -142,12 +139,12 @@
         <div class="cards">
           <% @drinks_alcohol.each do |drink| %>
             <label class="td-wine-card w-100 drink-selectable"
-                   data-meal-show-target="drinkCard"
-                   data-action="click->meal-show#toggleSelection">
+                   data-meal-selection-target="drinkCard"
+                   data-action="click->meal-selection#toggleSelection">
 
               <%= check_box_tag "selected_meal_drink_ids[]", drink.id, false,
                   class: "drink-checkbox",
-                  data: { meal_show_target: "checkbox" } %>
+                  data: { meal_selection_target: "checkbox" } %>
 
               <div class="td-wine-card-image">
                 <div class="td-wine-placeholder">
@@ -169,12 +166,12 @@
         <div class="cards">
           <% @drinks_no_alcohol.each do |drink| %>
             <label class="td-wine-card w-100 drink-selectable"
-                   data-meal-show-target="drinkCard"
-                   data-action="click->meal-show#toggleSelection">
+                   data-meal-selection-target="drinkCard"
+                   data-action="click->meal-selection#toggleSelection">
 
               <%= check_box_tag "selected_meal_drink_ids[]", drink.id, false,
                   class: "drink-checkbox",
-                  data: { meal_show_target: "checkbox" } %>
+                  data: { meal_selection_target: "checkbox" } %>
 
               <div class="td-wine-card-image">
                 <div class="td-wine-placeholder">
@@ -196,12 +193,12 @@
         <div class="cards">
           <% @drinks_impro.each do |drink| %>
             <label class="td-wine-card w-100 drink-selectable"
-                   data-meal-show-target="drinkCard"
-                   data-action="click->meal-show#toggleSelection">
+                   data-meal-selection-target="drinkCard"
+                   data-action="click->meal-selection#toggleSelection">
 
               <%= check_box_tag "selected_meal_drink_ids[]", drink.id, false,
                   class: "drink-checkbox",
-                  data: { meal_show_target: "checkbox" } %>
+                  data: { meal_selection_target: "checkbox" } %>
 
               <div class="td-wine-card-image">
                 <div class="td-wine-placeholder">
@@ -216,8 +213,20 @@
         </div>
       <% end %>
 
-      <%# Bouton submit caché %>
-      <%= f.submit "Valider l'événement", style: "display: none;" %>
+      <%# Bouton de validation %>
+      <div class="td-match-submit">
+        <%= f.submit "Valider l'événement",
+            class: "btn btn-gold td-btn-match",
+            data: {
+              meal_selection_target: "submitBtn",
+              confirm: "Créer cet événement dans l'historique ?"
+            },
+            disabled: true %>
+
+        <p data-meal-selection-target="countText" class="selection-count">
+          Sélectionnez au moins une boisson
+        </p>
+      </div>
 
     <% end %>
 
