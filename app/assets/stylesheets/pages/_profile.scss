@@ -1,0 +1,227 @@
+// ============================================
+// 🍷 TASTE & DRINK - PAGE PROFIL UTILISATEUR
+// Design 100% cohérent avec le reste de l'app
+// ============================================
+
+// === CARD PRINCIPALE ===
+.td-profile-main-card {
+  background: $dark-bg-card;
+  border-radius: 16px;
+  padding: 24px;
+  border: 2px solid $gold;  // ⬅️ Sans transparence !
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+// === HEADER (Avatar centré) ===
+.td-profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.td-profile-avatar-large {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, $gold-dark, $gold);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.td-avatar-initials-large {
+  font-size: 36px;
+  font-weight: 700;
+  color: $dark-bg;
+  text-transform: uppercase;
+}
+
+// === SECTIONS ===
+.td-profile-section {
+  margin-top: 20px;
+}
+
+.td-section-divider {
+  height: 1px;
+  background: rgba($text-muted, 0.1);
+  margin-bottom: 16px;
+}
+
+// === BADGES (Diet & Allergy) ===
+.td-profile-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.td-profile-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+
+  i {
+    font-size: 12px;
+  }
+
+  &.td-badge-diet {
+    background: rgba($success, 0.15);
+    color: $success;
+    border: 1px solid rgba($success, 0.3);
+  }
+
+  &.td-badge-allergy {
+    background: rgba($warning, 0.15);
+    color: $warning;
+    border: 1px solid rgba($warning, 0.3);
+  }
+}
+
+// === PRÉFÉRENCES ===
+.td-profile-preferences {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.td-preference-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+
+  i {
+    font-size: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .text-success {
+    color: $success;
+  }
+
+  .text-danger {
+    color: $danger;
+  }
+}
+
+.td-preference-text {
+  color: $text-secondary;
+  line-height: 1.5;
+
+  strong {
+    color: $text-primary;
+    font-weight: 600;
+  }
+}
+
+// === SECTION AMIS ===
+.td-profile-friends-section {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.td-profile-friends-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.td-profile-friend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+
+    .td-profile-friend-avatar {
+      border-color: $gold;
+    }
+  }
+}
+
+.td-profile-friend-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid rgba($gold, 0.2);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, $gold-dark, $gold);
+  transition: all 0.2s ease;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.td-avatar-initials-small {
+  font-size: 20px;
+  font-weight: 700;
+  color: $dark-bg;
+  text-transform: uppercase;
+}
+
+.td-profile-friend-name {
+  font-size: 12px;
+  color: $text-primary;
+  text-align: center;
+  font-weight: 500;
+}
+
+// === ACTIONS ===
+.td-profile-actions {
+  margin-top: 24px;
+
+  .btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    i {
+      font-size: 16px;
+    }
+  }
+}
+
+// === RESPONSIVE ===
+@media (max-width: 576px) {
+  .td-profile-friends-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .td-profile-friend-avatar {
+    width: 50px;
+    height: 50px;
+  }
+
+  .td-avatar-initials-small {
+    font-size: 18px;
+  }
+
+  .td-profile-friend-name {
+    font-size: 11px;
+  }
+}
