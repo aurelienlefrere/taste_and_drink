@@ -7,7 +7,7 @@
   <%# === EN-TÊTE DE PAGE === %>
   <div class="td-page-header">
     <h1 class="td-page-title">Mes Amis</h1>
-    
+
   </div>
 
   <%# === LISTE DES AMIS === %>
@@ -41,14 +41,14 @@
                 <% if friend.diet.present? %>
                   <span class="td-friend-badge td-badge-diet">
                     <i class="fas fa-leaf"></i>
-                    <%= friend.diet %>
+                    <%= friend.diet.upcase %>
                   </span>
                 <% end %>
 
                 <% if friend.allergy.present? %>
                   <span class="td-friend-badge td-badge-allergy">
                     <i class="fas fa-exclamation-triangle"></i>
-                    <%= friend.allergy %>
+                    <%= friend.allergy.upcase %>
                   </span>
                 <% end %>
               </div>
@@ -60,7 +60,7 @@
                 <div class="td-preference-item">
                   <i class="fas fa-heart text-success"></i>
                   <span class="td-preference-label">Aime :</span>
-                  <span class="td-preference-value"><%= friend.like %></span>
+                  <span class="td-preference-value"><%= friend.like.capitalize %></span>
                 </div>
               <% end %>
 
@@ -68,7 +68,7 @@
                 <div class="td-preference-item">
                   <i class="fas fa-heart-broken text-danger"></i>
                   <span class="td-preference-label">N'aime pas :</span>
-                  <span class="td-preference-value"><%= friend.dislike %></span>
+                  <span class="td-preference-value"><%= friend.dislike.capitalize %></span>
                 </div>
               <% end %>
             </div>
