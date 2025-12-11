@@ -67,12 +67,15 @@
     <%= form_with url: create_event_meal_path(@meal),
                   method: :post,
                   id: "event-form",
-                  data: { controller: "meal-selection" } do |f| %>
+                  data: {
+                    controller: "meal-show",
+                    meal_show_target: "form"
+                  } do |f| %>
 
       <div class="meal-selection-header">
         <div>
-          <h3 style="color: #C9A962; font-family: $font-didot;"> Recommandations pour <%= @meal.dish_name %></h3>
-          <p class="meal-selection-subtitle" style="font-family: 'Didot', serif;">
+          <h3><i class="fas fa-brain"></i> Recommandations pour <%= @meal.dish_name %></h3>
+          <p class="meal-selection-subtitle">
             Cliquez sur les boissons pour les sélectionner
           </p>
         </div>
@@ -85,12 +88,12 @@
         <div class="cards">
           <% @my_cellar.each do |drink| %>
             <label class="td-wine-card w-100 drink-selectable"
-                   data-meal-selection-target="drinkCard"
-                   data-action="click->meal-selection#toggleSelection">
+                   data-meal-show-target="drinkCard"
+                   data-action="click->meal-show#toggleSelection">
 
               <%= check_box_tag "selected_meal_drink_ids[]", drink.id, false,
                   class: "drink-checkbox",
-                  data: { meal_selection_target: "checkbox" } %>
+                  data: { meal_show_target: "checkbox" } %>
 
               <div class="td-wine-card-image">
                 <div class="td-wine-placeholder">
@@ -108,16 +111,16 @@
       <%# --- 🍷 Vins --- %>
       <%# <% wines = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Vin" }) %>
       <% if @drinks_wine.any? %>
-        <h4 class="mt-4">Vins</h4>
+        <h4>Vins</h4>
         <div class="cards">
           <% @drinks_wine.each do |drink| %>
             <label class="td-wine-card w-100 drink-selectable"
-                   data-meal-selection-target="drinkCard"
-                   data-action="click->meal-selection#toggleSelection">
+                   data-meal-show-target="drinkCard"
+                   data-action="click->meal-show#toggleSelection">
 
               <%= check_box_tag "selected_meal_drink_ids[]", drink.id, false,
                   class: "drink-checkbox",
-                  data: { meal_selection_target: "checkbox" } %>
+                  data: { meal_show_target: "checkbox" } %>
 
               <div class="td-wine-card-image">
                 <div class="td-wine-placeholder">
@@ -135,16 +138,16 @@
       <%# --- 🍸 Boissons alcoolisées --- %>
       <%# <% alcohol = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Alcoolisée" }) %>
       <% if @drinks_alcohol.any? %>
-        <h4 class="mt-4">Boissons alcoolisées</h4>
+        <h4>Boissons alcoolisées</h4>
         <div class="cards">
           <% @drinks_alcohol.each do |drink| %>
             <label class="td-wine-card w-100 drink-selectable"
-                   data-meal-selection-target="drinkCard"
-                   data-action="click->meal-selection#toggleSelection">
+                   data-meal-show-target="drinkCard"
+                   data-action="click->meal-show#toggleSelection">
 
               <%= check_box_tag "selected_meal_drink_ids[]", drink.id, false,
                   class: "drink-checkbox",
-                  data: { meal_selection_target: "checkbox" } %>
+                  data: { meal_show_target: "checkbox" } %>
 
               <div class="td-wine-card-image">
                 <div class="td-wine-placeholder">
@@ -162,16 +165,16 @@
       <%# --- 🥤 Boissons sans alcool --- %>
       <%# <% no_alcohol = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Non alcoolisée" }) %>
       <% if @drinks_no_alcohol.any? %>
-        <h4 class="mt-4">Boissons sans alcool</h4>
+        <h4>Boissons sans alcool</h4>
         <div class="cards">
           <% @drinks_no_alcohol.each do |drink| %>
             <label class="td-wine-card w-100 drink-selectable"
-                   data-meal-selection-target="drinkCard"
-                   data-action="click->meal-selection#toggleSelection">
+                   data-meal-show-target="drinkCard"
+                   data-action="click->meal-show#toggleSelection">
 
               <%= check_box_tag "selected_meal_drink_ids[]", drink.id, false,
                   class: "drink-checkbox",
-                  data: { meal_selection_target: "checkbox" } %>
+                  data: { meal_show_target: "checkbox" } %>
 
               <div class="td-wine-card-image">
                 <div class="td-wine-placeholder">
@@ -189,16 +192,16 @@
       <%# --- 🎲 Suggestions improbables --- %>
       <%# <% improbable = @meal.meal_drinks.joins(:drink).where(status: "recommendation", drinks: { category: "Improbable" }) %>
       <% if @drinks_impro.any? %>
-        <h4 class="mt-4">Suggestions improbables</h4>
+        <h4>Suggestions improbables</h4>
         <div class="cards">
           <% @drinks_impro.each do |drink| %>
             <label class="td-wine-card w-100 drink-selectable"
-                   data-meal-selection-target="drinkCard"
-                   data-action="click->meal-selection#toggleSelection">
+                   data-meal-show-target="drinkCard"
+                   data-action="click->meal-show#toggleSelection">
 
               <%= check_box_tag "selected_meal_drink_ids[]", drink.id, false,
                   class: "drink-checkbox",
-                  data: { meal_selection_target: "checkbox" } %>
+                  data: { meal_show_target: "checkbox" } %>
 
               <div class="td-wine-card-image">
                 <div class="td-wine-placeholder">
@@ -213,20 +216,8 @@
         </div>
       <% end %>
 
-      <%# Bouton de validation %>
-      <div class="td-match-submit">
-        <%= f.submit "Valider l'événement",
-            class: "btn btn-gold td-btn-match",
-            data: {
-              meal_selection_target: "submitBtn",
-              confirm: "Créer cet événement dans l'historique ?"
-            },
-            disabled: true %>
-
-        <p data-meal-selection-target="countText" class="selection-count">
-          Sélectionnez au moins une boisson
-        </p>
-      </div>
+      <%# Bouton submit caché %>
+      <%= f.submit "Valider l'événement", style: "display: none;" %>
 
     <% end %>
 

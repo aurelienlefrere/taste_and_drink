@@ -11,18 +11,18 @@ class MealsController < ApplicationController
     @drinks = @meal.drinks
     @drinks_stocks = current_user.drinks
 
-    @drinks_wine = @meal.drinks.where(category: "Vin").excluding(@drinks_stocks)
+    @drinks_wine = @meal.drinks.where(category: "Vin").excluding(@drinks_stocks).compact.first(3)
     # @wines = @meal.meal_drinks.where(drink: @drinks_wine)
 
-    @my_cellar = @meal.meal_drinks.where(drink: @drinks_stocks).map(&:drink)
+    @my_cellar = @meal.meal_drinks.where(drink: @drinks_stocks).map(&:drink).compact.first(3)
 
-    @drinks_alcohol = @meal.drinks.where(category: "Alcoolisée")
+    @drinks_alcohol = @meal.drinks.where(category: "Alcoolisée").compact.first(3)
     # @alcohol = @meal.meal_drinks.where(drink: @drinks_alcohol)
 
-    @drinks_no_alcohol = @meal.drinks.where(category: "Non alcoolisée")
+    @drinks_no_alcohol = @meal.drinks.where(category: "Non alcoolisée").compact.first(3)
     # @no_alcohol = @meal.meal_drinks.where(drink: @drinks_no_alcohol)
 
-    @drinks_impro = @meal.drinks.where(category: "Improbable")
+    @drinks_impro = @meal.drinks.where(category: "Improbable").compact.first(3)
     # @improbable = @meal.meal_drinks.where(drink: @drinks_impro)
   end
 
