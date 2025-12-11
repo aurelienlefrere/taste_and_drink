@@ -40,7 +40,7 @@ users_data = [
     first_name: 'Franck',
     last_name: 'Abeille',
     diet: 'Omnivore',
-    allergy: '',
+    allergy: 'cacahuète',
     like: 'vins rouges, wisky',
     dislike: 'vin blanc',
     photo: 'Franck.jpeg'
@@ -73,7 +73,7 @@ users_data = [
     first_name: 'Bassam',
     last_name: 'Renaud',
     diet: 'Hallal',
-    allergy: 'None',
+    allergy: '',
     like: 'thé glaçé',
     dislike: 'boissons alcoolisés',
     photo: 'Bassam.jpeg'
@@ -298,25 +298,28 @@ puts "\n🍽️ Création des événements (meals) avec boissons sélectionnées
 
 meals_data = [
   {
-    dish_name: "Boeuf Bourguignon",
+    dish_name: "Couscous",
     date: Date.new(2025, 10, 15),
     with_stock: true,
-    nb_drinks: 2
+    nb_drinks: 2,
+    add_random_guests: true
   },
   {
-    dish_name: "Magret de canard",
+    dish_name: "Pizza",
     date: Date.new(2025, 11, 3),
     with_stock: true,
-    nb_drinks: 3
+    nb_drinks: 3,
+    add_random_guests: true
   },
   {
-    dish_name: "Risotto aux champignons",
+    dish_name: "Apero",
     date: Date.new(2025, 11, 20),
     with_stock: false,
-    nb_drinks: 1
+    nb_drinks: 1,
+    add_random_guests: true
   },
   {
-    dish_name: "pâtes au pesto vert",
+    dish_name: "Pad Thaï",
     date: Date.new(2025, 12, 5),
     with_stock: true,
     nb_drinks: 1,
@@ -339,7 +342,17 @@ meals_data.each do |meal_data|
       meal: meal
     )
     puts "👤 Pierre ajouté comme invité au repas: #{meal.dish_name}"
+  elsif meal_data[:add_random_guests]
+  # Ajouter entre 1 et 3 invités aléatoires parmi les amis d'Aurélien
+  available_friends = User.where.not(email: ["Aurelien@example.com"]).sample(rand(1..3))
+  available_friends.each do |friend|
+    Guest.create!(
+      user: friend,
+      meal: meal
+    )
+    puts "👤 #{friend.first_name} ajouté comme invité au repas: #{meal.dish_name}"
   end
+end
 
   # Ajouter les boissons sélectionnées
   nb_drinks = meal_data[:nb_drinks]

@@ -50,7 +50,7 @@
 
                 <%# Nom du plat (au centre) %>
                 <div class="td-event-dish-main">
-                  <h3><%= meal.dish_name %></h3>
+                  <h3><%= meal.dish_name.upcase %></h3>
                   <p style="font-size: 0.85em; color: #667eea; margin-top: 5px;">
                     <%= validated_drinks.count %> boisson<%= validated_drinks.count > 1 ? 's' : '' %>
                   </p>
