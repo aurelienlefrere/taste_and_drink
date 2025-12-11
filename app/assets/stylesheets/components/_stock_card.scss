@@ -25,13 +25,13 @@
   background: #2c2a2a;
   transition: all 0.3s ease;
   border-radius: 8px;
-  border: 1px solid $gold-dark;
-  margin-bottom: 5px;
-  margin-top: 5px;
+  border: 2px solid $gold;       // ✅ Bordure dorée visible
+  margin-bottom: 16px;           // ✅ Plus d'espace (16px au lieu de 5px)
+  margin-top: 0;                 // ✅ Pas d'espace en haut
 
   &:hover {
-    border: 1px solid $gold-light;
-    // transform: translateY(-1px);
+    border: 2px solid $gold-light;  // ✅ Bordure plus claire au hover
+    transform: translateY(-2px);    // ✅ Petit effet de lift au hover
   }
 }
 
