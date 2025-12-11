@@ -242,7 +242,7 @@ puts "\n📦 Création des stocks pour Aurélien..."
 
 
 # 5 vins aléatoires avec des quantités variables
-wine_drinks = Drink.where(category: "Wine").sample(5)
+wine_drinks = Drink.where(category: "Vin").sample(5)
 
 wine_drinks.each do |drink|
   stock = Stock.create!(
@@ -346,7 +346,7 @@ meals_data.each do |meal_data|
 
   if meal_data[:add_guest]
     # Pour le dernier repas, sélectionner 1 vin aléatoire
-    selected_wine = Drink.where(category: "Wine").sample(1)
+    selected_wine = Drink.where(category: "Vin").sample(1)
     selected_wine.each do |drink|
       MealDrink.create!(
         meal: meal,
