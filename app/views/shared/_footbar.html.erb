@@ -25,10 +25,9 @@
     <%# === 3. MATCH (Centre - Bouton principal) === %>
     <%= link_to new_meal_path, class: "td-footbar-item td-footbar-match #{'active' if controller_name == 'meals' && action_name == 'new'}" do %>
       <div class="td-footbar-icon-match">
-        <i class="fas fa-utensils"></i>
-        <i class="fas fa-wine-glass-alt"></i>
+        <!-- Le texte apparaît maintenant DANS le bouton -->
+        <span class="td-footbar-label-inside">MATCH</span>
       </div>
-      <span class="td-footbar-label">Match</span>
     <% end %>
 
     <%# === 4. MA CAVE (Stock de vins) === %>

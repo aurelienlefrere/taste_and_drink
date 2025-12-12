@@ -12,12 +12,12 @@
   border: 2px solid $gold;
   box-shadow: 0 0 15px rgba($gold, 0.2);
   margin-bottom: 20px;
-  
+
   .td-section-header {
     display: flex;
     align-items: center;
     margin-bottom: 12px;
-    
+
     .td-section-title {
       margin: 0;
       font-size: 16px;
@@ -30,12 +30,12 @@
 // === SECTION QUANTITÉ ===
 .td-quantity-section {
   margin-bottom: 20px;
-  
+
   .td-section-header {
     display: flex;
     align-items: center;
     margin-bottom: 16px;
-    
+
     .td-section-title {
       margin: 0;
       font-size: 16px;
@@ -67,14 +67,14 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  
+
   // Style rose glossy (comme le bouton de connexion)
   background: linear-gradient(135deg, $pink-glossy-dark, $pink-glossy, $pink-glossy-light);
   color: $dark-bg;
   box-shadow:
     0 4px 15px rgba($pink-glossy, 0.3),
     inset 0 2px 4px rgba(255, 255, 255, 0.25);
-  
+
   // Reflet glossy
   &::before {
     content: '';
@@ -90,16 +90,16 @@
     );
     border-radius: 0 0 50% 50%;
   }
-  
+
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba($pink-glossy, 0.5);
   }
-  
+
   &:active {
     transform: translateY(0);
   }
-  
+
   i {
     position: relative;
     z-index: 1;
@@ -122,7 +122,7 @@
   border: 2px solid rgba($gold, 0.3);
   border-radius: 12px;
   padding: 0;
-  
+
   &:focus {
     border-color: $gold;
     box-shadow: 0 0 0 3px rgba($gold, 0.2);
@@ -143,14 +143,14 @@
 // === HEADER DE PAGE ===
 .td-page-header {
   margin-bottom: 20px;
-  
+
   .td-page-title {
     margin: 0;
     font-size: 26px;
     font-weight: 700;
     color: $gold;
   }
-  
+
   .td-page-subtitle {
     margin: 4px 0 0 0;
     font-size: 15px;

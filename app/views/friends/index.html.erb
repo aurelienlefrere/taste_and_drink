@@ -7,7 +7,7 @@
   <%# === EN-TÊTE DE PAGE === %>
   <div class="td-page-header">
     <h1 class="td-page-title">Mes Amis</h1>
-    <p class="td-page-subtitle"><%= @friends.count %> ami<%= @friends.count > 1 ? 's' : '' %> dans votre cercle</p>
+
   </div>
 
   <%# === LISTE DES AMIS === %>
@@ -28,47 +28,47 @@
                   </span>
                 <% end %>
               </div>
-              
+
               <%# Nom et prénom %>
               <div class="td-friend-name-block">
                 <h3><%= friend.first_name %> <%= friend.last_name %></h3>
               </div>
             </div>
-            
+
             <%# === DIET ET ALLERGY (côte à côte) === %>
             <% if friend.diet.present? || friend.allergy.present? %>
               <div class="td-friend-badges-row">
                 <% if friend.diet.present? %>
                   <span class="td-friend-badge td-badge-diet">
                     <i class="fas fa-leaf"></i>
-                    <%= friend.diet %>
+                    <%= friend.diet.upcase %>
                   </span>
                 <% end %>
-                
+
                 <% if friend.allergy.present? %>
                   <span class="td-friend-badge td-badge-allergy">
                     <i class="fas fa-exclamation-triangle"></i>
-                    <%= friend.allergy %>
+                    <%= friend.allergy.upcase %>
                   </span>
                 <% end %>
               </div>
             <% end %>
-            
+
             <%# === LIKES ET DISLIKES === %>
             <div class="td-friend-preferences">
               <% if friend.like.present? %>
                 <div class="td-preference-item">
                   <i class="fas fa-heart text-success"></i>
                   <span class="td-preference-label">Aime :</span>
-                  <span class="td-preference-value"><%= friend.like %></span>
+                  <span class="td-preference-value"><%= friend.like.capitalize %></span>
                 </div>
               <% end %>
-              
+
               <% if friend.dislike.present? %>
                 <div class="td-preference-item">
                   <i class="fas fa-heart-broken text-danger"></i>
                   <span class="td-preference-label">N'aime pas :</span>
-                  <span class="td-preference-value"><%= friend.dislike %></span>
+                  <span class="td-preference-value"><%= friend.dislike.capitalize %></span>
                 </div>
               <% end %>
             </div>

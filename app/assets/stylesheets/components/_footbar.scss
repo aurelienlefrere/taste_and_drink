@@ -1,6 +1,5 @@
 // ============================================
-// 🍷 TASTE & DRINK - FOOTBAR STYLES
-// Style: Rose glossy inspiré du logo Taste & Drink
+// 🍷 TASTE & DRINK - FOOTBAR TOUT EN DORÉ
 // ============================================
 
 .td-footbar {
@@ -11,8 +10,9 @@
   width: 100%;
   max-width: 500px;
   height: 70px;
-  background: $dark-bg;
-  border-top: 1px solid rgba($pink-glossy, 0.3);  // Changé de $gold
+  background: linear-gradient(180deg, transparent 0%, rgba(18, 18, 18, 0.98) 20%);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(201, 169, 98, 0.2);
   z-index: 1000;
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -26,7 +26,7 @@
   padding: 0 8px;
 }
 
-// === ITEM DE LA FOOTBAR (style glossy rose) ===
+// === ITEMS EN DORÉ ===
 .td-footbar-item {
   display: flex;
   flex-direction: column;
@@ -36,34 +36,48 @@
   height: 100%;
   padding: 8px 4px;
   text-decoration: none;
-  color: rgba($pink-glossy, 0.6);  // Rose avec transparence
-  transition: all 0.3s ease;
+  color: rgba(201, 169, 98, 0.6);
+  font-size: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 
   &:hover {
-    color: $pink-glossy;
+    color: #C9A962;
+    transform: translateY(-2px);
   }
 
-  // État actif - effet glossy plus prononcé
   &.active {
-    color: $pink-glossy-light;
+    color: #D4BC7B;
+    size: 10px;
+    font-size: 10px;
 
     .td-footbar-icon {
-      transform: translateY(-2px);
-      text-shadow: 0 0 10px rgba($pink-glossy, 0.5);  // Lueur rose
+      transform: translateY(-2px) scale(1.1);
     }
 
-    .td-footbar-label {
-      text-shadow: 0 0 8px rgba($pink-glossy, 0.4);
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #D4BC7B, transparent);
+      border-radius: 2px;
     }
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 }
 
-// === ICÔNE STANDARD (rose glossy) ===
 .td-footbar-icon {
   font-size: 20px;
   margin-bottom: 4px;
   transition: all 0.3s ease;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);  // Effet glossy
+  position: relative;
 }
 
 .td-footbar-label {
@@ -74,33 +88,33 @@
 }
 
 // ============================================
-// === BOUTON "MATCH" (Central - Rose Glossy Premium) ===
+// ✨ BOUTON MATCH CENTRAL (DORÉ BRILLANT)
 // ============================================
 .td-footbar-match {
   position: relative;
+  top: -20px;
 
   .td-footbar-icon-match {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
-    width: 56px;
-    height: 56px;
-    // Gradient rose glossy premium
-    background: linear-gradient(135deg, $pink-glossy-dark, $pink-glossy, $pink-glossy-light);
+    width: 40px;
+    height: 40px;
+    min-width: 50px;
+    min-height: 50px;
+    background: linear-gradient(135deg, #C9A962 0%, #D4BC7B 50%, #F4D03F 100%);
+    border: 1px solid #121212;
     border-radius: 50%;
     margin-bottom: 4px;
-    margin-top: -20px;
-    // Ombre et effet glossy multicouche
+    color: black;
     box-shadow:
-      0 4px 15px rgba($pink-glossy, 0.4),           // Ombre colorée
-      inset 0 2px 4px rgba(255, 255, 255, 0.25),    // Reflet interne haut
-      inset 0 -2px 4px rgba(0, 0, 0, 0.1);          // Ombre interne bas
+      0 4px 12px rgba(201, 169, 98, 0.4),
+      0 0 20px rgba(212, 188, 123, 0.2),
+      inset 0 2px 4px rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
 
-    // Reflet glossy en haut (effet "bulle")
     &::before {
       content: '';
       position: absolute;
@@ -110,15 +124,33 @@
       height: 40%;
       background: linear-gradient(
         to bottom,
-        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0.4),
         rgba(255, 255, 255, 0)
       );
       border-radius: 50%;
     }
 
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 70%
+      );
+      opacity: 0;
+      transform: translateX(-100%) translateY(-100%) rotate(45deg);
+      transition: opacity 0.3s ease, transform 0.6s ease;
+    }
+
     i {
-      font-size: 14px;
-      color: $dark-bg;
+      font-size: 18px;
+      color: #1a1a1a;
       position: relative;
       z-index: 1;
     }
@@ -127,17 +159,70 @@
   &:hover .td-footbar-icon-match {
     transform: scale(1.1);
     box-shadow:
-      0 6px 20px rgba($pink-glossy, 0.6),
-      inset 0 2px 4px rgba(255, 255, 255, 0.3),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+      0 12px 32px rgba(201, 169, 98, 0.8),
+      0 0 50px rgba(212, 188, 123, 0.6),
+      inset 0 2px 4px rgba(255, 255, 255, 0.4);
+
+    &::after {
+      opacity: 1;
+      transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
   }
 
-  &.active .td-footbar-icon-match {
-    background: linear-gradient(135deg, $pink-glossy, $pink-glossy-light);
+  &:active .td-footbar-icon-match {
+    transform: scale(1.05) rotate(90deg);
   }
 
   .td-footbar-label {
-    color: $pink-glossy;
+    color: #D4BC7B;
     font-weight: 600;
+    text-shadow: 0 0 10px rgba(212, 188, 123, 0.5);
   }
 }
+
+// ============================================
+// 🚀 ÉTATS DYNAMIQUES DU BOUTON MATCH
+// ============================================
+
+// Animations
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes checkPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+// // MODE CRÉATION MEAL : Bouton actif violet (quand le plat est rempli)
+// .td-footbar-active {
+//   .td-footbar-icon-match {
+//     background: linear-gradient(135deg, #E91E63 0%, #F06292 100%) !important;
+//     box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4) !important;
+//   }
+
+//   i {
+//     animation: pulse 1.5s ease-in-out infinite;
+//   }
+// }
+
+// // MODE VALIDATION DRINKS : Bouton actif vert (quand des drinks sont sélectionnées)
+// .td-footbar-validate {
+//   .td-footbar-icon-match {
+//     background: linear-gradient(135deg, #D4AF37 0%, #F4E4B0 100%) !important;
+//     box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4) !important;
+//   }
+
+//   i {
+//     animation: checkPulse 1.5s ease-in-out infinite;
+//   }
+// }

@@ -10,7 +10,7 @@
 }
 
 .td-page-title {
-  font-family: 'Playfair Display', serif;
+  font-family: $font-didot;  // ✨ DIDOT pour tous les titres
   font-size: 28px;
   font-weight: 700;
   color: $gold;
@@ -526,7 +526,6 @@
 
 // === BOUTON MATCH ===
 .td-match-submit {
-  position: sticky;
   bottom: 86px; // Au-dessus de la footbar
   padding: 16px 0;
   margin-top: 8px;
@@ -705,4 +704,10 @@
   .btn {
     flex: 1;
   }
+}
+
+// === Bouton avec police Montserrat ===
+.btn-montserrat {
+  font-family: $font-montserrat;
+  font-weight: 600;
 }
