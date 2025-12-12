@@ -45,7 +45,7 @@ body {
   padding: 0;
 
   // === DIMENSIONS IPHONE 15 Pro Max ===
-  max-width: 430px;
+  max-width: 500px;
   min-height: 100vh;
 
   // === EFFET TÉLÉPHONE FLOTTANT ===
@@ -60,7 +60,7 @@ body {
 }
 
 // === SUR MOBILE RÉEL : PAS DE CADRE ===
-@media (max-width: 430px) {
+@media (max-width: 500px) {
   html {
     background: $dark-bg; // Même fond que l'app
   }

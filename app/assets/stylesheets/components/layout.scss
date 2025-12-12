@@ -44,9 +44,8 @@ body {
   margin: 0 auto; // Centré horizontalement
   padding: 0;
 
-  // === DIMENSIONS ADAPTATIVES ===
-  // Par défaut : format iPhone 15 Pro Max
-  max-width: 430px;
+  // === DIMENSIONS IPHONE 15 Pro Max ===
+  max-width: 500px;
   min-height: 100vh;
 
   // === ÉCRANS LARGES (Projecteurs, monitors 1600px+) ===
@@ -74,7 +73,7 @@ body {
 }
 
 // === SUR MOBILE RÉEL : PAS DE CADRE ===
-@media (max-width: 430px) {
+@media (max-width: 500px) {
   html {
     background: $dark-bg; // Même fond que l'app
   }
