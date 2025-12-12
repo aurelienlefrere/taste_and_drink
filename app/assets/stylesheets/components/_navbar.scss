@@ -9,7 +9,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 430px;
+  max-width: 500px;
   height: 60px;
   background: $dark-bg;
   border-bottom: 1px solid rgba($gold, 0.2);
@@ -68,7 +68,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  
+
   .td-logo-gold {
     font-family: 'Playfair Display', serif;
     font-size: 22px;
@@ -76,7 +76,7 @@
     color: $gold;
     text-shadow: 0 2px 8px rgba($gold, 0.4);
     letter-spacing: 0.5px;
-    
+
     em {
       font-style: italic;
       color: $gold-light;
